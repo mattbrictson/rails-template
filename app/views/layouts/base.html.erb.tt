@@ -1,0 +1,36 @@
+<%%# The "base" layout contains boilerplate common to *all* views. %>
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- <%= app_const_base.titleize %> <%%= Rails.application.config.version %> (<%%= l(Rails.application.config.version_date) %>) -->
+
+    <%%# CSS should go closest to the top of the document as possible. %>
+    <%%= stylesheet_link_tag("application",
+                            :media => "all",
+                            "data-turbolinks-track" => true) %>
+
+    <%%# JavaScript must be in head for Turbolinks to work. %>
+    <%%= javascript_include_async_tag("application",
+                                     "data-turbolinks-track" => true) %>
+
+    <%%= yield(:head) %>
+
+    <meta charset="utf8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%%# Specifies the default name of home screen bookmark in iOS 6+ %>
+    <meta name="apple-mobile-web-app-title" content="<%= app_const_base.titleize %>">
+
+    <%%= csrf_meta_tags %>
+
+    <title>
+      <%%= strip_tags(yield(:title)) + " – " if content_for?(:title) %>
+      <%= app_const_base.titleize %>
+    </title>
+  </head>
+  <body>
+
+    <%%= yield %>
+
+  </body>
+</html>

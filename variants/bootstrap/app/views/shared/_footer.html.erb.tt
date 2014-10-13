@@ -1,0 +1,5 @@
+<hr>
+
+<footer>
+  <p>© <%= app_const_base.titleize %> <%%= Time.zone.now.strftime("%Y") %></p>
+</footer>

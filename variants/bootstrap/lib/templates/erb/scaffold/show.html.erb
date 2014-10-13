@@ -1,0 +1,19 @@
+<%% provide(:title) do %>
+  <%= singular_table_name.titleize %> #<%%= @<%= singular_table_name %>.id %>
+<%% end %>
+
+<table class="table table-bordered">
+  <tbody>
+<% attributes.reject(&:password_digest?).each do |attribute| -%>
+    <tr>
+      <th class="col-sm-2"><%= attribute.human_name %></th>
+      <td><%%= @<%= singular_table_name %>.<%= attribute.name %> %></td>
+    </tr>
+<% end -%>
+  </tbody>
+</table>
+
+<p>
+  <%%= link_to "Edit", edit_<%= singular_table_name %>_path(@<%= singular_table_name %>), :class => "btn btn-primary" %>
+  <%%= link_to "Back", <%= index_helper %>_path, :class => "btn btn-link" %>
+</p>

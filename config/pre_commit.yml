@@ -1,0 +1,21 @@
+---
+:checks_remove: []
+:checks_add:
+- :coffeelint
+- :common
+- :console_log
+- :debugger
+- :gemfile_path
+- :jshint
+- :jslint
+- :json
+- :merge_conflict
+- :migration
+- :pry
+- :rails
+- :rspec_focus
+- :ruby
+- :scss_lint
+- :tabs
+- :whitespace
+- :yaml

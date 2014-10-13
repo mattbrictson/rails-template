@@ -1,0 +1,23 @@
+<%%= bootstrap_form_for(@<%= singular_table_name %>) do |f| %>
+
+  <%%= f.alert_message "Please review the problems below:" %>
+
+<% attributes.each do |attribute| -%>
+<% if attribute.password_digest? -%>
+  <%%= f.password_field :password %>
+  <%%= f.password_field :password_confirmation %>
+<% else -%>
+  <%- if attribute.reference? -%>
+  <%%= f.<%= attribute.field_type %> :<%= attribute.column_name %> %>
+  <%- elsif attribute.field_type == :text_area -%>
+  <%%= f.text_area :<%= attribute.name %>, :rows => 5 %>
+  <%- else -%>
+  <%%= f.<%= attribute.field_type %> :<%= attribute.name %> %>
+  <%- end -%>
+<% end -%>
+<% end -%>
+
+  <%%= f.primary %>
+  <%%= link_to "Back", <%= index_helper %>_path, :class => "btn btn-link" %>
+
+<%% end %>

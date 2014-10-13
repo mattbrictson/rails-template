@@ -1,0 +1,9 @@
+<div class="page-header">
+  <% if content_for?(:title) %>
+    <h1><%= content_for(:title) %></h1>
+    <%= content_for(:page_subhead) %>
+  <% else %>
+    <h1>Untitled</h1>
+    <p>Don’t forget to set <code>provide(:title)</code> for this view!</p>
+  <% end %>
+</div>

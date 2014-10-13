@@ -1,0 +1,63 @@
+source "https://rubygems.org"
+
+gem "active_type", ">= 0.3.2"
+gem "autoprefixer-rails", ">= 5.0.0.1"
+gem "bcrypt"<%= gemfile_requirement("bcrypt") %>
+gem "coffee-rails"<%= gemfile_requirement("coffee-rails") %>
+gem "dotenv-rails"
+gem "jquery-rails"<%= gemfile_requirement("jquery-rails") %>
+gem "jquery-turbolinks"
+gem "mail", ">= 2.6.3"
+gem "marco-polo"
+gem "pg"<%= gemfile_requirement("pg") %>
+gem "rails", "<%= Rails.version %>"
+gem "sass-rails"<%= gemfile_requirement("sass-rails") %>
+gem "secure_headers"
+gem "sidekiq"
+gem "sinatra", ">= 1.3.0", :require => false
+gem "turbolinks"<%= gemfile_requirement("turbolinks") || ', ">= 2.5.2"' %>
+
+group :production, :staging do
+  gem "dotenv-deployment"
+  gem "unicorn"
+end
+
+group :development do
+  gem "annotate", ">= 2.5.0"
+  gem "awesome_print"
+  gem "better_errors"
+  gem "binding_of_caller"
+  gem "letter_opener"
+  gem "quiet_assets"
+  gem "rack-livereload"
+  gem "spring"
+  gem "xray-rails"
+end
+
+group :development do
+  gem "brakeman", :require => false
+  gem "bundler-audit", :require => false
+  gem "capistrano", "~> 3.3.5", :require => false
+  gem "capistrano-bundler", :require => false
+  gem "capistrano-fiftyfive", :require => false
+  gem "capistrano-rails", :require => false
+  gem "guard", ">= 2.2.2", :require => false
+  gem "guard-livereload", :require => false
+  gem "guard-minitest", :require => false
+  gem "rb-fsevent", :require => false
+  gem "simplecov", :require => false
+  gem "sshkit", "~> 1.6.1", :require => false
+  gem "terminal-notifier-guard", :require => false
+  gem "thin", :require => false
+end
+
+group :test do
+  gem "capybara"
+  gem "connection_pool"
+  gem "launchy"
+  gem "minitest-reporters"
+  gem "mocha"
+  gem "poltergeist"
+  gem "shoulda"
+  gem "test_after_commit"
+end

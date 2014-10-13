@@ -1,0 +1,101 @@
+#!/usr/bin/env ruby
+
+def setup!
+  within_project_root do
+    test "ruby -v" => ruby_version
+    run  "gem install bundler --no-document --conservative"
+    run  "rbenv rehash" if rbenv_installed?
+    run  "bundle install"
+    run  "rbenv rehash" if rbenv_installed?
+    copy "example.env"
+    copy "config/database.example.yml"
+    test_local_env_contains_required_keys
+    run  "bin/rake db:create:all"
+    run  "bin/rake db:migrate"
+    run  "bin/rake db:seed"
+    run  "pre-commit install" if pre_commit_available?
+  end
+end
+
+
+require "fileutils"
+require "highline" rescue :ignored
+
+def within_project_root(&block)
+  Dir.chdir(File.expand_path("../..", __FILE__), &block)
+end
+
+def test(opts)
+  command, output = opts.first
+
+  log(:yellow, "test #{command}") do
+    unless `#{command}`.include?(output)
+      die("#{command} does not include #{output}")
+    end
+  end
+end
+
+def ruby_version
+  @ruby_version ||= begin
+    IO.read(".ruby-version").strip
+  end
+end
+
+def run(command)
+  log(:blue, "run  #{command}") do
+    shell = "#{command} > /dev/null"
+    system(shell) or die("#{command} exited with non-zero status}")
+  end
+end
+
+def rbenv_installed?
+  @rbenv_installed ||= (`which rbenv`.length > 0 || :not_installed)
+  @rbenv_installed != :not_installed
+end
+
+def pre_commit_available?
+  @pre_commit_available ||= (`which pre-commit`.length > 0 || :not_installed)
+  @pre_commit_available != :not_installed
+end
+
+def copy(example_path)
+  copy_path = example_path.sub(/\.?example/, "")
+  return if File.exist?(copy_path)
+
+  log(:magenta, "copy #{example_path} → #{copy_path}") do
+    FileUtils.cp(example_path, copy_path)
+  end
+end
+
+def test_local_env_contains_required_keys
+  keys = ->(f) { IO.readlines(f).map { |l| l[/^([^#\s][^=\s]*)/, 1] }.compact }
+
+  log(:yellow, "test .env contents") do
+    missing = keys["example.env"] - keys[".env"]
+    if missing.any?
+      die("Your .env file is missing #{missing.join(', ')}")
+    end
+  end
+end
+
+def log(color, message, out=$stdout, &block)
+  if defined?(HighLine::String)
+    message.sub!(/^(\S*)/) { HighLine::String.new($1).public_send(color) }
+  end
+
+  if block_given?
+    out.print("#{message}… ")
+    yield
+    log(:green, "✔︎")
+  else
+    out.puts(message)
+  end
+end
+
+def die(message)
+  puts
+  log(:red, "FAIL #{message}", $stderr)
+  exit(1)
+end
+
+setup!

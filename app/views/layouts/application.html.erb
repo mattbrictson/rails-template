@@ -1,0 +1,9 @@
+<%# The "application" layout is the default layout. It extends "base"  %>
+<%# to include things like header, footer, and alerts that are common  %>
+<%# to most (but not all) views.                                       %>
+
+<%= render("shared/flash") %>
+
+<%= yield %>
+
+<% parent_layout "base" %>

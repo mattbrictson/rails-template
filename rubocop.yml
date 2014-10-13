@@ -1,0 +1,34 @@
+AllCops:
+  RunRailsCops: true
+  Exclude:
+    - "bin/*"
+    - Capfile
+    - config/boot.rb
+    - config/environment.rb
+    - config/initializers/version.rb
+    - db/schema.rb
+    - Gemfile
+    - Guardfile
+    - Rakefile
+
+Metrics/LineLength:
+  Exclude:
+    - "config/**/*"
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/HashSyntax:
+  EnforcedStyle: hash_rockets
+
+Style/RegexpLiteral:
+  MaxSlashes: 0
+
+Style/SpaceAroundEqualsInParameterDefault:
+  EnforcedStyle: no_space
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
