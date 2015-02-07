@@ -19,7 +19,11 @@ end
 
 
 require "fileutils"
-require "highline" rescue :ignored
+begin
+  require "highline"
+rescue LoadError
+  # If highline is missing, we'll gracefully omit ansi color output
+end
 
 def within_project_root(&block)
   Dir.chdir(File.expand_path("../..", __FILE__), &block)
