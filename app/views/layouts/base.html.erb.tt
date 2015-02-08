@@ -16,7 +16,7 @@
 
     <%%= yield(:head) %>
 
-    <meta charset="utf8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%%# Specifies the default name of home screen bookmark in iOS 6+ %>
     <meta name="apple-mobile-web-app-title" content="<%= app_const_base.titleize %>">
