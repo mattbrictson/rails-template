@@ -15,11 +15,6 @@ end
 insert_into_file "config/environments/development.rb", :before => /^end/ do
   <<-RUBY
 
-  # Limit log file size to 20MB with one backup
-  log_file = open(config.paths["log"].first, "a")
-  log_file.binmode
-  config.logger = Logger.new(log_file, 1, 20971520)
-
   # Automatically inject JavaScript needed for LiveReload.
   config.middleware.insert_after(ActionDispatch::Static, Rack::LiveReload)
   RUBY
