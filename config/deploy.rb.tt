@@ -3,7 +3,7 @@ set :repo_url, "<%= git_repo_url %>"
 
 # Project-specific overrides go here.
 # For list of variables that can be customized, see:
-# https://github.com/55minutes/capistrano-fiftyfive/blob/master/lib/capistrano/tasks/defaults.rake
+# https://github.com/mattbrictson/capistrano-fiftyfive/blob/master/lib/capistrano/tasks/defaults.rake
 
 fetch(:fiftyfive_recipes) << "sidekiq"
 fetch(:fiftyfive_aptitude_packages).merge!(

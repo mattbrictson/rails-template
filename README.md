@@ -134,7 +134,7 @@ Rails generators are very lightly documented; what you’ll find is that most of
 [livereload]:https://github.com/guard/guard-livereload
 [rubocop]:https://github.com/bbatsov/rubocop
 [xray-rails]:https://github.com/brentd/xray-rails
-[capistrano-fiftyfive]:https://github.com/55minutes/capistrano-fiftyfive
+[capistrano-fiftyfive]:https://github.com/mattbrictson/capistrano-fiftyfive
 [unicorn]:http://unicorn.bogomips.org
 [Mandrill]:http://mandrill.com
 [brakeman]:https://github.com/presidentbeef/brakeman

@@ -1,6 +1,6 @@
 # How to provision a new environment for <%= app_name %>
 
-This project uses the open source [capistrano-fiftyfive](https://github.com/55minutes/capistrano-fiftyfive) set of tasks for capistrano to provision new environments. This document contains a quick overview of the provisioning process.
+This project uses the open source [capistrano-fiftyfive](https://github.com/mattbrictson/capistrano-fiftyfive) set of tasks for capistrano to provision new environments. This document contains a quick overview of the provisioning process.
 
 In capistrano terminology, *stage* refers to an environment like `staging` or `production`. These instructions will use the *stage* term for the remainder of the document.
 
