@@ -40,7 +40,7 @@ group :development do
   gem "bundler-audit", :require => false
   gem "capistrano", "~> 3.3.5", :require => false
   gem "capistrano-bundler", :require => false
-  gem "capistrano-fiftyfive", :require => false
+  gem "capistrano-fiftyfive", ">= 0.18.0", :require => false
   gem "capistrano-rails", :require => false
   gem "guard", ">= 2.2.2", :require => false
   gem "guard-livereload", :require => false
