@@ -1,11 +1,4 @@
-insert_into_file "config/application.rb", :before => /^  end/ do
-  <<-'RUBY'
-
-    # Ensure non-standard paths are eager-loaded
-    config.eager_load_paths += ["#{config.root}/app/workers"]
-  RUBY
-end
-
+apply "config/application.rb"
 copy_file "config/brakeman.yml"
 copy_file "config/pre_commit.yml"
 template "config/database.example.yml.tt"
