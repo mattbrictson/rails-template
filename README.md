@@ -11,6 +11,8 @@ This template currently works with:
 * Rails 4.2.x
 * PostgreSQL
 
+If you need help setting up a Ruby development environment, check out my [Rails OS X Setup Guide](https://mattbrictson.com/rails-osx-setup-guide).
+
 ## Installation
 
 *Optional.*
