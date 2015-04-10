@@ -21,7 +21,7 @@ fi
 cp config/database.example.yml config/database.yml
 cp example.env .env
 
-bundle install
+bundle install --retry=3
 bundle exec rake db:drop || true
 bundle exec rake db:create db:migrate
 bundle exec rake db:seed
