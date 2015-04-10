@@ -21,6 +21,9 @@ Style/ClassAndModuleChildren:
 Style/Documentation:
   Enabled: false
 
+Style/DoubleNegation:
+  Enabled: false
+
 Style/HashSyntax:
   EnforcedStyle: hash_rockets
 
