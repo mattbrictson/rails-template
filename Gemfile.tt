@@ -12,7 +12,7 @@ gem "marco-polo"
 gem "pg"<%= gemfile_requirement("pg") || ', "~> 0.18"' %>
 gem "rails", "<%= Rails.version %>"
 gem "sass-rails"<%= gemfile_requirement("sass-rails") %>
-gem "secure_headers"
+gem "secure_headers", ">= 2.1.0"
 gem "sidekiq"
 gem "sinatra", ">= 1.3.0", :require => false
 gem "turbolinks"<%= gemfile_requirement("turbolinks") || ', ">= 2.5.2"' %>
