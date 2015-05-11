@@ -1,18 +1,23 @@
 ENV["RAILS_ENV"] ||= "test"
 require File.expand_path("../../config/environment", __FILE__)
 require "rails/test_help"
+
+# Mocha provides mocking and stubbing helpers
 require "mocha/mini_test"
 
+# Minitest::Reporters adds color and progress bar to the test runner
 require "minitest/reporters"
 Minitest::Reporters.use!(
   Minitest::Reporters::ProgressReporter.new,
   ENV,
   Minitest.backtrace_filter)
 
+# Capybara + poltergeist allow JS testing via headless webkit
 require "capybara/rails"
 require "capybara/poltergeist"
 Capybara.javascript_driver = :poltergeist
 
+# Use Sidekiq's test fake that pushes all jobs into a jobs array
 require "sidekiq/testing"
 Sidekiq::Testing.fake!
 
@@ -29,6 +34,8 @@ class ActionDispatch::IntegrationTest
   include Capybara::DSL
 end
 
+# Monkey patch so that AR shares a single DB connection among all threads.
+# This ensures data consistency between the test thread and poltergeist thread.
 class ActiveRecord::Base
   mattr_accessor :shared_connection
   @@shared_connection = nil
