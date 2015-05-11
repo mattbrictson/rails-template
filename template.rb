@@ -35,7 +35,7 @@ def apply_template!
 
   git :init unless preexisting_git_repo?
 
-  run "RUBYOPT=#{rubyopt_without_bundler} bin/setup"
+  run_with_clean_bundler_env "bin/setup"
   generate_spring_binstubs
 
   unless preexisting_git_repo?
@@ -151,8 +151,9 @@ def apply_bootstrap?
     =~ /^y(es)?/i
 end
 
-def rubyopt_without_bundler
-  ENV["RUBYOPT"].to_s.sub(%r{-rbundler/setup}, "")
+def run_with_clean_bundler_env(cmd)
+  return run(cmd) unless defined?(Bundler)
+  Bundler.with_clean_env { run(cmd) }
 end
 
 apply_template!
