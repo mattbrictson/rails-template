@@ -14,7 +14,6 @@ def apply_template!
   remove_file "README.rdoc"
 
   template "example.env.tt"
-  copy_file "capistrano/metrics", ".capistrano/metrics"
   copy_file "gitignore", ".gitignore", :force => true
   copy_file "jenkins-ci.sh", :mode => :preserve
   copy_file "rubocop.yml", ".rubocop.yml"
