@@ -4,6 +4,8 @@ require "rails/test_help"
 
 # Mocha provides mocking and stubbing helpers
 require "mocha/mini_test"
+Mocha::Configuration.warn_when(:stubbing_non_existent_method)
+Mocha::Configuration.warn_when(:stubbing_non_public_method)
 
 # Minitest::Reporters adds color and progress bar to the test runner
 require "minitest/reporters"
