@@ -1,7 +1,7 @@
-# Extend the default assets:precompile by additionally gzipping *all*
-# assets. By default Rails only gzips .js and .css, and even then, only
-# .js and .css that are compiled (e.g from scss). This extension ensures that
-# big and easily-compressed files like SVGs also get gzipped.
+# Extend the default assets:precompile by gzipping all assets once the default
+# Sprockets behavior has completed. This is needed because Sprockets 2.x does
+# not gzip static assets like SVGs, and Sprockets 3 no longer does gzipping at
+# all!
 
 namespace :assets do
   desc "Create .gz versions of static assets"
@@ -17,12 +17,14 @@ namespace :assets do
       next unless f =~ zip_types
 
       gz_file = "#{f}.gz"
+      next if File.exist?(gz_file)
+
       mtime = File.mtime(f)
 
       File.open(gz_file, "wb") do |dest|
         gz = Zlib::GzipWriter.new(dest, Zlib::BEST_COMPRESSION)
         gz.mtime = mtime.to_i
-        gz.write(IO.read(f))
+        IO.copy_stream(open(f), gz)
         gz.close
       end
 
