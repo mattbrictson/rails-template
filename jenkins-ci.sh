@@ -13,9 +13,11 @@ cd $WORKSPACE
 if ! ruby -v &> /dev/null; then
   rbenv update
   rbenv install `cat .ruby-version`
-  gem install bundler --no-document
-  rbenv rehash
 fi
+
+# Install necessary version of bundler
+bundler_version=`ruby -e 'puts $<.read[/BUNDLED WITH\n   (\S+)$/, 1] || "<1.10"' Gemfile.lock`
+gem install bundler --conservative --no-document -v $bundler_version
 
 # Set up local config
 cp config/database.example.yml config/database.yml
