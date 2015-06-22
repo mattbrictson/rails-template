@@ -104,7 +104,7 @@ def assert_postgresql
        "but the pg gem isn’t present in your Gemfile."
 end
 
-# Mimic the convention used by capistrano-fiftyfive in order to generate
+# Mimic the convention used by capistrano-mb in order to generate
 # accurate deployment documentation.
 def capistrano_app_name
   app_name.gsub(/[^a-zA-Z0-9_]/, "_")

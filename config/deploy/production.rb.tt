@@ -1,5 +1,5 @@
 set :branch, ENV.fetch("CAPISTRANO_BRANCH", "master")
-set :fiftyfive_sidekiq_concurrency, 1
+set :mb_sidekiq_concurrency, 1
 
 server "<%= production_hostname %>",
        :user => "deployer",

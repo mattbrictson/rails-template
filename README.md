@@ -79,7 +79,7 @@ The template will perform the following steps:
     * [xray-rails][] – inspect view partials in the browser
 * Deployment
     * [airbrussh][] – prettier log output for capistrano
-    * [capistrano-fiftyfive][] – capistrano recipes
+    * [capistrano-mb][] – capistrano recipes
     * [unicorn][] – the industry-standard Rails server
 * Security
     * [brakeman][] and [bundler-audit][] – detect security vulnerabilities
@@ -138,7 +138,7 @@ Rails generators are very lightly documented; what you’ll find is that most of
 [rubocop]:https://github.com/bbatsov/rubocop
 [xray-rails]:https://github.com/brentd/xray-rails
 [airbrussh]:https://github.com/mattbrictson/airbrussh
-[capistrano-fiftyfive]:https://github.com/mattbrictson/capistrano-fiftyfive
+[capistrano-mb]:https://github.com/mattbrictson/capistrano-mb
 [unicorn]:http://unicorn.bogomips.org
 [Mandrill]:http://mandrill.com
 [brakeman]:https://github.com/presidentbeef/brakeman
