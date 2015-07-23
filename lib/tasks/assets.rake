@@ -20,7 +20,6 @@ namespace :assets do
       gz_file = "#{f}.gz"
       next if File.exist?(gz_file) && File.mtime(gz_file) >= mtime
 
-
       File.open(gz_file, "wb") do |dest|
         gz = Zlib::GzipWriter.new(dest, Zlib::BEST_COMPRESSION)
         gz.mtime = mtime.to_i
