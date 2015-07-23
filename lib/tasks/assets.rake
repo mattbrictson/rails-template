@@ -4,8 +4,8 @@
 # all!
 
 namespace :assets do
-  desc "Create .gz versions of static assets"
-  task :gzip_static => :environment do
+  desc "Create .gz versions of assets"
+  task :gzip => :environment do
     zip_types = /\.(?:css|html|js|otf|svg|txt|xml)$/
 
     public_assets = File.join(
@@ -34,6 +34,6 @@ namespace :assets do
 
   # Hook into existing assets:precompile task
   Rake::Task["assets:precompile"].enhance do
-    Rake::Task["assets:gzip_static"].invoke
+    Rake::Task["assets:gzip"].invoke
   end
 end
