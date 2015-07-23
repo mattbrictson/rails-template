@@ -16,10 +16,10 @@ namespace :assets do
     Dir["#{public_assets}/**/*"].each do |f|
       next unless f =~ zip_types
 
-      gz_file = "#{f}.gz"
-      next if File.exist?(gz_file)
-
       mtime = File.mtime(f)
+      gz_file = "#{f}.gz"
+      next if File.exist?(gz_file) && File.mtime(gz_file) >= mtime
+
 
       File.open(gz_file, "wb") do |dest|
         gz = Zlib::GzipWriter.new(dest, Zlib::BEST_COMPRESSION)
