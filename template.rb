@@ -90,6 +90,7 @@ def assert_valid_options
     :edge => false
   }
   valid_options.each do |key, expected|
+    next unless options.key?(key)
     actual = options[key]
     unless actual == expected
       fail Rails::Generators::Error, "Unsupported option: #{key}=#{actual}"
