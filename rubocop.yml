@@ -34,3 +34,6 @@ Style/SpaceAroundEqualsInParameterDefault:
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes
+
+Style/TrivialAccessors:
+  AllowPredicates: true
