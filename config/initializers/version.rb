@@ -5,7 +5,8 @@ rescue
 end
 
 Rails.application.config.version_time = begin
-  Time.zone.parse(`git log -1 --format="%ad" --date=iso 2> /dev/null`)
+  time = Time.zone.parse(`git log -1 --format="%ad" --date=iso 2> /dev/null`)
+  time || Time.zone.now
 rescue
   Time.zone.now
 end
