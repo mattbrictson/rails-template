@@ -114,7 +114,7 @@ end
 
 def git_repo_url
   @git_repo_url ||=
-    ask("What is the git remote URL for this project [skip]?", :blue)
+    ask_with_default("What is the git remote URL for this project?", :blue, "skip")
 end
 
 def production_hostname
@@ -134,13 +134,14 @@ def gemfile_requirement(name)
 end
 
 def ask_with_default(question, color, default)
+  return default unless $stdin.tty?
   question = (question.split("?") << " [#{default}]?").join
   answer = ask(question, color)
   answer.to_s.strip.empty? ? default : answer
 end
 
 def git_repo_specified?
-  !git_repo_url.strip.empty?
+  git_repo_url != "skip" && !git_repo_url.strip.empty?
 end
 
 def preexisting_git_repo?

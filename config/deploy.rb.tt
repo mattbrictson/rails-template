@@ -1,5 +1,5 @@
 set :application, "<%= app_name %>"
-set :repo_url, "<%= git_repo_url %>"
+set :repo_url, "<%= git_repo_specified? ? git_repo_url : "TODO" %>"
 
 # Project-specific overrides go here.
 # For list of variables that can be customized, see:
