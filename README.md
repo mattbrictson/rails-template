@@ -81,6 +81,7 @@ The template will perform the following steps:
     * [airbrussh][] – prettier log output for capistrano
     * [capistrano-mb][] – capistrano recipes
     * [unicorn][] – the industry-standard Rails server
+    * [unicorn-worker-killer][] – to manage memory use
 * Security
     * [brakeman][] and [bundler-audit][] – detect security vulnerabilities
     * [secure_headers][] – hardens your app against XSS attacks
@@ -140,6 +141,7 @@ Rails generators are very lightly documented; what you’ll find is that most of
 [airbrussh]:https://github.com/mattbrictson/airbrussh
 [capistrano-mb]:https://github.com/mattbrictson/capistrano-mb
 [unicorn]:http://unicorn.bogomips.org
+[unicorn-worker-killer]:https://github.com/kzk/unicorn-worker-killer
 [Mandrill]:http://mandrill.com
 [brakeman]:https://github.com/presidentbeef/brakeman
 [bundler-audit]:https://github.com/rubysec/bundler-audit

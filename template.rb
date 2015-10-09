@@ -23,6 +23,7 @@ def apply_template!
   copy_file "Capfile"
   copy_file "Guardfile"
 
+  apply "config.ru.rb"
   apply "app/template.rb"
   apply "bin/template.rb"
   apply "config/template.rb"

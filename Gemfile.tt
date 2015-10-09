@@ -19,6 +19,7 @@ gem "turbolinks"<%= gemfile_requirement("turbolinks") || ', ">= 2.5.2"' %>
 
 group :production, :staging do
   gem "unicorn"
+  gem "unicorn-worker-killer"
 end
 
 group :development do
