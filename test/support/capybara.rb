@@ -6,6 +6,9 @@ Capybara.javascript_driver = :poltergeist
 class ActionDispatch::IntegrationTest
   # Make the Capybara DSL available in all integration tests
   include Capybara::DSL
+
+  # Ensure each test gets a clean session
+  setup { Capybara.current_session.driver.browser.clear_cookies }
 end
 
 # Monkey patch so that AR shares a single DB connection among all threads.
