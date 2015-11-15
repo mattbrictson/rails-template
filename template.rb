@@ -35,9 +35,15 @@ def apply_template!
   apply "variants/bootstrap/template.rb" if apply_bootstrap?
 
   git :init unless preexisting_git_repo?
+  empty_directory ".git/safe"
 
   run_with_clean_bundler_env "bin/setup"
   generate_spring_binstubs
+
+  binstubs = %w(
+    brakeman bundler-audit capistrano guard sidekiq terminal-notifier
+  )
+  run_with_clean_bundler_env "bundle binstubs #{binstubs.join(' ')}"
 
   unless preexisting_git_repo?
     git :add => "-A ."
