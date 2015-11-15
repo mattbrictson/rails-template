@@ -61,6 +61,7 @@ group :test do
   gem "minitest-reporters"
   gem "mocha"
   gem "poltergeist"
-  gem "shoulda"
+  gem "shoulda-context"
+  gem "shoulda-matchers", ">= 3.0.1"
   gem "test_after_commit"
 end
