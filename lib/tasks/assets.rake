@@ -28,6 +28,8 @@ namespace :assets do
       end
 
       File.utime(mtime, mtime, gz_file)
+      Rails.logger = Logger.new(STDOUT)
+      Rails.logger.info "Writing #{gz_file}"
     end
   end
 
