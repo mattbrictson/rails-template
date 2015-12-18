@@ -40,7 +40,7 @@ group :development do
   gem "airbrussh", :require => false
   gem "brakeman", :require => false
   gem "bundler-audit", :require => false
-  gem "capistrano", "~> 3.4.0", :require => false
+  gem "capistrano", "~> 3.4", :require => false
   gem "capistrano-bundler", :require => false
   gem "capistrano-mb", ">= 0.22.2", :require => false
   gem "capistrano-nc", :require => false
@@ -50,7 +50,7 @@ group :development do
   gem "guard-minitest", :require => false
   gem "rb-fsevent", :require => false
   gem "simplecov", :require => false
-  gem "sshkit", "~> 1.7.1", :require => false
+  gem "sshkit", "~> 1.8", :require => false
   gem "terminal-notifier", :require => false
   gem "terminal-notifier-guard", :require => false
   gem "thin", :require => false
