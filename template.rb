@@ -41,7 +41,7 @@ def apply_template!
   generate_spring_binstubs
 
   binstubs = %w(
-    brakeman bundler-audit capistrano guard sidekiq terminal-notifier
+    annotate brakeman bundler-audit capistrano guard sidekiq terminal-notifier
   )
   run_with_clean_bundler_env "bundle binstubs #{binstubs.join(' ')}"
 
