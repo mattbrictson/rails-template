@@ -108,7 +108,6 @@ Action Mailer is configured to use [Mandrill][] for SMTP. You can change this by
 #### Other tweaks that patch over some Rails shortcomings
 
 * A much-improved `bin/setup` script
-* Automatic gzip of SVG and other static assets during deployment
 * Log rotation so that development and test Rails logs don’t grow out of control
 
 #### Plus lots of documentation for your project
