@@ -33,7 +33,7 @@ group :development do
   gem "quiet_assets"
   gem "rack-livereload"
   gem "spring"
-  gem "xray-rails", ">= 0.1.16"
+  gem "xray-rails", ">= 0.1.18"
 end
 
 group :development do
