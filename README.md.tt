@@ -19,6 +19,8 @@ This project requires:
 * PostgreSQL must be installed and accepting connections
 * [Redis][] must be installed and running on localhost with the default port
 
+On a Mac, you can obtain all of the above packages using [Homebrew][].
+
 If you need help setting up a Ruby development environment, check out this [Rails OS X Setup Guide](https://mattbrictson.com/rails-osx-setup-guide).
 
 ## Getting started
@@ -41,3 +43,4 @@ Run the `bin/setup` script. This script will:
 [rbenv]:https://github.com/sstephenson/rbenv
 [poltergeist]:https://github.com/teampoltergeist/poltergeist
 [redis]:http://redis.io
+[Homebrew]:http://brew.sh
