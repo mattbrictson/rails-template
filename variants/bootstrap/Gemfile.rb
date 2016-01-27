@@ -1,7 +1,7 @@
 insert_into_file "Gemfile", :after => /gem "bcrypt".*\n/ do
   <<-GEMS.strip_heredoc
-    gem "bootstrap_form", "~> 2.3.0"
-    gem "bootstrap-sass", "~> 3.2.0"
+    gem "bootstrap_form", "~> 2.3"
+    gem "bootstrap-sass", "~> 3.3"
   GEMS
 end
 
