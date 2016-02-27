@@ -4,9 +4,7 @@ def setup!
   within_project_root do
     test "ruby -v" => ruby_version
     run  "gem install bundler --no-document --conservative"
-    run  "rbenv rehash" if rbenv_installed?
     run  "bundle install"
-    run  "rbenv rehash" if rbenv_installed?
     copy "example.env"
     copy "config/database.example.yml"
     test_local_env_contains_required_keys
@@ -57,11 +55,6 @@ end
 def with_clean_bundler_env(&block)
   return block.call unless defined?(Bundler)
   Bundler.with_clean_env(&block)
-end
-
-def rbenv_installed?
-  @rbenv_installed ||= (`which rbenv`.length > 0 || :not_installed)
-  @rbenv_installed != :not_installed
 end
 
 def pre_commit_available?
