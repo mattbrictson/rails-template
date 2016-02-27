@@ -93,9 +93,9 @@ The template will perform the following steps:
     * [shoulda][] – shortcuts for common ActiveRecord tests
     * [test_after_commit][] – ensures after_commit hooks can be tested
 
-#### Mandrill SMTP
+#### Postmark
 
-Action Mailer is configured to use [Mandrill][] for SMTP. You can change this by editing `environments/production.rb`.
+I like to use [Postmark][] for transactional email, and so I've included the [postmark-rails][] gem and configured it in `environments/production.rb`. Make sure to sign up for a Postmark account to get an API key, or switch to your own preferred email provider before deploying your app.
 
 #### Bootstrap integration (optional)
 
@@ -141,7 +141,8 @@ Rails generators are very lightly documented; what you’ll find is that most of
 [capistrano-mb]:https://github.com/mattbrictson/capistrano-mb
 [unicorn]:http://unicorn.bogomips.org
 [unicorn-worker-killer]:https://github.com/kzk/unicorn-worker-killer
-[Mandrill]:http://mandrill.com
+[Postmark]:http://postmarkapp.com
+[postmark-rails]:http://www.rubydoc.info/gems/postmark-rails/0.12.0
 [brakeman]:https://github.com/presidentbeef/brakeman
 [bundler-audit]:https://github.com/rubysec/bundler-audit
 [secure_headers]:https://github.com/twitter/secureheaders
