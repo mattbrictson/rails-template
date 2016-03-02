@@ -31,7 +31,7 @@ bundle exec rake db:seed
 # Webkit needs an X server in order to render.
 # See https://github.com/thoughtbot/capybara-webkit/issues/402
 if type xvfb-run; then
-  DISABLE_SPRING=1 DISPLAY=localhost:1.0 xvfb-run bundle exec rake test:coverage
+  DISABLE_SPRING=1 DISPLAY=localhost:1.0 xvfb-run -a bundle exec rake test:coverage
 else
   DISABLE_SPRING=1 bundle exec rake test:coverage
 fi
