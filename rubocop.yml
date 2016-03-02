@@ -17,6 +17,9 @@ Metrics/LineLength:
   Exclude:
     - "config/**/*"
 
+Style/BarePercentLiterals:
+  EnforcedStyle: percent_q
+
 Style/ClassAndModuleChildren:
   Enabled: false
 
