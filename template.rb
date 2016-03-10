@@ -16,7 +16,7 @@ def apply_template!
   template "example.env.tt"
   copy_file "gitignore", ".gitignore", :force => true
   copy_file "jenkins-ci.sh", :mode => :preserve
-  copy_file "rubocop.yml", ".rubocop.yml"
+  template "rubocop.yml.tt", ".rubocop.yml"
   template "ruby-version.tt", ".ruby-version"
   copy_file "simplecov", ".simplecov"
 

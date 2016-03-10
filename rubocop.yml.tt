@@ -1,7 +1,7 @@
 AllCops:
-  RunRailsCops: true
   DisplayCopNames: true
   DisplayStyleGuide: true
+  TargetRubyVersion: <%= RUBY_VERSION[/\d+\.\d+/] %>
   Exclude:
     - "bin/*"
     - Capfile
@@ -13,9 +13,28 @@ AllCops:
     - Guardfile
     - Rakefile
 
+Metrics/AbcSize:
+  Exclude:
+    - "test/**/*"
+
+Metrics/ClassLength:
+  Exclude:
+    - "test/**/*"
+
 Metrics/LineLength:
   Exclude:
     - "config/**/*"
+
+Metrics/MethodLength:
+  Max: 12
+  Exclude:
+    - "test/**/*"
+
+Rails:
+  Enabled: true
+
+Rails/Validation:
+  Enabled: false
 
 Style/BarePercentLiterals:
   EnforcedStyle: percent_q
@@ -23,10 +42,10 @@ Style/BarePercentLiterals:
 Style/ClassAndModuleChildren:
   Enabled: false
 
-Style/Documentation:
+Style/DoubleNegation:
   Enabled: false
 
-Style/DoubleNegation:
+Style/FrozenStringLiteralComment:
   Enabled: false
 
 Style/HashSyntax:
