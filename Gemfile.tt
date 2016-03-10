@@ -38,7 +38,7 @@ group :development do
 end
 
 group :development do
-  gem "airbrussh", :require => false
+  gem "airbrussh", "~> 1.0", :require => false
   gem "brakeman", :require => false
   gem "bundler-audit", :require => false
   gem "capistrano", "~> 3.4", :require => false
