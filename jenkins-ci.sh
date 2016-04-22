@@ -41,8 +41,7 @@ if bundle show brakeman &> /dev/null; then
   bundle exec brakeman --no-progress
 fi
 if bundle show bundler-audit &> /dev/null; then
-  bundle exec bundle-audit update
-  bundle exec bundle-audit -v
+  bundle exec bundle-audit check --update -v
 fi
 
 # Run a capistrano deploy if we just built the "development" branch.
