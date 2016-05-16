@@ -15,8 +15,7 @@ gem "rails", "<%= Rails.version %>"
 gem "redis-namespace"
 gem "sass-rails"<%= gemfile_requirement("sass-rails") %>
 gem "secure_headers", "~> 3.0"
-gem "sidekiq"
-gem "sinatra", ">= 1.3.0", :require => false
+gem "sidekiq", ">= 4.2.0"
 gem "turbolinks"<%= gemfile_requirement("turbolinks") || ', ">= 2.5.2"' %>
 
 group :production, :staging do
