@@ -2,7 +2,7 @@
 
 ## Description
 
-This is the application template that I use for my Rails 4.2 projects. As a freelance Rails developer, I need to be able to start new projects quickly and with a good set of defaults. I've assembled this template over the years to include best-practices, tweaks, documentation, and personal preferences, while still generally adhering to the "Rails way".
+This is the application template that I use for my Rails 4.2 projects (Rails 5 support is [coming soon](https://github.com/mattbrictson/rails-template/pull/9)). As a freelance Rails developer, I need to be able to start new projects quickly and with a good set of defaults. I've assembled this template over the years to include best-practices, tweaks, documentation, and personal preferences, while still generally adhering to the "Rails way".
 
 ## Requirements
 
