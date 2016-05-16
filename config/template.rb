@@ -35,4 +35,5 @@ apply "config/environments/production.rb"
 apply "config/environments/test.rb"
 template "config/environments/staging.rb.tt"
 
+route 'root "home#index"'
 route %(mount Sidekiq::Web => "/sidekiq" # monitoring console\n)

@@ -42,18 +42,25 @@ group :development do
   gem "guard-livereload", :require => false
   gem "guard-minitest", :require => false
   gem "letter_opener"
-  gem "listen"
+  gem "listen"<%= gemfile_requirement("listen") %>
   gem "overcommit", :require => false
-  gem "quiet_assets"
+<% if gemfile_requirement("puma") -%>
+  gem "puma"<%= gemfile_requirement("puma") %>
+<% end -%>
   gem "rack-livereload"
   gem "rb-fsevent", :require => false
   gem "rubocop", :require => false
   gem "simplecov", :require => false
   gem "spring"
   gem "sshkit", "~> 1.8", :require => false
+<% if gemfile_requirement("spring-watcher-listen") -%>
+  gem "spring-watcher-listen"<%= gemfile_requirement("spring-watcher-listen") %>
+<% end -%>
   gem "terminal-notifier", :require => false
   gem "terminal-notifier-guard", :require => false
+<% unless gemfile_requirement("puma") -%>
   gem "thin", :require => false
+<% end -%>
   gem "xray-rails", ">= 0.1.18"
 end
 
@@ -67,5 +74,4 @@ group :test do
   gem "poltergeist"
   gem "shoulda-context"
   gem "shoulda-matchers", ">= 3.0.1"
-  gem "test_after_commit"
 end
