@@ -43,21 +43,47 @@ You will be prompted to choose passwords and enter other configuration values as
 
 It is safe to run the provision command multiple times on the same stage (the scripts are generally idempotent).
 
-## 3. Install a custom SSL key and certificate (optional)
+## 3. Install a custom SSL key and certificate using Let's Encrypt with auto-renewal
 
-You can upload your SSL key and certificate to the following location:
-
-```
-/etc/ssl/<%= capistrano_app_name %>.key
-/etc/ssl/<%= capistrano_app_name %>.crt
-```
-
-Make sure the files are owned by `root` with permissions `600`.
-
-Once uploaded, restart nginx using this command:
+Perform the following commands as root.
 
 ```
-sudo service nginx restart
+mkdir -p /opt/certbot
+cd /opt/certbot/
+wget https://dl.eff.org/certbot-auto
+chmod a+x certbot-auto
+./certbot-auto certonly
+```
+
+When prompted:
+
+* Select the *webroot* option
+* Enter domains to secure (for example): `<%= production_hostname %>`
+* Enter webroot path: `/home/deployer/apps/<%= capistrano_app_name %>/shared/public/`
+
+The `.pem` files created by `certbot-auto` need to be linked so Nginx can see them:
+
+```
+ln -s /etc/letsencrypt/live/<%= production_hostname %>/fullchain.pem /etc/ssl/<%= capistrano_app_name %>.crt
+ln -s /etc/letsencrypt/live/<%= production_hostname %>/privkey.pem /etc/ssl/<%= capistrano_app_name %>.key
+```
+
+Restart Nginx to enable the certificate:
+
+```
+service nginx restart
+```
+
+Verify auto-renewal works by doing a dry run:
+
+```
+/opt/certbot/certbot-auto renew --webroot-path /home/deployer/apps/<%= capistrano_app_name %>/shared/public/ --dry-run
+```
+
+Finally, add this to the root crontab to enable auto-renewal:
+
+```
+<%= rand(60) %> <%= h=rand(11); "#{h},#{h+12}" %> * * * /opt/certbot/certbot-auto renew --quiet --no-self-upgrade --webroot-path /home/deployer/apps/<%= capistrano_app_name %>/shared/public/
 ```
 
 ## 4. Deploy
