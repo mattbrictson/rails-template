@@ -11,7 +11,6 @@ def setup!
     run  "bin/rake db:create:all"
     run  "bin/rake db:migrate"
     run  "bin/rake db:seed"
-    run  "pre-commit install" if pre_commit_available?
   end
 end
 
@@ -55,11 +54,6 @@ end
 def with_clean_bundler_env(&block)
   return block.call unless defined?(Bundler)
   Bundler.with_clean_env(&block)
-end
-
-def pre_commit_available?
-  @pre_commit_available ||= (`which pre-commit`.length > 0 || :not_installed)
-  @pre_commit_available != :not_installed
 end
 
 def copy(example_path)
