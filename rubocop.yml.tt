@@ -9,6 +9,7 @@ AllCops:
     - config/environment.rb
     - config/initializers/version.rb
     - db/schema.rb
+    - "tmp/**/*"
     - Gemfile
     - Guardfile
     - Rakefile
@@ -28,6 +29,7 @@ Metrics/LineLength:
 Metrics/MethodLength:
   Max: 12
   Exclude:
+    - "db/migrate/*"
     - "test/**/*"
 
 Rails:
@@ -41,6 +43,16 @@ Style/BarePercentLiterals:
 
 Style/ClassAndModuleChildren:
   Enabled: false
+
+Style/Documentation:
+  Exclude:
+    - "app/controllers/application_controller.rb"
+    - "app/helpers/**/*_helper.rb"
+    - "app/mailers/**/*_mailer.rb"
+    - "app/models/application_record.rb"
+    - "config/**/*"
+    - "db/**/*"
+    - "test/**/*"
 
 Style/DoubleNegation:
   Enabled: false
