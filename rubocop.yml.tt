@@ -25,6 +25,7 @@ Metrics/ClassLength:
 Metrics/LineLength:
   Exclude:
     - "config/**/*"
+    - "db/**/*"
 
 Metrics/MethodLength:
   Max: 12

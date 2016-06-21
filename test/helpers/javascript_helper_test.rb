@@ -16,6 +16,7 @@ class JavascriptHelperTest < ActionView::TestCase
   test "javascript_include_async_tag adds async attribute" do
     assert_equal(
       '<script src="/javascripts/foo.js" async="async"></script>',
-      javascript_include_async_tag("foo"))
+      javascript_include_async_tag("foo")
+    )
   end
 end

@@ -13,12 +13,15 @@ end
 
 # Monkey patch so that AR shares a single DB connection among all threads.
 # This ensures data consistency between the test thread and poltergeist thread.
+# rubocop:disable Style/ClassVars
 class ActiveRecord::Base
   mattr_accessor :shared_connection
   @@shared_connection = nil
 
   def self.connection
-    @@shared_connection || ConnectionPool::Wrapper.new(:size => 1) { retrieve_connection }
+    @@shared_connection || begin
+      ConnectionPool::Wrapper.new(:size => 1) { retrieve_connection }
+    end
   end
 end
 ActiveRecord::Base.shared_connection = ActiveRecord::Base.connection

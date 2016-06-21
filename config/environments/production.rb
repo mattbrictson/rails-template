@@ -27,8 +27,8 @@ insert_into_file "config/environments/production.rb",
   }
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default_url_options = {
-    host: "#{production_hostname}",
-    protocol: "https"
+    :host => "#{production_hostname}",
+    :protocol => "https"
   }
   config.action_mailer.asset_host = "https://#{production_hostname}"
   RUBY
