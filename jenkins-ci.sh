@@ -24,6 +24,18 @@ cp config/database.example.yml config/database.yml
 cp example.env .env
 
 bundle install --deployment --retry=3
+
+# Static analysis audits
+if bundle show brakeman &> /dev/null; then
+  bundle exec brakeman --no-progress
+fi
+if bundle show bundler-audit &> /dev/null; then
+  bundle exec bundle-audit check --update -v
+fi
+if bundle show rubocop &> /dev/null; then
+  bundle exec rubocop
+fi
+
 bundle exec rake db:drop || true
 bundle exec rake db:create db:migrate
 bundle exec rake db:seed
@@ -34,14 +46,6 @@ if type xvfb-run; then
   DISABLE_SPRING=1 DISPLAY=localhost:1.0 xvfb-run -a bundle exec rake test:coverage
 else
   DISABLE_SPRING=1 bundle exec rake test:coverage
-fi
-
-# Security audits
-if bundle show brakeman &> /dev/null; then
-  bundle exec brakeman --no-progress
-fi
-if bundle show bundler-audit &> /dev/null; then
-  bundle exec bundle-audit check --update -v
 fi
 
 # Run a capistrano deploy if we just built the "development" branch.

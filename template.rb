@@ -16,7 +16,6 @@ def apply_template!
   template "example.env.tt"
   copy_file "gitignore", ".gitignore", :force => true
   copy_file "jenkins-ci.sh", :mode => :preserve
-  template "rubocop.yml.tt", ".rubocop.yml"
   template "ruby-version.tt", ".ruby-version"
   copy_file "simplecov", ".simplecov"
 
@@ -43,7 +42,13 @@ def apply_template!
   binstubs = %w(
     annotate brakeman bundler-audit capistrano guard sidekiq terminal-notifier
   )
+  binstubs << "rubocop" if apply_rubocop?
   run_with_clean_bundler_env "bundle binstubs #{binstubs.join(' ')}"
+
+  if apply_rubocop?
+    template "rubocop.yml.tt", ".rubocop.yml"
+    run_rubocop_autocorrections
+  end
 
   unless preexisting_git_repo?
     git :add => "-A ."
@@ -163,6 +168,16 @@ end
 def run_with_clean_bundler_env(cmd)
   return run(cmd) unless defined?(Bundler)
   Bundler.with_clean_env { run(cmd) }
+end
+
+def apply_rubocop?
+  return @apply_rubocop if defined?(@apply_rubocop)
+  @apply_rubocop = \
+    ask_with_default("Use RuboCop in this project?", :blue, "no") =~ /^y(es)?/i
+end
+
+def run_rubocop_autocorrections
+  run_with_clean_bundler_env "bin/rubocop -a --fail-level A > /dev/null"
 end
 
 apply_template!

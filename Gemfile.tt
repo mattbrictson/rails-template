@@ -50,6 +50,9 @@ group :development do
   gem "guard-livereload", :require => false
   gem "guard-minitest", :require => false
   gem "rb-fsevent", :require => false
+<% if apply_rubocop? -%>
+  gem "rubocop", :require => false
+<% end -%>
   gem "simplecov", :require => false
   gem "sshkit", "~> 1.8", :require => false
   gem "terminal-notifier", :require => false
