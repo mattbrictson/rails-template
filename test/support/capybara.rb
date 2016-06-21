@@ -6,6 +6,8 @@ Capybara.javascript_driver = :poltergeist
 class ActionDispatch::IntegrationTest
   # Make the Capybara DSL available in all integration tests
   include Capybara::DSL
+  # This comes from the minitest-capybara gem
+  include Capybara::Assertions
 
   # Ensure each test gets a clean session
   setup { Capybara.current_session.driver.browser.clear_cookies }

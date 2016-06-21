@@ -64,6 +64,7 @@ group :test do
   gem "capybara"
   gem "connection_pool"
   gem "launchy"
+  gem "minitest-capybara"
   gem "minitest-reporters"
   gem "mocha"
   gem "poltergeist"
