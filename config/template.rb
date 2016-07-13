@@ -9,6 +9,11 @@ template "config/deploy.rb.tt"
 template "config/deploy/production.rb.tt"
 template "config/deploy/staging.rb.tt"
 
+insert_into_file "config/boot.rb", :after => %r{bundler/setup.*\n} do
+  'require "bootscale/setup"'
+
+end
+
 gsub_file "config/routes.rb", /  # root 'welcome#index'/ do
   '  root "home#index"'
 end
