@@ -40,15 +40,13 @@ def apply_template!
   generate_spring_binstubs
 
   binstubs = %w(
-    annotate brakeman bundler-audit capistrano guard sidekiq terminal-notifier
+    annotate brakeman bundler-audit capistrano guard rubocop sidekiq
+    terminal-notifier
   )
-  binstubs << "rubocop" if apply_rubocop?
   run_with_clean_bundler_env "bundle binstubs #{binstubs.join(' ')}"
 
-  if apply_rubocop?
-    template "rubocop.yml.tt", ".rubocop.yml"
-    run_rubocop_autocorrections
-  end
+  template "rubocop.yml.tt", ".rubocop.yml"
+  run_rubocop_autocorrections
 
   unless preexisting_git_repo?
     git :add => "-A ."
@@ -168,12 +166,6 @@ end
 def run_with_clean_bundler_env(cmd)
   return run(cmd) unless defined?(Bundler)
   Bundler.with_clean_env { run(cmd) }
-end
-
-def apply_rubocop?
-  return @apply_rubocop if defined?(@apply_rubocop)
-  @apply_rubocop = \
-    ask_with_default("Use RuboCop in this project?", :blue, "no") =~ /^y(es)?/i
 end
 
 def run_rubocop_autocorrections
