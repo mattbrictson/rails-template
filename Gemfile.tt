@@ -51,6 +51,7 @@ group :development do
   gem "guard-livereload", :require => false
   gem "guard-minitest", :require => false
   gem "rb-fsevent", :require => false
+  gem "overcommit", :require => false
   gem "rubocop", :require => false
   gem "simplecov", :require => false
   gem "sshkit", "~> 1.8", :require => false

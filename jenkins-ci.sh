@@ -25,17 +25,21 @@ cp example.env .env
 
 bundle install --deployment --retry=3
 
-# Static analysis audits
+# Overcommit hooks
+if [ -f .overcommit.yml ]; then
+  bundle exec overcommit --sign
+  bundle exec overcommit --run
+fi
+
+# Security audits
 if bundle show brakeman &> /dev/null; then
   bundle exec brakeman --no-progress
 fi
 if bundle show bundler-audit &> /dev/null; then
   bundle exec bundle-audit check --update -v
 fi
-if bundle show rubocop &> /dev/null; then
-  bundle exec rubocop
-fi
 
+# Recreate the database from scratch to test migrations and seeds work
 bundle exec rake db:drop || true
 bundle exec rake db:create db:migrate
 bundle exec rake db:seed
