@@ -1,6 +1,6 @@
 # <%= app_name %>
 
-This is a Rails <%= Rails.version %> app.
+This is a Rails <%= Rails::VERSION::MAJOR %> app.
 
 ## Documentation
 
