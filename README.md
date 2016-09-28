@@ -2,13 +2,15 @@
 
 ## Description
 
-This is the application template that I use for my Rails 4.2 projects (Rails 5 support is [coming soon](https://github.com/mattbrictson/rails-template/pull/9)). As a freelance Rails developer, I need to be able to start new projects quickly and with a good set of defaults. I've assembled this template over the years to include best-practices, tweaks, documentation, and personal preferences, while still generally adhering to the "Rails way".
+This is the application template that I use for my Rails 5 projects. As a freelance Rails developer, I need to be able to start new projects quickly and with a good set of defaults. I've assembled this template over the years to include best-practices, tweaks, documentation, and personal preferences, while still generally adhering to the "Rails way".
+
+*For Rails 4.2 projects, use the [rails-42 branch](https://github.com/mattbrictson/rails-template/tree/rails-42).*
 
 ## Requirements
 
 This template currently works with:
 
-* Rails 4.2.x
+* Rails 5.0.x
 * PostgreSQL
 
 If you need help setting up a Ruby development environment, check out my [Rails OS X Setup Guide](https://mattbrictson.com/rails-osx-setup-guide).
