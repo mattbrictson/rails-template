@@ -2,7 +2,7 @@
 
 ## Description
 
-This is the application template that I use for my Rails 4.2 projects (Rails 5 support is [coming soon](https://github.com/mattbrictson/rails-template/pull/9)). As a freelance Rails developer, I need to be able to start new projects quickly and with a good set of defaults. I've assembled this template over the years to include best-practices, tweaks, documentation, and personal preferences, while still generally adhering to the "Rails way".
+This is the application template that I use for my Rails 4.2 projects (Rails 5 support is in the [master branch](https://github.com/mattbrictson/rails-template/)). As a freelance Rails developer, I need to be able to start new projects quickly and with a good set of defaults. I've assembled this template over the years to include best-practices, tweaks, documentation, and personal preferences, while still generally adhering to the "Rails way".
 
 ## Requirements
 
@@ -21,7 +21,7 @@ To make this the default Rails application template on your system, create a `~/
 
 ```
 -d postgresql
--m https://raw.githubusercontent.com/mattbrictson/rails-template/master/template.rb
+-m https://raw.githubusercontent.com/mattbrictson/rails-template/rails-42/template.rb
 ```
 
 ## Usage
@@ -37,7 +37,7 @@ To generate a Rails application using this template, pass the `-m` option to `ra
 ```
 rails new blog \
   -d postgresql \
-  -m https://raw.githubusercontent.com/mattbrictson/rails-template/master/template.rb
+  -m https://raw.githubusercontent.com/mattbrictson/rails-template/rails-42/template.rb
 ```
 
 *Remember that options must go after the name of the application.* The only database supported by this template is `postgresql`.
