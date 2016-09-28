@@ -8,9 +8,13 @@
 /.bundle
 
 # Ignore all logfiles and tempfiles.
-/log/*.log
-/log/*.log.*
-/tmp
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+
+# Ignore Byebug command history file.
+.byebug_history
 
 # Ignore test reports
 /brakeman-output.*

@@ -1,4 +1,4 @@
-RAILS_REQUIREMENT = "~> 4.2.0"
+RAILS_REQUIREMENT = "~> 5.0.0"
 
 def apply_template!
   assert_minimum_rails_version
@@ -139,7 +139,7 @@ end
 
 def gemfile_requirement(name)
   @original_gemfile ||= IO.read("Gemfile")
-  req = @original_gemfile[/gem\s+['"]#{name}['"]\s*(,[><~= \t\d\.\w'"]*).*$/, 1]
+  req = @original_gemfile[/gem\s+['"]#{name}['"]\s*(,[><~= \t\d\.\w'"]*)?.*$/, 1]
   req && req.gsub("'", %(")).strip.sub(/^,\s*"/, ', "')
 end
 
