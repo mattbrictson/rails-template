@@ -78,7 +78,6 @@ The template will perform the following steps:
     * [rubocop][] – enforces Ruby code style
     * [xray-rails][] – inspect view partials in the browser
 * Deployment
-    * [airbrussh][] – prettier log output for capistrano
     * [capistrano-mb][] – capistrano recipes
     * [unicorn][] – the industry-standard Rails server
     * [unicorn-worker-killer][] – to manage memory use
@@ -137,7 +136,6 @@ Rails generators are very lightly documented; what you’ll find is that most of
 [livereload]:https://github.com/guard/guard-livereload
 [rubocop]:https://github.com/bbatsov/rubocop
 [xray-rails]:https://github.com/brentd/xray-rails
-[airbrussh]:https://github.com/mattbrictson/airbrussh
 [capistrano-mb]:https://github.com/mattbrictson/capistrano-mb
 [unicorn]:http://unicorn.bogomips.org
 [unicorn-worker-killer]:https://github.com/kzk/unicorn-worker-killer
