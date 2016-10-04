@@ -33,7 +33,7 @@ group :development do
   gem "brakeman", :require => false
   gem "bundler-audit", ">= 0.5.0", :require => false
   gem "capistrano", "~> 3.6", :require => false
-  gem "capistrano-bundler", :require => false
+  gem "capistrano-bundler", "~> 1.2", :require => false
   gem "capistrano-mb", ">= 0.22.2", :require => false
   gem "capistrano-nc", :require => false
   gem "capistrano-rails", :require => false

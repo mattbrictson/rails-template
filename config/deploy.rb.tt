@@ -14,3 +14,5 @@ set :mb_dotenv_keys, %w(
   sidekiq_web_username
   sidekiq_web_password
 )
+
+after "deploy:published", "bundler:clean"
