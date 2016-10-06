@@ -7,7 +7,6 @@ gem "bootscale", :require => false
 gem "coffee-rails"<%= gemfile_requirement("coffee-rails") %>
 gem "dotenv-rails", ">= 2.0.0"
 gem "jquery-rails"<%= gemfile_requirement("jquery-rails") %>
-gem "jquery-turbolinks"
 gem "mail", ">= 2.6.3"
 gem "marco-polo"
 gem "pg"<%= gemfile_requirement("pg") || ', "~> 0.18"' %>

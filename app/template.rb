@@ -1,4 +1,3 @@
-apply "app/assets/javascripts/application.js.rb"
 copy_file "app/assets/stylesheets/application.scss"
 remove_file "app/assets/stylesheets/application.css"
 
