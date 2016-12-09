@@ -47,7 +47,7 @@ group :development do
 <% end -%>
   gem "rack-livereload"
   gem "rb-fsevent", :require => false
-  gem "rubocop", :require => false
+  gem "rubocop", :require => false, ">= 0.44.0"
   gem "simplecov", :require => false
   gem "spring"
   gem "sshkit", "~> 1.8", :require => false
