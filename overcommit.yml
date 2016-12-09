@@ -21,6 +21,12 @@ PreCommit:
   BundleCheck:
     enabled: true
 
+  FixMe:
+    enabled: true
+    keywords: ["FIXME"]
+    exclude:
+      - .overcommit.yml
+
   LocalPathsInGemfile:
     enabled: true
 

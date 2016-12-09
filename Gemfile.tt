@@ -41,7 +41,7 @@ group :development do
   gem "guard-minitest", :require => false
   gem "letter_opener"
   gem "listen"<%= gemfile_requirement("listen") %>
-  gem "overcommit", :require => false
+  gem "overcommit", ">= 0.37.0", :require => false
 <% if gemfile_requirement("puma") -%>
   gem "puma"<%= gemfile_requirement("puma") %>
 <% end -%>
