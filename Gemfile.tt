@@ -27,6 +27,7 @@ end
 group :development do
   gem "annotate", ">= 2.5.0"
   gem "awesome_print"
+  gem "bcrypt_pbkdf", :require => false
   gem "better_errors"
   gem "binding_of_caller"
   gem "brakeman", :require => false
@@ -47,6 +48,8 @@ group :development do
 <% end -%>
   gem "rack-livereload"
   gem "rb-fsevent", :require => false
+  gem "rbnacl", "~> 3.4", :require => false
+  gem "rbnacl-libsodium", :require => false
   gem "rubocop", :require => false, ">= 0.44.0"
   gem "simplecov", :require => false
   gem "spring"
