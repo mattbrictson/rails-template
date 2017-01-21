@@ -66,6 +66,9 @@ Style/Documentation:
 Style/DoubleNegation:
   Enabled: false
 
+Style/EmptyMethod:
+  Enabled: false
+
 Style/FrozenStringLiteralComment:
   Enabled: false
 
