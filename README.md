@@ -1,5 +1,7 @@
 # mattbrictson/rails-template
 
+[![Join the chat at https://gitter.im/mattbrictson/rails-template](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/mattbrictson/rails-template?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 ## Description
 
 This is the application template that I use for my Rails 5 projects. As a freelance Rails developer, I need to be able to start new projects quickly and with a good set of defaults. I've assembled this template over the years to include best-practices, tweaks, documentation, and personal preferences, while still generally adhering to the "Rails way".
