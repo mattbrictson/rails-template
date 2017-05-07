@@ -3,7 +3,6 @@ source "https://rubygems.org"
 gem "active_type", ">= 0.3.2"
 gem "autoprefixer-rails", ">= 5.0.0.1"
 gem "bcrypt"<%= gemfile_requirement("bcrypt") %>
-gem "bootscale", :require => false
 gem "coffee-rails"<%= gemfile_requirement("coffee-rails") %>
 gem "dotenv-rails", ">= 2.0.0"
 gem "jquery-rails"<%= gemfile_requirement("jquery-rails") %>
