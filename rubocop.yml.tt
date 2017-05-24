@@ -14,6 +14,9 @@ AllCops:
     - Guardfile
     - Rakefile
 
+Layout/SpaceAroundEqualsInParameterDefault:
+  EnforcedStyle: no_space
+
 Metrics/AbcSize:
   Exclude:
     - "test/**/*"
@@ -47,6 +50,10 @@ Rails:
 Rails/Validation:
   Enabled: false
 
+Rails/ApplicationRecord:
+  Exclude:
+    - "db/migrate/**"
+
 Style/BarePercentLiterals:
   EnforcedStyle: percent_q
 
@@ -77,9 +84,6 @@ Style/HashSyntax:
 
 Style/NumericPredicate:
   Enabled: false
-
-Style/SpaceAroundEqualsInParameterDefault:
-  EnforcedStyle: no_space
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes
