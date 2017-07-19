@@ -1,4 +1,5 @@
 apply "config/application.rb"
+apply "config/boot.rb"
 copy_file "config/brakeman.yml"
 template "config/database.example.yml.tt"
 remove_file "config/database.yml"
