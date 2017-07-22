@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+
+# bin/setup is idempotent, so we can just reuse it here
+load File.expand_path("../setup", __FILE__)
