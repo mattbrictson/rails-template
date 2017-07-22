@@ -1,6 +1,6 @@
-require "test_helper"
+require "application_system_test_case"
 
-class LayoutHelperTest < ActionDispatch::IntegrationTest
+class LayoutHelperTest < ApplicationSystemTestCase
   test "rendered page contains both base and application layouts" do
     visit("/")
     assert_selector("html>head+body")

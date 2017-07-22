@@ -1,4 +1,4 @@
-RAILS_REQUIREMENT = "~> 5.0.0"
+RAILS_REQUIREMENT = "~> 5.1.0".freeze
 
 def apply_template!
   assert_minimum_rails_version
@@ -29,7 +29,6 @@ def apply_template!
   apply "config/template.rb"
   apply "doc/template.rb"
   apply "lib/template.rb"
-  apply "public/template.rb"
   apply "test/template.rb"
 
   apply "variants/bootstrap/template.rb" if apply_bootstrap?

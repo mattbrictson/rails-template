@@ -10,8 +10,9 @@ This is the application template that I use for my Rails 5 projects. As a freela
 
 This template currently works with:
 
-* Rails 5.0.x
+* Rails 5.1.x
 * PostgreSQL
+* chromedriver
 
 If you need help setting up a Ruby development environment, check out my [Rails OS X Setup Guide](https://mattbrictson.com/rails-osx-setup-guide).
 
@@ -87,12 +88,10 @@ The template will perform the following steps:
     * [brakeman][] and [bundler-audit][] – detect security vulnerabilities
     * [secure_headers][] – hardens your app against XSS attacks
 * Testing
-    * [capybara][] and [poltergeist][] – integration testing
     * [minitest-reporters][] – colorizes test output with progress bar and more
     * [mocha][] – excellent mocking for Test::Unit/Minitest
     * [simplecov][] – code coverage reports
     * [shoulda][] – shortcuts for common ActiveRecord tests
-    * [test_after_commit][] – ensures after_commit hooks can be tested
 
 #### Postmark
 
@@ -147,12 +146,9 @@ Rails generators are very lightly documented; what you’ll find is that most of
 [bundler-audit]:https://github.com/rubysec/bundler-audit
 [secure_headers]:https://github.com/twitter/secureheaders
 [minitest-reporters]:https://github.com/kern/minitest-reporters
-[capybara]:https://github.com/jnicklas/capybara
-[poltergeist]:https://github.com/teampoltergeist/poltergeist
 [mocha]:https://github.com/freerange/mocha
 [shoulda]:https://github.com/thoughtbot/shoulda
 [simplecov]:https://github.com/colszowka/simplecov
-[test_after_commit]:https://github.com/grosser/test_after_commit
 [Bootstrap]:http://getbootstrap.com
 [application templates]:http://guides.rubyonrails.org/generators.html#application-templates
 [template.rb]: template.rb
