@@ -2,9 +2,12 @@
 
 ## Description
 
-This is the application template that I use for my Rails 5 projects. As a freelance Rails developer, I need to be able to start new projects quickly and with a good set of defaults. I've assembled this template over the years to include best-practices, tweaks, documentation, and personal preferences, while still generally adhering to the "Rails way".
+This is the application template that I use for my Rails 5.1 projects. As a freelance Rails developer, I need to be able to start new projects quickly and with a good set of defaults. I've assembled this template over the years to include best-practices, tweaks, documentation, and personal preferences, while still generally adhering to the "Rails way".
 
-*For Rails 4.2 projects, use the [rails-42 branch](https://github.com/mattbrictson/rails-template/tree/rails-42).*
+For older versions of Rails, use these branches:
+
+* [Rails 4.2.x](https://github.com/mattbrictson/rails-template/tree/rails-42)
+* [Rails 5.0.x](https://github.com/mattbrictson/rails-template/tree/rails-50)
 
 ## Requirements
 
