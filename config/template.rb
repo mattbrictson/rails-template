@@ -23,7 +23,7 @@ copy_file "config/initializers/version.rb"
 template "config/initializers/sidekiq.rb.tt"
 
 gsub_file "config/initializers/filter_parameter_logging.rb", /\[:password\]/ do
-  "%w(password secret session cookie csrf)"
+  "%w[password secret session cookie csrf]"
 end
 
 apply "config/environments/development.rb"
