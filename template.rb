@@ -75,6 +75,10 @@ def add_template_repository_to_source_path
       "https://github.com/mattbrictson/rails-template.git",
       tempdir
     ].map(&:shellescape).join(" ")
+
+    if (branch = __FILE__[%r{rails-template/(.+)/template.rb}, 1])
+      Dir.chdir(tempdir) { git :checkout => branch }
+    end
   else
     source_paths.unshift(File.dirname(__FILE__))
   end
