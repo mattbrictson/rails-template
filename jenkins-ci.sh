@@ -58,3 +58,6 @@ if bundle show capistrano &> /dev/null; then
     SSHKIT_COLOR=1 bundle exec cap staging deploy:migrate_and_restart
   fi
 fi
+
+# Prevent old gem versions from accumulating
+bundle clean
