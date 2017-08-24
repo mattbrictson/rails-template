@@ -2,7 +2,6 @@ copy_file "test/test_helper.rb", :force => true
 copy_file "test/support/mailer.rb"
 copy_file "test/support/mocha.rb"
 copy_file "test/support/rails.rb"
-copy_file "test/support/reporters.rb"
 copy_file "test/support/sidekiq.rb"
 copy_file "test/support/shoulda_matchers.rb"
 copy_file "test/helpers/javascript_helper_test.rb"

@@ -91,7 +91,6 @@ The template will perform the following steps:
     * [brakeman][] and [bundler-audit][] – detect security vulnerabilities
     * [secure_headers][] – hardens your app against XSS attacks
 * Testing
-    * [minitest-reporters][] – colorizes test output with progress bar and more
     * [mocha][] – excellent mocking for Test::Unit/Minitest
     * [simplecov][] – code coverage reports
     * [shoulda][] – shortcuts for common ActiveRecord tests
@@ -148,7 +147,6 @@ Rails generators are very lightly documented; what you’ll find is that most of
 [brakeman]:https://github.com/presidentbeef/brakeman
 [bundler-audit]:https://github.com/rubysec/bundler-audit
 [secure_headers]:https://github.com/twitter/secureheaders
-[minitest-reporters]:https://github.com/kern/minitest-reporters
 [mocha]:https://github.com/freerange/mocha
 [shoulda]:https://github.com/thoughtbot/shoulda
 [simplecov]:https://github.com/colszowka/simplecov
