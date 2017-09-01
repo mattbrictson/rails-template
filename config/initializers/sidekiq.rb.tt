@@ -1,11 +1,3 @@
-Sidekiq.configure_server do |config|
-  config.redis = { :namespace => "<%= capistrano_app_name %>" }
-end
-
-Sidekiq.configure_client do |config|
-  config.redis = { :namespace => "<%= capistrano_app_name %>" }
-end
-
 require "sidekiq/web"
 Sidekiq::Web.app_url = "/"
 Sidekiq::Web.use(Rack::Auth::Basic, "Application") do |username, password|
