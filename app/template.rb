@@ -10,4 +10,6 @@ copy_file "app/views/layouts/application.html.erb", :force => true
 template "app/views/layouts/base.html.erb.tt"
 copy_file "app/views/shared/_flash.html.erb"
 copy_file "app/views/home/index.html.erb"
-empty_directory_with_keep_file "app/jobs"
+
+remove_dir "app/jobs"
+empty_directory_with_keep_file "app/workers"
