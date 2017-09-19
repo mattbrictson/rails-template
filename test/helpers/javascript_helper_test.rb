@@ -12,15 +12,15 @@ class JavascriptHelperTest < ActionView::TestCase
     Mocha::Configuration.allow(:stubbing_non_public_method) do
       stubs(:request_debug_assets?).returns(true)
     end
-    js_tag = javascript_include_tag("foo")
-    js_async_tag = javascript_include_async_tag("foo")
+    js_tag = javascript_include_tag("foo", :skip_pipeline => true)
+    js_async_tag = javascript_include_async_tag("foo", :skip_pipeline => true)
     assert_equal(js_tag, js_async_tag)
   end
 
   test "javascript_include_async_tag adds async attribute" do
     assert_equal(
       '<script src="/javascripts/foo.js" async="async"></script>',
-      javascript_include_async_tag("foo")
+      javascript_include_async_tag("foo", :skip_pipeline => true)
     )
   end
 
