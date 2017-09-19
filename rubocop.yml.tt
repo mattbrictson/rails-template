@@ -41,6 +41,9 @@ Metrics/MethodLength:
     - "db/migrate/*"
     - "test/**/*"
 
+Naming/VariableNumber:
+  Enabled: false
+
 Performance/Casecmp:
   Enabled: false
 
@@ -90,6 +93,3 @@ Style/StringLiterals:
 
 Style/TrivialAccessors:
   AllowPredicates: true
-
-Style/VariableNumber:
-  Enabled: false
