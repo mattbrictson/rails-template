@@ -21,6 +21,7 @@
 # Ignore test reports
 /brakeman-output.*
 /coverage
+/test/reports/
 
 # Ignore results of `rake assets:precompile`.
 /public/assets/

@@ -1,0 +1,68 @@
+# Ruby CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-ruby/ for more details
+#
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/ruby:<%= RUBY_VERSION %>-node-browsers
+        environment:
+          PGHOST: 127.0.0.1
+          PGUSER: postgres
+          RAILS_ENV: test
+      - image: circleci/postgres:9.4
+        environment:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: ""
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "Gemfile.lock" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      - run:
+          name: Install dependencies
+          command: |
+            bundle install --deployment --jobs=4 --retry=3 --path vendor/bundle
+
+      - save_cache:
+          paths:
+            - ./vendor/bundle
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+
+      - run:
+          name: Run security audits
+          command: |
+            bin/brakeman --exit-on-warn --no-progress
+            bin/bundle-audit check --update -v
+
+      - run:
+          name: Set up database
+          command: |
+            cp config/database.example.yml config/database.yml
+            cp example.env .env
+            bin/rake db:setup
+
+      - run:
+          name: Run tests
+          command: |
+            bin/rake test test:system TESTOPTS="--ci-dir=./reports"
+
+      - store_test_results:
+          path: ./reports
+
+      - store_artifacts:
+          path: ./tmp/screenshots
+          destination: screenshots
+
+      - store_artifacts:
+          path: brakeman-output.html
+          destination: brakeman-output.html
