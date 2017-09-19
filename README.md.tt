@@ -15,7 +15,7 @@ This README describes the purpose of this repository and how to set up a develop
 This project requires:
 
 * Ruby <%= RUBY_VERSION %>, preferably managed using [rbenv][]
-* PhantomJS (in order to use the [poltergeist][] gem)
+* Chromedriver for Capybara testing
 * PostgreSQL must be installed and accepting connections
 * [Redis][] must be installed and running on localhost with the default port
 
@@ -36,11 +36,11 @@ Run the `bin/setup` script. This script will:
 
 ### Run it!
 
-1. Run `rake test` to make sure everything works.
-2. Run `rails s` to start the Rails app.
-3. In a separate console, run `bundle exec sidekiq` to start the Sidekiq background job processor.
+1. Run `bin/rake test` to make sure everything works.
+2. Run `bin/rake test:system` to run system (capybara) tests.
+3. Run `bin/rails s` to start the Rails app.
+4. In a separate console, run `bin/sidekiq` to start the Sidekiq background job processor.
 
 [rbenv]:https://github.com/sstephenson/rbenv
-[poltergeist]:https://github.com/teampoltergeist/poltergeist
 [redis]:http://redis.io
 [Homebrew]:http://brew.sh
