@@ -73,7 +73,7 @@ group :test do
   gem "capybara"<%= gemfile_requirement("capybara") %>
   gem "connection_pool"
   gem "launchy"
-  gem "minitest-ci"
+  gem "minitest-ci", ">= 3.3.0", :require => false
   gem "mocha"
   gem "selenium-webdriver"<%= gemfile_requirement("selenium-webdriver") %>
   gem "shoulda-context"

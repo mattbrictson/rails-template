@@ -1,4 +1,5 @@
 copy_file "test/test_helper.rb", :force => true
+copy_file "test/support/circleci.rb"
 copy_file "test/support/mailer.rb"
 copy_file "test/support/mocha.rb"
 copy_file "test/support/rails.rb"
