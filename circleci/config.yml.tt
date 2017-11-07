@@ -41,20 +41,20 @@ jobs:
       - run:
           name: Run security audits
           command: |
-            bin/brakeman --exit-on-warn --no-progress
-            bin/bundle-audit check --update -v
+            bundle exec brakeman --exit-on-warn --no-progress
+            bundle exec bundle-audit check --update -v
 
       - run:
           name: Set up database
           command: |
             cp config/database.example.yml config/database.yml
             cp example.env .env
-            bin/rake db:setup
+            bundle exec rake db:setup
 
       - run:
           name: Run tests
           command: |
-            bin/rake test test:system TESTOPTS="--ci-dir=./reports"
+            bundle exec rake test test:system TESTOPTS="--ci-dir=./reports"
 
       - store_test_results:
           path: ./reports
