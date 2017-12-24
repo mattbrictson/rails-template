@@ -41,7 +41,7 @@ def apply_template!
 
   binstubs = %w(
     annotate brakeman bundler-audit capistrano guard rubocop sidekiq
-    terminal-notifier
+    terminal-notifier unicorn
   )
   run_with_clean_bundler_env "bundle binstubs #{binstubs.join(' ')}"
 
