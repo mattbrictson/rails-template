@@ -39,6 +39,14 @@ jobs:
           key: v1-dependencies-{{ arch }}-{{ checksum "Gemfile.lock" }}
 
       - run:
+          name: Run overcommit
+          command: |
+            git config --local user.name "Circle CI"
+            git config --local user.email ci@example.com
+            bundle exec overcommit --sign
+            bundle exec overcommit --run
+
+      - run:
           name: Run security audits
           command: |
             bundle exec brakeman --exit-on-warn --no-progress
