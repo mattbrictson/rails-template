@@ -39,11 +39,11 @@ def apply_template!
   run_with_clean_bundler_env "bin/setup"
   generate_spring_binstubs
 
-  binstubs = %w(
-    annotate brakeman bundler-audit capistrano guard rubocop sidekiq
+  binstubs = %w[
+    annotate brakeman bundler bundler-audit capistrano guard rubocop sidekiq
     terminal-notifier unicorn
-  )
-  run_with_clean_bundler_env "bundle binstubs #{binstubs.join(' ')}"
+  ]
+  run_with_clean_bundler_env "bundle binstubs #{binstubs.join(' ')} --force"
 
   template "rubocop.yml.tt", ".rubocop.yml"
   run_rubocop_autocorrections
