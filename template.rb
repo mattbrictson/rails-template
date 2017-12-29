@@ -37,6 +37,7 @@ def apply_template!
   empty_directory ".git/safe"
 
   run_with_clean_bundler_env "bin/setup"
+  create_initial_migration
   generate_spring_binstubs
 
   binstubs = %w[
@@ -180,6 +181,12 @@ end
 
 def run_rubocop_autocorrections
   run_with_clean_bundler_env "bin/rubocop -a --fail-level A > /dev/null"
+end
+
+def create_initial_migration
+  return if Dir["db/migrate/**/*.rb"].any?
+  run_with_clean_bundler_env "bin/rails generate migration initial_migration"
+  run_with_clean_bundler_env "bin/rake db:migrate"
 end
 
 apply_template!
