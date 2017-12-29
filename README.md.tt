@@ -40,8 +40,26 @@ Run the `bin/setup` script. This script will:
 
 1. Run `bin/rake test` to make sure everything works.
 2. Run `bin/rake test:system` to run system (capybara) tests.
-3. Run `bin/rails s` to start the Rails app.
-4. In a separate console, run `bin/sidekiq` to start the Sidekiq background job processor.
+3. Run `bin/rails s` and `bin/sidekiq` to start the app and Sidekiq; alternatively, start both at once with `heroku local`.
+
+<% unless apply_capistrano? -%>
+## Deployment
+
+Ensure the following environment variables are set in the deployment environment:
+
+* `POSTMARK_API_KEY`
+* `RACK_ENV`
+* `RAILS_ENV`
+* `REDIS_URL`
+* `SECRET_KEY_BASE`
+* `SIDEKIQ_WEB_PASSWORD`
+* `SIDEKIQ_WEB_USERNAME`
+
+Optionally:
+
+* `RAILS_LOG_TO_STDOUT`
+* `RAILS_SERVE_STATIC_FILES`
+<% end -%>
 
 [rbenv]:https://github.com/sstephenson/rbenv
 [redis]:http://redis.io
