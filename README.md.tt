@@ -7,8 +7,10 @@ This is a Rails <%= Rails::VERSION::MAJOR %> app.
 This README describes the purpose of this repository and how to set up a development environment. Other sources of documentation are as follows:
 
 * UI and API designs are in `doc/`
+<% if apply_capistrano? -%>
 * Server setup instructions are in `PROVISIONING.md`
 * Staging and production deployment instructions are in `DEPLOYMENT.md`
+<% end -%>
 
 ## Prerequisites
 

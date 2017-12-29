@@ -16,6 +16,9 @@ gem "mail", ">= 2.6.3"
 gem "marco-polo"
 gem "pg"<%= gemfile_requirement("pg") || ', "~> 0.18"' %>
 gem "pgcli-rails"
+<% unless apply_capistrano? -%>
+gem "puma"<%= gemfile_requirement("puma") %>
+<% end -%>
 gem "rails", "<%= Rails.version %>"
 gem "sass-rails"<%= gemfile_requirement("sass-rails") %>
 gem "secure_headers", "~> 3.0"
@@ -24,8 +27,10 @@ gem "turbolinks"<%= gemfile_requirement("turbolinks") || ', ">= 2.5.2"' %>
 
 group :production, :staging do
   gem "postmark-rails"
+<% if apply_capistrano? -%>
   gem "unicorn"
   gem "unicorn-worker-killer"
+<% end -%>
 end
 
 group :development do
@@ -36,18 +41,20 @@ group :development do
   gem "binding_of_caller"
   gem "brakeman", :require => false
   gem "bundler-audit", ">= 0.5.0", :require => false
+<% if apply_capistrano? -%>
   gem "capistrano", "~> 3.6", :require => false
   gem "capistrano-bundler", "~> 1.2", :require => false
   gem "capistrano-mb", ">= 0.33.0", :require => false
   gem "capistrano-nc", :require => false
   gem "capistrano-rails", :require => false
+<% end -%>
   gem "guard", ">= 2.2.2", :require => false
   gem "guard-livereload", :require => false
   gem "guard-minitest", :require => false
   gem "letter_opener"
   gem "listen"<%= gemfile_requirement("listen") %>
   gem "overcommit", ">= 0.37.0", :require => false
-<% if gemfile_requirement("puma") -%>
+<% if gemfile_requirement("puma") && apply_capistrano? -%>
   gem "puma"<%= gemfile_requirement("puma") %>
 <% end -%>
   gem "rack-livereload"

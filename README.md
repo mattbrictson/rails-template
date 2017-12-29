@@ -83,7 +83,7 @@ The template will perform the following steps:
     * [livereload][] – magically refreshes browsers whenever you save a file
     * [rubocop][] – enforces Ruby code style
     * [xray-rails][] – inspect view partials in the browser
-* Deployment
+* Deployment via Capistrano (optional)
     * [capistrano-mb][] – capistrano recipes
     * [unicorn][] – the industry-standard Rails server
     * [unicorn-worker-killer][] – to manage memory use
@@ -115,8 +115,7 @@ I like to use [Postmark][] for transactional email, and so I've included the [po
 #### Plus lots of documentation for your project
 
 * `README.md`
-* `PROVISIONING.md`
-* `DEPLOYMENT.md`
+* `PROVISIONING.md` and `DEPLOYMENT.md` for Capistrano (optional)
 
 ## How does it work?
 
