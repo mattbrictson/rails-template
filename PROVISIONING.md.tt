@@ -24,7 +24,7 @@ Capistrano runs on your local machine and uses SSH to perform the deployment on 
 
 Furthermore, the server itself must meet the following requirements:
 
-* Ubuntu 14.04 LTS (64 bit).
+* Ubuntu 16.04 LTS (64 bit).
 
 
 ## 1. Create a new stage (or edit an existing one)
@@ -35,7 +35,7 @@ Create a new stage (or modify an existing one to move that stage to a new server
 
 ## 2. Run the provision command
 
-`bundle exec cap <stage> provision:14_04`
+`bundle exec cap <stage> provision`
 
 Replace `<stage>` with the name of the stage you wish to provision (e.g. `production`).
 

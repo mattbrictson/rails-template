@@ -24,7 +24,7 @@ Capistrano runs on your local machine and uses SSH to perform the deployment on 
 
 ### Performing a graceful deployment (no migrations)
 
-This will deploy the latest code from `development`. Make sure to `git push` your changes first, or they will not apply.
+This will deploy the latest code from `master`. Make sure to `git push` your changes first, or they will not apply.
 
 ```
 bundle exec cap production deploy
@@ -45,7 +45,7 @@ This will stop the app and display a maintenance page during the deployment.
 
 This application consists of two executables that run as the `deployer` user:
 
-* Unicorn is the application server that services Rails HTTP requests
+* Puma is the application server that services Rails HTTP requests
 * Sidekiq is the background worker that services the job queue stored in Redis
 
 These in turn rely on the following services:
@@ -56,16 +56,16 @@ These in turn rely on the following services:
 
 ### Controlling processes
 
-All processes are set up to start automatically when the server boots, and can be controlled using the standard Ubuntu `service` command:
+All processes are set up to start automatically when the server boots, and can be controlled using the standard Ubuntu `systemctl` command:
 
 ```
-sudo service postgresql <start|stop|restart>
-sudo service nginx <start|stop|restart>
-sudo service unicorn_<%= capistrano_app_name %> <start|stop|restart>
-sudo service sidekiq_<%= capistrano_app_name %> <start|stop>
+sudo systemctl <start|stop|restart|status> postgresql
+sudo systemctl <start|stop|restart|status> nginx
+sudo systemctl <start|stop|restart|status> <%= capistrano_app_name %>-puma.service
+sudo systemctl <start|stop|restart|status> <%= capistrano_app_name %>-sidekiq.service
 ```
 
-Note that Unicorn and Sidekiq require access to PostgreSQL and Redis, so those supporting services should be started first.
+Note that the `deployer` user has permission to restart `<%= capistrano_app_name %>-puma.service` and `<%= capistrano_app_name %>-sidekiq.service`, but nothing else. All other `systemctl` commands require `root`.
 
 ### Configuration
 
@@ -78,7 +78,6 @@ All configuration values required by the application can be changed here:
 After making changes to this file, be sure to restart the application:
 
 ```
-sudo service unicorn_<%= capistrano_app_name %> restart
-sudo service sidekiq_<%= capistrano_app_name %> stop
-sudo service sidekiq_<%= capistrano_app_name %> start
+sudo systemctl restart <%= capistrano_app_name %>-puma.service
+sudo systemctl restart <%= capistrano_app_name %>-sidekiq.service
 ```
