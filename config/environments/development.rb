@@ -19,3 +19,7 @@ insert_into_file "config/environments/development.rb", :before => /^end/ do
   config.middleware.insert_after(ActionDispatch::Static, Rack::LiveReload)
   RUBY
 end
+
+gsub_file "config/environments/development.rb",
+          "join('tmp/caching-dev.txt')",
+          'join("tmp", "caching-dev.txt")'
