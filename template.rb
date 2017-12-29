@@ -54,7 +54,7 @@ def apply_template!
   template "rubocop.yml.tt", ".rubocop.yml"
   run_rubocop_autocorrections
 
-  if empty_git_repo? || !git_repo_specified?
+  unless any_local_git_commits?
     git :add => "-A ."
     git :commit => "-n -m 'Set up project'"
     git :checkout => "-b development" if apply_capistrano?
@@ -169,9 +169,8 @@ def preexisting_git_repo?
   @preexisting_git_repo == true
 end
 
-def empty_git_repo?
-  return @empty_git_repo if defined?(@empty_git_repo)
-  @empty_git_repo = !system("git rev-list -n 1 --all &> /dev/null")
+def any_local_git_commits?
+  system("git log &> /dev/null")
 end
 
 def apply_bootstrap?
