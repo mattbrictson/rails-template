@@ -49,7 +49,7 @@ def apply_template!
   template "rubocop.yml.tt", ".rubocop.yml"
   run_rubocop_autocorrections
 
-  if empty_git_repo?
+  if empty_git_repo? || !git_repo_specified?
     git :add => "-A ."
     git :commit => "-n -m 'Set up project'"
     git :checkout => "-b development"
