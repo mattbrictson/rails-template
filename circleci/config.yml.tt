@@ -32,6 +32,7 @@ jobs:
           name: Install dependencies
           command: |
             bundle install --deployment --jobs=4 --retry=3 --path vendor/bundle
+            bundle clean
 
       - save_cache:
           paths:
