@@ -10,6 +10,7 @@ AllCops:
     - config/initializers/version.rb
     - db/schema.rb
     - "tmp/**/*"
+    - "vendor/**/*"
     - Gemfile
     - Guardfile
     - Rakefile
