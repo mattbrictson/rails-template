@@ -51,12 +51,12 @@ Performance/Casecmp:
 Rails:
   Enabled: true
 
-Rails/Validation:
-  Enabled: false
-
 Rails/ApplicationRecord:
   Exclude:
     - "db/migrate/**"
+
+Rails/Validation:
+  Enabled: false
 
 Style/BarePercentLiterals:
   EnforcedStyle: percent_q
