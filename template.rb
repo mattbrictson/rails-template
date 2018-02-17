@@ -186,12 +186,19 @@ def apply_capistrano?
 end
 
 def run_with_clean_bundler_env(cmd)
-  return run(cmd) unless defined?(Bundler)
-  Bundler.with_clean_env { run(cmd) }
+  success = if defined?(Bundler)
+              Bundler.with_clean_env { run(cmd) }
+            else
+              run(cmd)
+            end
+  unless success
+    puts "Command failed, exiting: #{cmd}"
+    exit(1)
+  end
 end
 
 def run_rubocop_autocorrections
-  run_with_clean_bundler_env "bin/rubocop -a --fail-level A > /dev/null"
+  run_with_clean_bundler_env "bin/rubocop -a --fail-level A > /dev/null || true"
 end
 
 def create_initial_migration
