@@ -13,6 +13,9 @@
 !/log/.keep
 !/tmp/.keep
 
+# Ignore uploaded files in development
+/storage/*
+
 /node_modules
 /yarn-error.log
 
@@ -28,4 +31,5 @@
 
 # Never check passwords into source control!
 /config/database.yml
+/config/master.key
 /.env

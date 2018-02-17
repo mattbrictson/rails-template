@@ -1,4 +1,4 @@
-RAILS_REQUIREMENT = "~> 5.1.0".freeze
+RAILS_REQUIREMENT = "~> 5.2.0".freeze
 
 def apply_template!
   assert_minimum_rails_version
@@ -19,7 +19,7 @@ def apply_template!
   template "example.env.tt"
   copy_file "gitignore", ".gitignore", force: true
   copy_file "overcommit.yml", ".overcommit.yml"
-  template "ruby-version.tt", ".ruby-version"
+  template "ruby-version.tt", ".ruby-version", force: true
   copy_file "simplecov", ".simplecov"
 
   copy_file "Capfile" if apply_capistrano?
