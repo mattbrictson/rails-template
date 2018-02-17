@@ -13,15 +13,16 @@ gem "bcrypt"<%= gemfile_requirement("bcrypt") %>
 gem "bootsnap", ">= 1.1.0", :require => false
 gem "coffee-rails"<%= gemfile_requirement("coffee-rails") %>
 gem "dotenv-rails", ">= 2.0.0"
+gem "ffi", "!= 1.9.21" # 1.9.21 fails to compile native extensions on macOS
 gem "jquery-rails"<%= gemfile_requirement("jquery-rails") %>
 gem "mail", ">= 2.6.3"
 gem "marco-polo"
-gem "pg"<%= gemfile_requirement("pg") || ', "~> 0.18"' %>
+gem "pg"<%= gemfile_requirement("pg") %>
 gem "pgcli-rails"
 <% unless apply_capistrano? -%>
 gem "puma"<%= gemfile_requirement("puma") %>
 <% end -%>
-gem "rails", "<%= Rails.version %>"
+gem "rails", "~> <%= Rails.version %>"
 gem "sass-rails"<%= gemfile_requirement("sass-rails") %>
 gem "secure_headers", "~> 3.0"
 gem "sidekiq", ">= 4.2.0"
@@ -44,8 +45,8 @@ group :development do
   gem "brakeman", :require => false
   gem "bundler-audit", ">= 0.5.0", :require => false
 <% if apply_capistrano? -%>
-  gem "capistrano", "~> 3.6", :require => false
-  gem "capistrano-bundler", "~> 1.2", :require => false
+  gem "capistrano", "~> 3.10", :require => false
+  gem "capistrano-bundler", "~> 1.3", :require => false
   gem "capistrano-mb", ">= 0.33.0", :require => false
   gem "capistrano-nc", :require => false
   gem "capistrano-rails", :require => false
@@ -65,7 +66,7 @@ group :development do
   gem "rubocop", ">= 0.50.0", :require => false
   gem "simplecov", :require => false
   gem "spring"
-  gem "sshkit", "~> 1.8", :require => false
+  gem "sshkit", "~> 1.16", :require => false
 <% if gemfile_requirement("spring-watcher-listen") -%>
   gem "spring-watcher-listen"<%= gemfile_requirement("spring-watcher-listen") %>
 <% end -%>
