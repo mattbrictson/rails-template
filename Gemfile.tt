@@ -19,7 +19,6 @@ gem "puma"<%= gemfile_requirement("puma") %>
 <% end -%>
 gem "rails", "~> <%= Rails.version %>"
 gem "sass-rails"<%= gemfile_requirement("sass-rails") %>
-gem "secure_headers", "~> 3.0"
 gem "sidekiq", ">= 4.2.0"
 gem "turbolinks"<%= gemfile_requirement("turbolinks") || ', ">= 2.5.2"' %>
 

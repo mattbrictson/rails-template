@@ -20,7 +20,6 @@ end
 copy_file "config/initializers/generators.rb"
 copy_file "config/initializers/rotate_log.rb"
 copy_file "config/initializers/secret_token.rb"
-copy_file "config/initializers/secure_headers.rb"
 copy_file "config/initializers/version.rb"
 template "config/initializers/sidekiq.rb.tt"
 
