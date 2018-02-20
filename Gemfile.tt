@@ -10,7 +10,6 @@ ruby "<%= RUBY_VERSION %>"
 gem "active_type", ">= 0.3.2"
 gem "autoprefixer-rails", ">= 5.0.0.1"
 gem "bcrypt"<%= gemfile_requirement("bcrypt") %>
-gem "bootsnap", ">= 1.1.0", :require => false
 gem "coffee-rails"<%= gemfile_requirement("coffee-rails") %>
 gem "dotenv-rails", ">= 2.0.0"
 gem "ffi", "!= 1.9.21" # 1.9.21 fails to compile native extensions on macOS
