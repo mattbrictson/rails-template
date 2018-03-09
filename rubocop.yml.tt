@@ -42,6 +42,9 @@ Metrics/MethodLength:
     - "db/migrate/*"
     - "test/**/*"
 
+Naming/MemoizedInstanceVariableName:
+  Enabled: false
+
 Naming/VariableNumber:
   Enabled: false
 
