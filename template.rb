@@ -1,8 +1,6 @@
 RAILS_REQUIREMENT = "~> 5.1.0".freeze
 
 def apply_template!
-  ENV["DISABLE_BOOTSNAP"] = "1"
-
   assert_minimum_rails_version
   assert_valid_options
   assert_postgresql
