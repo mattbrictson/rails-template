@@ -18,14 +18,14 @@
 <% end -%>
         <td>
           <div class="btn-group">
-            <%%= link_to <%= singular_table_name %>, :class => "btn btn-xs btn-default" do %>
-              <%%= fa_icon("eye", :text => "Show") %>
+            <%%= link_to <%= singular_table_name %>, class: "btn btn-xs btn-default" do %>
+              <%%= fa_icon("eye", text: "Show") %>
             <%% end %>
-            <%%= link_to edit_<%= singular_table_name %>_path(<%= singular_table_name %>), :class => "btn btn-xs btn-default" do %>
-              <%%= fa_icon("pencil", :text => "Edit") %>
+            <%%= link_to edit_<%= singular_table_name %>_path(<%= singular_table_name %>), class: "btn btn-xs btn-default" do %>
+              <%%= fa_icon("pencil", text: "Edit") %>
             <%% end %>
-            <%%= link_to <%= singular_table_name %>, :class => "btn btn-xs btn-danger", :method => :delete, :data => { :confirm => "Are you sure you want to delete this <%= singular_table_name %>?" } do %>
-              <%%= fa_icon("trash-o", :text => "Destroy") %>
+            <%%= link_to <%= singular_table_name %>, class: "btn btn-xs btn-danger", method: :delete, data: { confirm: "Are you sure you want to delete this <%= singular_table_name %>?" } do %>
+              <%%= fa_icon("trash-o", text: "Destroy") %>
             <%% end %>
           </div>
       </tr>
@@ -35,6 +35,6 @@
 
 <br>
 
-<%%= link_to new_<%= singular_table_name %>_path, :class => "btn btn-default" do %>
-  <%%= fa_icon("plus", :text => "New <%= human_name %>") %>
+<%%= link_to new_<%= singular_table_name %>_path, class: "btn btn-default" do %>
+  <%%= fa_icon("plus", text: "New <%= human_name %>") %>
 <%% end %>

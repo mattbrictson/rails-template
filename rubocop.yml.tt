@@ -86,9 +86,6 @@ Style/EmptyMethod:
 Style/FrozenStringLiteralComment:
   Enabled: false
 
-Style/HashSyntax:
-  EnforcedStyle: hash_rockets
-
 Style/NumericPredicate:
   Enabled: false
 

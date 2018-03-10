@@ -6,18 +6,18 @@ def apply_template!
   assert_postgresql
   add_template_repository_to_source_path
 
-  template "Gemfile.tt", :force => true
+  template "Gemfile.tt", force: true
 
   if apply_capistrano?
     template "DEPLOYMENT.md.tt"
     template "PROVISIONING.md.tt"
   end
 
-  template "README.md.tt", :force => true
+  template "README.md.tt", force: true
   remove_file "README.rdoc"
 
   template "example.env.tt"
-  copy_file "gitignore", ".gitignore", :force => true
+  copy_file "gitignore", ".gitignore", force: true
   copy_file "overcommit.yml", ".overcommit.yml"
   template "ruby-version.tt", ".ruby-version"
   copy_file "simplecov", ".simplecov"
@@ -55,12 +55,12 @@ def apply_template!
   run_rubocop_autocorrections
 
   unless any_local_git_commits?
-    git :add => "-A ."
-    git :commit => "-n -m 'Set up project'"
-    git :checkout => "-b development" if apply_capistrano?
+    git add: "-A ."
+    git commit: "-n -m 'Set up project'"
+    git checkout: "-b development" if apply_capistrano?
     if git_repo_specified?
-      git :remote => "add origin #{git_repo_url.shellescape}"
-      git :push => "-u origin --all"
+      git remote: "add origin #{git_repo_url.shellescape}"
+      git push: "-u origin --all"
     end
   end
 end
@@ -77,14 +77,14 @@ def add_template_repository_to_source_path
     require "tmpdir"
     source_paths.unshift(tempdir = Dir.mktmpdir("rails-template-"))
     at_exit { FileUtils.remove_entry(tempdir) }
-    git :clone => [
+    git clone: [
       "--quiet",
       "https://github.com/mattbrictson/rails-template.git",
       tempdir
     ].map(&:shellescape).join(" ")
 
     if (branch = __FILE__[%r{rails-template/(.+)/template.rb}, 1])
-      Dir.chdir(tempdir) { git :checkout => branch }
+      Dir.chdir(tempdir) { git checkout: branch }
     end
   else
     source_paths.unshift(File.dirname(__FILE__))
@@ -104,11 +104,11 @@ end
 # Bail out if user has passed in contradictory generator options.
 def assert_valid_options
   valid_options = {
-    :skip_gemfile => false,
-    :skip_bundle => false,
-    :skip_git => false,
-    :skip_test_unit => false,
-    :edge => false
+    skip_gemfile: false,
+    skip_bundle: false,
+    skip_git: false,
+    skip_test_unit: false,
+    edge: false
   }
   valid_options.each do |key, expected|
     next unless options.key?(key)

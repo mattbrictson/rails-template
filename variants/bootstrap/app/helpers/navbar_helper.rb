@@ -8,7 +8,7 @@ module NavbarHelper
   #     <%= navbar_link_to(
   #           "Home",
   #           root_path,
-  #           :active_when => { :controller => "home" }) %>
+  #           active_when: { controller: "home" }) %>
   #
   def navbar_link_to(label, path, options={})
     active_when = options.delete(:active_when) { Hash.new }
@@ -21,7 +21,7 @@ module NavbarHelper
       end
     end
 
-    content_tag(:li, :class => ("active" if active)) do
+    content_tag(:li, class: ("active" if active)) do
       link_to(label, path, options)
     end
   end

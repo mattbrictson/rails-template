@@ -3,7 +3,7 @@ apply "config/boot.rb"
 copy_file "config/brakeman.yml"
 template "config/database.example.yml.tt"
 remove_file "config/database.yml"
-copy_file "config/puma.rb", :force => true
+copy_file "config/puma.rb", force: true
 remove_file "config/secrets.yml"
 copy_file "config/sidekiq.yml"
 

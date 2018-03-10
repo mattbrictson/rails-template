@@ -5,7 +5,7 @@ apply "app/assets/stylesheets/application.scss.rb"
 copy_file "app/assets/javascripts/bootstrap.js"
 copy_file "app/assets/stylesheets/bootstrap.scss"
 copy_file "app/helpers/navbar_helper.rb"
-copy_file "app/views/layouts/application.html.erb", :force => true
+copy_file "app/views/layouts/application.html.erb", force: true
 template "app/views/shared/_footer.html.erb.tt"
 template "app/views/shared/_navbar.html.erb.tt"
 copy_file "app/views/shared/_page_header.erb"

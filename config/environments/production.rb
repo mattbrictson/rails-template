@@ -2,7 +2,7 @@ comment_lines "config/environments/production.rb",
               /config\.assets\.js_compressor = :uglifier/
 
 insert_into_file "config/environments/production.rb",
-                 :after => /# config\.assets\.css_compressor = :sass\n/ do
+                 after: /# config\.assets\.css_compressor = :sass\n/ do
   <<-RUBY
 
   # Disable minification since it adds a *huge* amount of time to precompile.
@@ -17,18 +17,18 @@ uncomment_lines "config/environments/production.rb",
 uncomment_lines "config/environments/production.rb", /config\.force_ssl = true/
 
 insert_into_file "config/environments/production.rb",
-                 :after => /# config\.action_mailer\.raise_deliv.*\n/ do
+                 after: /# config\.action_mailer\.raise_deliv.*\n/ do
   <<-RUBY
 
   # Production email config
   config.action_mailer.delivery_method = :postmark
   config.action_mailer.postmark_settings = {
-    :api_token => ENV.fetch("POSTMARK_API_KEY")
+    api_token: ENV.fetch("POSTMARK_API_KEY")
   }
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default_url_options = {
-    :host => "#{production_hostname}",
-    :protocol => "https"
+    host: "#{production_hostname}",
+    protocol: "https"
   }
   config.action_mailer.asset_host = "https://#{production_hostname}"
   RUBY
