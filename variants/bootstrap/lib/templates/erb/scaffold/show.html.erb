@@ -2,11 +2,11 @@
   <%= singular_table_name.titleize %> #<%%= @<%= singular_table_name %>.id %>
 <%% end %>
 
-<table class="table table-bordered">
+<table class="table table-bordered table-sm">
   <tbody>
 <% attributes.reject(&:password_digest?).each do |attribute| -%>
     <tr>
-      <th class="col-sm-2"><%= attribute.human_name %></th>
+      <th class=""><%= attribute.human_name %></th>
       <td><%%= @<%= singular_table_name %>.<%= attribute.name %> %></td>
     </tr>
 <% end -%>

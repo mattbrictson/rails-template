@@ -1,6 +1,6 @@
 <%% provide(:title, "Listing <%= plural_table_name %>") %>
 
-<table class="table table-striped">
+<table class="table table-striped table-sm">
   <thead>
     <tr>
 <% attributes.reject(&:password_digest?).each do |attribute| -%>
@@ -17,14 +17,14 @@
         <td><%%= <%= singular_table_name %>.<%= attribute.name %> %></td>
 <% end -%>
         <td>
-          <div class="btn-group">
-            <%%= link_to <%= singular_table_name %>, class: "btn btn-xs btn-default" do %>
+          <div class="btn-group float-right">
+            <%%= link_to <%= singular_table_name %>, class: "btn btn-sm btn-primary" do %>
               <%%= fa_icon("eye", text: "Show") %>
             <%% end %>
-            <%%= link_to edit_<%= singular_table_name %>_path(<%= singular_table_name %>), class: "btn btn-xs btn-default" do %>
+            <%%= link_to edit_<%= singular_table_name %>_path(<%= singular_table_name %>), class: "btn btn-sm btn-success" do %>
               <%%= fa_icon("pencil", text: "Edit") %>
             <%% end %>
-            <%%= link_to <%= singular_table_name %>, class: "btn btn-xs btn-danger", method: :delete, data: { confirm: "Are you sure you want to delete this <%= singular_table_name %>?" } do %>
+            <%%= link_to <%= singular_table_name %>, class: "btn btn-sm btn-danger", method: :delete, data: { confirm: "Are you sure you want to delete this <%= singular_table_name %>?" } do %>
               <%%= fa_icon("trash-o", text: "Destroy") %>
             <%% end %>
           </div>
@@ -35,6 +35,6 @@
 
 <br>
 
-<%%= link_to new_<%= singular_table_name %>_path, class: "btn btn-default" do %>
+<%%= link_to new_<%= singular_table_name %>_path, class: "btn btn-sm btn-primary" do %>
   <%%= fa_icon("plus", text: "New <%= human_name %>") %>
 <%% end %>
