@@ -81,7 +81,7 @@ group :test do
   gem "capybara"<%= gemfile_requirement("capybara") %>
   gem "launchy"
   gem "minitest-ci", ">= 3.3.0", require: false
-  gem "mocha"
+  gem "mocha", ">= 1.4.0"
   gem "selenium-webdriver"<%= gemfile_requirement("selenium-webdriver") %>
   gem "shoulda-context"
   gem "shoulda-matchers", ">= 3.0.1"
