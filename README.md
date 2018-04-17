@@ -2,18 +2,19 @@
 
 ## Description
 
-This is the application template that I use for my Rails 5.1 projects. As a freelance Rails developer, I need to be able to start new projects quickly and with a good set of defaults. I've assembled this template over the years to include best-practices, tweaks, documentation, and personal preferences, while still generally adhering to the "Rails way".
+This is the application template that I use for my Rails 5.2 projects. As a freelance Rails developer, I need to be able to start new projects quickly and with a good set of defaults. I've assembled this template over the years to include best-practices, tweaks, documentation, and personal preferences, while still generally adhering to the "Rails way".
 
 For older versions of Rails, use these branches:
 
 * [Rails 4.2.x](https://github.com/mattbrictson/rails-template/tree/rails-42)
 * [Rails 5.0.x](https://github.com/mattbrictson/rails-template/tree/rails-50)
+* [Rails 5.1.x](https://github.com/mattbrictson/rails-template/tree/rails-51)
 
 ## Requirements
 
 This template currently works with:
 
-* Rails 5.1.x
+* Rails 5.2.x
 * PostgreSQL
 * chromedriver
 
