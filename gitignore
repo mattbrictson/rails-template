@@ -25,6 +25,7 @@
 /brakeman-output.*
 /coverage
 /test/reports/
+/capybara-*.html
 
 # Ignore results of `rake assets:precompile`.
 /public/assets/
