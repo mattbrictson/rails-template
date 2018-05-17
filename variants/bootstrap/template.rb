@@ -15,4 +15,8 @@ copy_file "lib/templates/erb/scaffold/edit.html.erb"
 copy_file "lib/templates/erb/scaffold/index.html.erb"
 copy_file "lib/templates/erb/scaffold/new.html.erb"
 copy_file "lib/templates/erb/scaffold/show.html.erb"
+copy_file "public/403.html", force: true
+copy_file "public/404.html", force: true
+copy_file "public/422.html", force: true
+copy_file "public/500.html", force: true
 copy_file "test/helpers/navbar_helper_test.rb"
