@@ -22,3 +22,6 @@
 # Never check passwords into source control!
 /config/database.yml
 /.env
+
+# Ignore Jetbrains IDE (RubyMine)
+/.idea/*
