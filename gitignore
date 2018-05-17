@@ -34,3 +34,6 @@
 /config/database.yml
 /config/master.key
 /.env
+
+# Ignore Jetbrains IDE (RubyMine)
+/.idea/*
