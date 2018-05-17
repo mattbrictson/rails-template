@@ -9,6 +9,8 @@ AllCops:
     - config/environment.rb
     - config/initializers/version.rb
     - db/schema.rb
+    - "node_modules/**/*"
+    - "bower_components/**/*"
     - "tmp/**/*"
     - "vendor/**/*"
     - Gemfile
