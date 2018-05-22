@@ -73,14 +73,7 @@ Style/ClassAndModuleChildren:
   Enabled: false
 
 Style/Documentation:
-  Exclude:
-    - "app/controllers/application_controller.rb"
-    - "app/helpers/**/*_helper.rb"
-    - "app/mailers/**/*_mailer.rb"
-    - "app/models/application_record.rb"
-    - "config/**/*"
-    - "db/**/*"
-    - "test/**/*"
+  Enabled: false
 
 Style/DoubleNegation:
   Enabled: false
