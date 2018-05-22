@@ -60,6 +60,9 @@ Rails/ApplicationRecord:
   Exclude:
     - "db/migrate/**"
 
+Rails/RefuteMethods:
+  Enabled: false
+
 Rails/Validation:
   Enabled: false
 
