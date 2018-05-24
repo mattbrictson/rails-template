@@ -28,6 +28,8 @@ group :production, :staging do
   gem "unicorn"
   gem "unicorn-worker-killer"
 <% end -%>
+  gem "sshkit", ">= 1.16", require: false
+  gem "sshkit-sudo", ">= 0.1"
 end
 
 group :development do
