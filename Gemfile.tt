@@ -28,8 +28,6 @@ group :production, :staging do
   gem "unicorn"
   gem "unicorn-worker-killer"
 <% end -%>
-  gem "sshkit", ">= 1.16", require: false
-  gem "sshkit-sudo", ">= 0.1"
 end
 
 group :development do
@@ -63,6 +61,7 @@ group :development do
   gem "simplecov", require: false
   gem "spring"
   gem "sshkit", "~> 1.16", require: false
+  gem "sshkit-sudo", ">= 0.1"
 <% if gemfile_requirement("spring-watcher-listen") -%>
   gem "spring-watcher-listen"<%= gemfile_requirement("spring-watcher-listen") %>
 <% end -%>
