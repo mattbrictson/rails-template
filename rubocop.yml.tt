@@ -45,7 +45,7 @@ Metrics/MethodLength:
     - "test/**/*"
 
 Naming/MemoizedInstanceVariableName:
-  Enabled: false
+  EnforcedStyleForLeadingUnderscores: optional
 
 Naming/VariableNumber:
   Enabled: false
