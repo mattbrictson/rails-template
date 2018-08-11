@@ -17,6 +17,7 @@ def apply_template!
   remove_file "README.rdoc"
 
   template "example.env.tt"
+  copy_file "editorconfig", ".editorconfig"
   copy_file "gitignore", ".gitignore", force: true
   copy_file "overcommit.yml", ".overcommit.yml"
   template "ruby-version.tt", ".ruby-version", force: true
