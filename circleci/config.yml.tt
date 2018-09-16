@@ -75,3 +75,20 @@ jobs:
       - store_artifacts:
           path: brakeman-output.html
           destination: brakeman-output.html
+
+workflows:
+  version: 2
+  commit-workflow:
+    jobs:
+      - build
+  cron-workflow:
+    triggers:
+      - schedule:
+          cron: "0 13 * * 1,2,3,4,5"
+          filters:
+            branches:
+              only:
+                - master
+                - development
+    jobs:
+      - build
