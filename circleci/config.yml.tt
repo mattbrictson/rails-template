@@ -44,7 +44,6 @@ jobs:
           command: |
             git config --local user.name "Circle CI"
             git config --local user.email ci@example.com
-            bundle exec overcommit --sign
             bundle exec overcommit --run
 
       - run:

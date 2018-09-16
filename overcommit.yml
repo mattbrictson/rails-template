@@ -16,6 +16,7 @@
 # Uncomment the following lines to make the configuration take effect.
 
 gemfile: Gemfile
+verify_signatures: false
 
 PreCommit:
   BundleCheck:

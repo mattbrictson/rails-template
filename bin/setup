@@ -6,7 +6,6 @@ def setup!
     run  "gem install bundler --no-document --conservative"
     run  "bundle install"
     run  "bin/yarn install" if File.exist?("yarn.lock")
-    run  "bundle exec overcommit --sign"
     run  "bundle exec overcommit --install"
     copy "example.env"
     copy "config/database.example.yml"
