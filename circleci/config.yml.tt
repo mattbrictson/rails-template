@@ -50,7 +50,7 @@ jobs:
       - run:
           name: Run security audits
           command: |
-            bundle exec brakeman --exit-on-warn --no-progress
+            bundle exec brakeman -q --no-summary
             bundle exec bundle-audit check --update -v
 
       - run:
@@ -71,10 +71,6 @@ jobs:
       - store_artifacts:
           path: ./tmp/screenshots
           destination: screenshots
-
-      - store_artifacts:
-          path: brakeman-output.html
-          destination: brakeman-output.html
 
 workflows:
   version: 2
