@@ -17,6 +17,7 @@ gem "pgcli-rails"
 <% unless apply_capistrano? -%>
 gem "puma"<%= gemfile_requirement("puma") %>
 <% end -%>
+gem "rack-canonical-host", "~> 0.2.3"
 gem "rails", "~> <%= Rails.version %>"
 gem "sass-rails"<%= gemfile_requirement("sass-rails") %>
 gem "sidekiq", ">= 4.2.0"
