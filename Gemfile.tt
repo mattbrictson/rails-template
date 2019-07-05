@@ -62,8 +62,9 @@ group :development do
   gem "puma"<%= gemfile_requirement("puma") %>
 <% end -%>
   gem "rack-livereload"
-  gem "rubocop", ">= 0.67.2", require: false
+  gem "rubocop", ">= 0.70.0", require: false
   gem "rubocop-performance", require: false
+  gem "rubocop-rails", require: false
   gem "simplecov", require: false
   gem "spring"
   gem "sshkit", "~> 1.16", require: false
