@@ -63,6 +63,7 @@ jobs:
       - run:
           name: Run tests
           command: |
+            bundle exec rake webdrivers:chromedriver:update
             bundle exec rake test test:system TESTOPTS="--ci-dir=./reports"
 
       - store_test_results:
