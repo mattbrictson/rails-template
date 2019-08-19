@@ -1,4 +1,4 @@
-RAILS_REQUIREMENT = "~> 5.2.0".freeze
+RAILS_REQUIREMENT = "~> 6.0.0".freeze
 
 def apply_template!
   assert_minimum_rails_version
@@ -43,6 +43,7 @@ def apply_template!
   empty_directory ".git/safe"
 
   run_with_clean_bundler_env "bin/setup"
+  run_with_clean_bundler_env "bin/rails webpacker:install"
   create_initial_migration
   generate_spring_binstubs
 
