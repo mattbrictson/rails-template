@@ -90,7 +90,6 @@ The template will perform the following steps:
 * Security
     * [brakeman][] and [bundler-audit][] – detect security vulnerabilities
 * Testing
-    * [mocha][] – excellent mocking for Test::Unit/Minitest
     * [simplecov][] – code coverage reports
     * [shoulda][] – shortcuts for common ActiveRecord tests
 
@@ -144,7 +143,6 @@ Rails generators are very lightly documented; what you’ll find is that most of
 [postmark-rails]:http://www.rubydoc.info/gems/postmark-rails/0.12.0
 [brakeman]:https://github.com/presidentbeef/brakeman
 [bundler-audit]:https://github.com/rubysec/bundler-audit
-[mocha]:https://github.com/freerange/mocha
 [shoulda]:https://github.com/thoughtbot/shoulda
 [simplecov]:https://github.com/colszowka/simplecov
 [Bootstrap]:http://getbootstrap.com
