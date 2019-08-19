@@ -7,10 +7,6 @@ This is a Rails <%= Rails::VERSION::MAJOR %> app.
 This README describes the purpose of this repository and how to set up a development environment. Other sources of documentation are as follows:
 
 * UI and API designs are in `doc/`
-<% if apply_capistrano? -%>
-* Server setup instructions are in `PROVISIONING.md`
-* Staging and production deployment instructions are in `DEPLOYMENT.md`
-<% end -%>
 
 ## Prerequisites
 
@@ -42,7 +38,6 @@ Run the `bin/setup` script. This script will:
 2. Run `bin/rake test:system` to run system (capybara) tests.
 3. Run `bin/rails s` and `bin/sidekiq` to start the app and Sidekiq; alternatively, start both at once with `heroku local`.
 
-<% unless apply_capistrano? -%>
 ## Deployment
 
 Ensure the following environment variables are set in the deployment environment:
@@ -62,7 +57,6 @@ Optionally:
 * `RAILS_MAX_THREADS`
 * `RAILS_SERVE_STATIC_FILES`
 * `WEB_CONCURRENCY`
-<% end -%>
 
 [rbenv]:https://github.com/sstephenson/rbenv
 [redis]:http://redis.io

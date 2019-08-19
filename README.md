@@ -84,10 +84,6 @@ The template will perform the following steps:
     * [livereload][] – magically refreshes browsers whenever you save a file
     * [rubocop][] – enforces Ruby code style
     * [xray-rails][] – inspect view partials in the browser
-* Deployment via Capistrano (optional)
-    * [capistrano-mb][] – capistrano recipes
-    * [unicorn][] – the industry-standard Rails server
-    * [unicorn-worker-killer][] – to manage memory use
 * Security
     * [brakeman][] and [bundler-audit][] – detect security vulnerabilities
 * Testing
@@ -111,11 +107,6 @@ I like to use [Postmark][] for transactional email, and so I've included the [po
 * A much-improved `bin/setup` script
 * Log rotation so that development and test Rails logs don’t grow out of control
 
-#### Plus lots of documentation for your project
-
-* `README.md`
-* `PROVISIONING.md` and `DEPLOYMENT.md` for Capistrano (optional)
-
 ## How does it work?
 
 This project works by hooking into the standard Rails [application templates][] system, with some caveats. The entry point is the [template.rb][] file in the root of this repository.
@@ -137,9 +128,6 @@ Rails generators are very lightly documented; what you’ll find is that most of
 [livereload]:https://github.com/guard/guard-livereload
 [rubocop]:https://github.com/bbatsov/rubocop
 [xray-rails]:https://github.com/brentd/xray-rails
-[capistrano-mb]:https://github.com/mattbrictson/capistrano-mb
-[unicorn]:http://unicorn.bogomips.org
-[unicorn-worker-killer]:https://github.com/kzk/unicorn-worker-killer
 [Postmark]:http://postmarkapp.com
 [postmark-rails]:http://www.rubydoc.info/gems/postmark-rails/0.12.0
 [brakeman]:https://github.com/presidentbeef/brakeman
