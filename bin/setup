@@ -10,6 +10,7 @@ def setup!
     copy "example.env"
     copy "config/database.example.yml"
     test_local_env_contains_required_keys
+    run  "bin/rake tmp:create"
     run  "bin/rake db:create:all"
     run  "bin/rake db:migrate"
     run  "bin/rake db:seed"
