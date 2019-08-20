@@ -9,6 +9,9 @@ insert_into_file "config/environments/production.rb",
 end
 
 uncomment_lines "config/environments/production.rb", /config\.force_ssl = true/
+gsub_file "config/environments/production.rb",
+          "config.force_ssl = true",
+          'config.force_ssl = ENV["RAILS_FORCE_SSL"].present?'
 
 insert_into_file "config/environments/production.rb",
                  after: /# config\.action_mailer\.raise_deliv.*\n/ do
