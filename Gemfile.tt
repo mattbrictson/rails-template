@@ -23,7 +23,7 @@ gem "turbolinks"<%= gemfile_requirement("turbolinks") %>
 <% end -%>
 gem "webpacker"<%= gemfile_requirement("webpacker") %>
 
-group :production, :staging do
+group :production do
   gem "postmark-rails"
 end
 

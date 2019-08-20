@@ -34,11 +34,10 @@ To make this the default Rails application template on your system, create a `~/
 
 ## Usage
 
-This template assumes you will store your project in a remote git repository (e.g. Bitbucket or GitHub) and that you will deploy to staging and production environments. It will prompt you for this information in order to pre-configure your app, so be ready to provide:
+This template assumes you will store your project in a remote git repository (e.g. Bitbucket or GitHub) and that you will deploy to a production environment. It will prompt you for this information in order to pre-configure your app, so be ready to provide:
 
 1. The git URL of your (freshly created and empty) Bitbucket/GitHub repository
-2. The hostname of your staging server
-3. The hostname of your production server
+2. The hostname of your production server
 
 To generate a Rails application using this template, pass the `-m` option to `rails new`, like this:
 

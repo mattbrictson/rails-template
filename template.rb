@@ -131,11 +131,6 @@ def production_hostname
     ask_with_default("Production hostname?", :blue, "example.com")
 end
 
-def staging_hostname
-  @staging_hostname ||=
-    ask_with_default("Staging hostname?", :blue, "staging.example.com")
-end
-
 def gemfile_requirement(name)
   @original_gemfile ||= IO.read("Gemfile")
   req = @original_gemfile[/gem\s+['"]#{name}['"]\s*(,[><~= \t\d\.\w'"]*)?.*$/, 1]
