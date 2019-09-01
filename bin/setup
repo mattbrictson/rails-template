@@ -3,7 +3,7 @@
 def setup!
   within_project_root do
     test "ruby -v" => ruby_version
-    run  "gem install bundler --no-document --conservative"
+    run  "gem install bundler #{bundler_ver_arg} --no-document --conservative"
     run  "bundle install"
     run  "bin/yarn install" if File.exist?("yarn.lock")
     run  "bundle exec overcommit --install"
@@ -17,7 +17,6 @@ def setup!
   end
 end
 
-
 require "fileutils"
 begin
   require "highline"
@@ -26,7 +25,7 @@ rescue LoadError
 end
 
 def within_project_root(&block)
-  Dir.chdir(File.expand_path("../..", __FILE__), &block)
+  Dir.chdir(File.expand_path("..", __dir__), &block)
 end
 
 def test(opts)
@@ -43,6 +42,13 @@ def ruby_version
   @ruby_version ||= begin
     IO.read(".ruby-version").strip
   end
+end
+
+def bundler_ver_arg
+  lock_file = File.expand_path("../Gemfile.lock", __dir__)
+  lock = File.exist?(lock_file) ? IO.read(lock_file) : ""
+  version = lock[/BUNDLED WITH\n   (\S+)$/, 1]
+  version ? "-v #{version}" : nil
 end
 
 def run(command)
