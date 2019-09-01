@@ -1,3 +1,4 @@
+require "bundler"
 RAILS_REQUIREMENT = "~> 6.0.0".freeze
 
 def apply_template!

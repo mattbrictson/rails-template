@@ -31,7 +31,10 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            bundle install --deployment --jobs=4 --retry=3 --path vendor/bundle
+            gem install bundler -v <%=  Bundler::VERSION %> --conservative --no-document
+            bundle config --local deployment true
+            bundle config --local path vendor/bundle
+            bundle install --jobs=4 --retry=3
             bundle clean
 
       - save_cache:
