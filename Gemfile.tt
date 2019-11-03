@@ -9,7 +9,6 @@ gem "bcrypt"<%= gemfile_requirement("bcrypt") %>
 gem "bootsnap"<%= gemfile_requirement("bootsnap") %>, require: false
 gem "coffee-rails"<%= gemfile_requirement("coffee-rails") %>
 gem "dotenv-rails", ">= 2.0.0"
-gem "marco-polo"
 gem "pg"<%= gemfile_requirement("pg") %>
 gem "pgcli-rails"
 gem "puma", "~> 4.1"
