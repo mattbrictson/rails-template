@@ -103,6 +103,8 @@ def assert_valid_options
     skip_gemfile: false,
     skip_bundle: false,
     skip_git: false,
+    skip_system_test: false,
+    skip_test: false,
     skip_test_unit: false,
     edge: false
   }
