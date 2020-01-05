@@ -64,6 +64,9 @@ Rails/ApplicationRecord:
   Exclude:
     - "db/migrate/**"
 
+Rails/RakeEnvironment:
+  Enabled: false
+
 Rails/RefuteMethods:
   Enabled: false
 
