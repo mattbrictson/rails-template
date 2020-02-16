@@ -10,11 +10,12 @@ jobs:
         environment:
           PGHOST: 127.0.0.1
           PGUSER: postgres
+          PGPASS: postgres
           RAILS_ENV: test
       - image: circleci/postgres:10.5-alpine
         environment:
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: ""
+          POSTGRES_PASSWORD: postgres
 
     working_directory: ~/repo
 
