@@ -1,4 +1,5 @@
 require:
+  - rubocop-minitest
   - rubocop-performance
   - rubocop-rails
 
@@ -21,10 +22,24 @@ AllCops:
     - Guardfile
     - Rakefile
 
+Layout/HashAlignment:
+  EnforcedColonStyle:
+    - table
+    - key
+  EnforcedHashRocketStyle:
+    - table
+    - key
+
+Layout/LineLength:
+  Exclude:
+    - "config/**/*"
+    - "db/**/*"
+
 Layout/SpaceAroundEqualsInParameterDefault:
   EnforcedStyle: no_space
 
 Metrics/AbcSize:
+  Max: 20
   Exclude:
     - "test/**/*"
 
@@ -37,13 +52,8 @@ Metrics/ClassLength:
   Exclude:
     - "test/**/*"
 
-Metrics/LineLength:
-  Exclude:
-    - "config/**/*"
-    - "db/**/*"
-
 Metrics/MethodLength:
-  Max: 12
+  Max: 18
   Exclude:
     - "db/migrate/*"
     - "test/**/*"
@@ -56,9 +66,6 @@ Naming/VariableNumber:
 
 Performance/Casecmp:
   Enabled: false
-
-Rails:
-  Enabled: true
 
 Rails/ApplicationRecord:
   Exclude:
@@ -90,6 +97,18 @@ Style/EmptyMethod:
 
 Style/FrozenStringLiteralComment:
   Enabled: false
+
+Style/HashEachMethods:
+  Enabled: true
+
+Style/HashSyntax:
+  EnforcedStyle: ruby19
+
+Style/HashTransformKeys:
+  Enabled: true
+
+Style/HashTransformValues:
+  Enabled: true
 
 Style/NumericPredicate:
   Enabled: false

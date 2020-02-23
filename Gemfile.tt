@@ -44,7 +44,8 @@ group :development do
   gem "listen"<%= gemfile_requirement("listen") %>
   gem "overcommit", ">= 0.37.0", require: false
   gem "rack-livereload"
-  gem "rubocop", ">= 0.70.0", require: false
+  gem "rubocop", ">= 0.80.0", require: false
+  gem "rubocop-minitest", require: false
   gem "rubocop-performance", require: false
   gem "rubocop-rails", require: false
   gem "simplecov", require: false
