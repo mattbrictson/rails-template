@@ -86,7 +86,6 @@ The template will perform the following steps:
 * Security
     * [brakeman][] and [bundler-audit][] – detect security vulnerabilities
 * Testing
-    * [simplecov][] – code coverage reports
     * [shoulda][] – shortcuts for common ActiveRecord tests
 
 #### Postmark
@@ -132,7 +131,6 @@ Rails generators are very lightly documented; what you’ll find is that most of
 [brakeman]:https://github.com/presidentbeef/brakeman
 [bundler-audit]:https://github.com/rubysec/bundler-audit
 [shoulda]:https://github.com/thoughtbot/shoulda
-[simplecov]:https://github.com/colszowka/simplecov
 [Bootstrap]:http://getbootstrap.com
 [application templates]:http://guides.rubyonrails.org/generators.html#application-templates
 [template.rb]: template.rb

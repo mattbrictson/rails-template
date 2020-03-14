@@ -48,7 +48,6 @@ group :development do
   gem "rubocop-minitest", require: false
   gem "rubocop-performance", require: false
   gem "rubocop-rails", require: false
-  gem "simplecov", require: false
   gem "spring"
 <% if gemfile_requirement("spring-watcher-listen") -%>
   gem "spring-watcher-listen"<%= gemfile_requirement("spring-watcher-listen") %>

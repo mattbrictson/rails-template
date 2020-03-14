@@ -30,7 +30,6 @@ yarn-debug.log*
 
 # Ignore test reports.
 /brakeman-output.*
-/coverage
 /test/reports/
 /capybara-*.html
 
