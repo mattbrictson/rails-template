@@ -25,9 +25,9 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-            - v1-dependencies-{{ arch }}-{{ checksum "Gemfile.lock" }}
+            - bundle-v1-{{ arch }}-{{ checksum ".ruby-version" }}-{{ checksum "Gemfile.lock" }}
             # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-{{ arch }}-
+            - bundle-v1-{{ arch }}-{{ checksum ".ruby-version" }}-
 
       - run:
           name: Install dependencies
@@ -41,7 +41,7 @@ jobs:
       - save_cache:
           paths:
             - ./vendor/bundle
-          key: v1-dependencies-{{ arch }}-{{ checksum "Gemfile.lock" }}
+          key: bundle-v1-{{ arch }}-{{ checksum ".ruby-version" }}-{{ checksum "Gemfile.lock" }}
 
       - run:
           name: Run overcommit
