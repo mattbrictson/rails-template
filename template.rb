@@ -1,4 +1,5 @@
 require "bundler"
+require "json"
 RAILS_REQUIREMENT = "~> 6.0.0".freeze
 
 def apply_template!
@@ -47,6 +48,10 @@ def apply_template!
 
   template "rubocop.yml.tt", ".rubocop.yml"
   run_rubocop_autocorrections
+
+  template "eslintrc.js", ".eslintrc.js"
+  template "prettierrc.js", ".prettierrc.js"
+  add_eslint_and_run_fix
 
   unless any_local_git_commits?
     git add: "-A ."
@@ -177,6 +182,31 @@ def create_initial_migration
   return if Dir["db/migrate/**/*.rb"].any?
   run_with_clean_bundler_env "bin/rails generate migration initial_migration"
   run_with_clean_bundler_env "bin/rake db:migrate"
+end
+
+def add_eslint_and_run_fix
+  packages = %w[
+    eslint
+    eslint-config-prettier
+    eslint-plugin-jest
+    eslint-plugin-prettier prettier
+  ]
+  run_with_clean_bundler_env "yarn add #{packages.join(' ')} -D"
+  add_package_json_script(lint: "eslint 'app/javascript/**/*.{js,jsx}'")
+  run_with_clean_bundler_env "yarn lint --fix"
+end
+
+def add_package_json_script(scripts)
+  package_json = JSON.parse(IO.read("package.json"))
+  package_json["scripts"] ||= {}
+  scripts.each do |name, script|
+    package_json["scripts"][name.to_s] = script
+  end
+  package_json = {
+    "name" => package_json["name"],
+    "scripts" => package_json["scripts"].sort.to_h
+  }.merge(package_json)
+  IO.write("package.json", JSON.pretty_generate(package_json) + "\n")
 end
 
 apply_template!

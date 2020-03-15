@@ -22,6 +22,14 @@ PreCommit:
   BundleCheck:
     enabled: true
 
+  EsLint:
+    required_executable: yarn
+    enabled: true
+    command: ["yarn", "eslint", "-f", "compact"]
+    include:
+      - app/javascript/**/*.js
+      - app/javascript/**/*.jsx
+
   FixMe:
     enabled: true
     keywords: ["FIXME"]
