@@ -92,14 +92,6 @@ The template will perform the following steps:
 
 I like to use [Postmark][] for transactional email, and so I've included the [postmark-rails][] gem and configured it in `environments/production.rb`. Make sure to sign up for a Postmark account to get an API key, or switch to your own preferred email provider before deploying your app.
 
-#### Bootstrap integration (optional)
-
-[Bootstrap][]-related features are opt-in. To apply these to your project, answer "yes" when prompted.
-
-* Bootstrap-themed scaffold templates
-* Application layout that includes Bootstrap-style navbar and boilerplate
-* View helpers for generating common Bootstrap markup
-
 #### Other tweaks that patch over some Rails shortcomings
 
 * A much-improved `bin/setup` script
@@ -131,7 +123,6 @@ Rails generators are very lightly documented; what you’ll find is that most of
 [brakeman]:https://github.com/presidentbeef/brakeman
 [bundler-audit]:https://github.com/rubysec/bundler-audit
 [shoulda]:https://github.com/thoughtbot/shoulda
-[Bootstrap]:http://getbootstrap.com
 [application templates]:http://guides.rubyonrails.org/generators.html#application-templates
 [template.rb]: template.rb
 [thor]: https://github.com/erikhuda/thor

@@ -31,8 +31,6 @@ def apply_template!
   apply "lib/template.rb"
   apply "test/template.rb"
 
-  apply "variants/bootstrap/template.rb" if apply_bootstrap?
-
   git :init unless preexisting_git_repo?
   empty_directory ".git/safe"
 
@@ -157,11 +155,6 @@ end
 
 def any_local_git_commits?
   system("git log &> /dev/null")
-end
-
-def apply_bootstrap?
-  ask_with_default("Use Bootstrap gems, layouts, views, etc.?", :blue, "no")\
-    =~ /^y(es)?/i
 end
 
 def run_with_clean_bundler_env(cmd)
