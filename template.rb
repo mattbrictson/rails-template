@@ -186,6 +186,7 @@ end
 
 def add_eslint_and_run_fix
   packages = %w[
+    babel-eslint
     eslint
     eslint-config-prettier
     eslint-plugin-jest
