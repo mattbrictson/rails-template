@@ -1,10 +1,8 @@
-# Ruby CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-ruby/ for more details
-#
-version: 2
-jobs:
-  build:
+version: 2.1
+
+executors:
+  ruby:
+    working_directory: ~/repo
     docker:
       - image: circleci/ruby:<%= RUBY_VERSION %>-node-browsers
         environment:
@@ -12,67 +10,114 @@ jobs:
           PGUSER: postgres
           PGPASS: postgres
           RAILS_ENV: test
-      - image: circleci/postgres:10.5-alpine
+      - image: circleci/postgres:12-alpine
         environment:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
 
-    working_directory: ~/repo
-
+commands:
+  bundle-install:
+    description: Install Ruby dependencies with Bundler
     steps:
-      - checkout
-
-      # Download and cache dependencies
       - restore_cache:
           keys:
             - bundle-v1-{{ arch }}-{{ checksum ".ruby-version" }}-{{ checksum "Gemfile.lock" }}
-            # fallback to using the latest cache if no exact match is found
             - bundle-v1-{{ arch }}-{{ checksum ".ruby-version" }}-
-
       - run:
-          name: Install dependencies
+          name: Install Ruby Dependencies
           command: |
             gem install bundler -v <%=  Bundler::VERSION %> --conservative --no-document
             bundle config --local deployment true
             bundle config --local path vendor/bundle
             bundle install --jobs=4 --retry=3
             bundle clean
-
       - save_cache:
           paths:
             - ./vendor/bundle
           key: bundle-v1-{{ arch }}-{{ checksum ".ruby-version" }}-{{ checksum "Gemfile.lock" }}
-
+  install-node:
+    description: Install latest versions of Node and Yarn
+    steps:
       - run:
-          name: Run overcommit
+          name: Install Node
+          command: |
+            curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash
+            sudo apt-get install -y nodejs
+            sudo ln -sf /usr/bin/node /usr/local/bin/node
+      - run:
+          name: Install Yarn
+          command: |
+            sudo npm i -g yarn
+            sudo ln -sf /usr/bin/yarn /usr/local/bin/yarn
+  set-up-database:
+    steps:
+      - run:
+          name: Set Up Database
+          command: |
+            cp config/database.example.yml config/database.yml
+            cp example.env .env
+            bundle exec rake db:setup
+  yarn-install:
+    description: Install JS dependencies with Yarn
+    steps:
+      - restore_cache:
+          keys:
+            - node_modules-v1-{{ arch }}-{{ checksum "yarn.lock" }}
+            - node_modules-v1-{{ arch }}
+      - run:
+          name: Install JS Dependencies
+          command: yarn install --frozen-lockfile
+      - save_cache:
+          paths:
+            - ./node_modules
+          key: node_modules-v1-{{ arch }}-{{ checksum "yarn.lock" }}
+
+jobs:
+  static_analysis:
+    executor: ruby
+    steps:
+      - checkout
+      - bundle-install
+      - run:
+          name: Run Overcommit
           command: |
             git config --local user.name "Circle CI"
             git config --local user.email ci@example.com
             bundle exec overcommit --sign
             bundle exec overcommit --run
-
       - run:
-          name: Run security audits
+          name: Run Security Audits
           command: |
             bundle exec brakeman -q --no-summary
             bundle exec bundle-audit check --update -v
-
+  test:
+    executor: ruby
+    steps:
+      - install-node
+      - checkout
+      - bundle-install
+      - yarn-install
+      - set-up-database
       - run:
-          name: Set up database
-          command: |
-            cp config/database.example.yml config/database.yml
-            cp example.env .env
-            bundle exec rake db:setup
-
-      - run:
-          name: Run tests
-          command: |
-            bundle exec rake webdrivers:chromedriver:update
-            bundle exec rake test test:system TESTOPTS="--ci-dir=./reports"
-
+          name: Run Tests
+          command: bundle exec rake test TESTOPTS="--ci-dir=./reports"
       - store_test_results:
           path: ./reports
-
+  test_system:
+    executor: ruby
+    steps:
+      - install-node
+      - checkout
+      - bundle-install
+      - yarn-install
+      - set-up-database
+      - run:
+          name: Run System Tests
+          command: |
+            bundle exec rake webdrivers:chromedriver:update
+            bundle exec rake test:system TESTOPTS="--ci-dir=./reports"
+      - store_test_results:
+          path: ./reports
       - store_artifacts:
           path: ./tmp/screenshots
           destination: screenshots
@@ -81,7 +126,9 @@ workflows:
   version: 2
   commit-workflow:
     jobs:
-      - build
+      - static_analysis
+      - test
+      - test_system
   cron-workflow:
     triggers:
       - schedule:
@@ -92,4 +139,6 @@ workflows:
                 - master
                 - development
     jobs:
-      - build
+      - static_analysis
+      - test
+      - test_system
