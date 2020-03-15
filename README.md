@@ -82,7 +82,6 @@ The template will perform the following steps:
     * [guard][] – runs tests as you develop; mandatory for effective TDD
     * [livereload][] – magically refreshes browsers whenever you save a file
     * [rubocop][] – enforces Ruby code style
-    * [xray-rails][] – inspect view partials in the browser
 * Security
     * [brakeman][] and [bundler-audit][] – detect security vulnerabilities
 * Testing
@@ -117,7 +116,6 @@ Rails generators are very lightly documented; what you’ll find is that most of
 [guard]:https://github.com/guard/guard
 [livereload]:https://github.com/guard/guard-livereload
 [rubocop]:https://github.com/bbatsov/rubocop
-[xray-rails]:https://github.com/brentd/xray-rails
 [Postmark]:http://postmarkapp.com
 [postmark-rails]:http://www.rubydoc.info/gems/postmark-rails/0.12.0
 [brakeman]:https://github.com/presidentbeef/brakeman
