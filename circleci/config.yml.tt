@@ -16,7 +16,7 @@ executors:
           POSTGRES_PASSWORD: postgres
 
 commands:
-  bundle-install:
+  bundle_install:
     description: Install Ruby dependencies with Bundler
     steps:
       - restore_cache:
@@ -35,7 +35,7 @@ commands:
           paths:
             - ./vendor/bundle
           key: bundle-v1-{{ arch }}-{{ checksum ".ruby-version" }}-{{ checksum "Gemfile.lock" }}
-  install-node:
+  install_node:
     description: Install latest versions of Node and Yarn
     steps:
       - run:
@@ -49,7 +49,7 @@ commands:
           command: |
             sudo npm i -g yarn
             sudo ln -sf /usr/bin/yarn /usr/local/bin/yarn
-  set-up-database:
+  set_up_database:
     steps:
       - run:
           name: Set Up Database
@@ -57,27 +57,27 @@ commands:
             cp config/database.example.yml config/database.yml
             cp example.env .env
             bundle exec rake db:setup
-  yarn-install:
+  yarn_install:
     description: Install JS dependencies with Yarn
     steps:
       - restore_cache:
           keys:
-            - node_modules-v1-{{ arch }}-{{ checksum "yarn.lock" }}
-            - node_modules-v1-{{ arch }}
+            - yarn-cache-v1-{{ arch }}-{{ checksum "yarn.lock" }}
+            - yarn-cache-v1-{{ arch }}
       - run:
           name: Install JS Dependencies
-          command: yarn install --frozen-lockfile
+          command: yarn install --frozen-lockfile --cache-folder .yarn-cache
       - save_cache:
           paths:
-            - ./node_modules
-          key: node_modules-v1-{{ arch }}-{{ checksum "yarn.lock" }}
+            - .yarn-cache
+          key: yarn-cache-v1-{{ arch }}-{{ checksum "yarn.lock" }}
 
 jobs:
   static_analysis:
     executor: ruby
     steps:
       - checkout
-      - bundle-install
+      - bundle_install
       - run:
           name: Run Overcommit
           command: |
@@ -93,11 +93,11 @@ jobs:
   test:
     executor: ruby
     steps:
-      - install-node
+      - install_node
       - checkout
-      - bundle-install
-      - yarn-install
-      - set-up-database
+      - bundle_install
+      - yarn_install
+      - set_up_database
       - run:
           name: Run Tests
           command: bundle exec rake test TESTOPTS="--ci-dir=./reports"
@@ -106,11 +106,11 @@ jobs:
   test_system:
     executor: ruby
     steps:
-      - install-node
+      - install_node
       - checkout
-      - bundle-install
-      - yarn-install
-      - set-up-database
+      - bundle_install
+      - yarn_install
+      - set_up_database
       - run:
           name: Run System Tests
           command: |
