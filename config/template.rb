@@ -1,6 +1,5 @@
 apply "config/application.rb"
-template "config/database.example.yml.tt"
-remove_file "config/database.yml"
+template "config/database.yml", force: true
 copy_file "config/puma.rb", force: true
 remove_file "config/secrets.yml"
 copy_file "config/sidekiq.yml"

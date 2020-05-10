@@ -29,7 +29,7 @@ Run the `bin/setup` script. This script will:
 
 * Check you have the required Ruby version
 * Install gems using Bundler
-* Create local copies of `.env` and `database.yml`
+* Create a local copy of `.env`
 * Create, migrate, and seed the database
 
 ### Run it!
@@ -42,6 +42,7 @@ Run the `bin/setup` script. This script will:
 
 Ensure the following environment variables are set in the deployment environment:
 
+* `DATABASE_URL`
 * `POSTMARK_API_KEY`
 * `RACK_ENV`
 * `RAILS_ENV`

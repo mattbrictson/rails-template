@@ -8,7 +8,6 @@ def setup!
     run  "bin/yarn install" if File.exist?("yarn.lock")
     run  "bundle exec overcommit --install"
     copy "example.env"
-    copy "config/database.example.yml"
     test_local_env_contains_required_keys
     run  "bin/rake tmp:create"
     run  "bin/rake db:create:all"

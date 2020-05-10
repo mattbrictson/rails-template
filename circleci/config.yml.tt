@@ -54,7 +54,6 @@ commands:
       - run:
           name: Set Up Database
           command: |
-            cp config/database.example.yml config/database.yml
             cp example.env .env
             bundle exec rake db:setup
   yarn_install:
