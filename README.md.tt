@@ -57,6 +57,7 @@ Optionally:
 * `RAILS_LOG_TO_STDOUT`
 * `RAILS_MAX_THREADS`
 * `RAILS_SERVE_STATIC_FILES`
+* `SIDEKIQ_CONCURRENCY`
 * `WEB_CONCURRENCY`
 
 [rbenv]:https://github.com/sstephenson/rbenv
