@@ -16,6 +16,7 @@ For older versions of Rails, use these branches:
 This template currently works with:
 
 * Rails 6.0.x
+* Bundler 2.x
 * PostgreSQL
 * chromedriver
 

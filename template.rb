@@ -1,3 +1,4 @@
+gem "bundler", "~> 2.0"
 require "bundler"
 require "json"
 RAILS_REQUIREMENT = "~> 6.0.0".freeze
