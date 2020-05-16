@@ -1,4 +1,3 @@
-gem "bundler", "~> 2.0"
 require "bundler"
 require "json"
 RAILS_REQUIREMENT = "~> 6.0.0".freeze
@@ -165,7 +164,11 @@ end
 
 def run_with_clean_bundler_env(cmd)
   success = if defined?(Bundler)
-              Bundler.with_unbundled_env { run(cmd) }
+              if Bundler.respond_to?(:with_unbundled_env)
+                Bundler.with_unbundled_env { run(cmd) }
+              else
+                Bundler.with_clean_env { run(cmd) }
+              end
             else
               run(cmd)
             end
