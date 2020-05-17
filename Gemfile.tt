@@ -26,28 +26,17 @@ group :production do
   gem "postmark-rails"
 end
 
-group :development, :test do
-  gem "byebug"
-end
-
 group :development do
   gem "amazing_print"
   gem "annotate", ">= 2.5.0"
   gem "better_errors"
   gem "binding_of_caller"
-  gem "brakeman", require: false
-  gem "bundler-audit", ">= 0.5.0", require: false
   gem "guard", ">= 2.2.2", require: false
   gem "guard-livereload", require: false
   gem "guard-minitest", require: false
   gem "letter_opener"
   gem "listen"<%= gemfile_requirement("listen") %>
-  gem "overcommit", ">= 0.37.0", require: false
   gem "rack-livereload"
-  gem "rubocop", ">= 0.80.0", require: false
-  gem "rubocop-minitest", require: false
-  gem "rubocop-performance", require: false
-  gem "rubocop-rails", require: false
   gem "spring"
 <% if gemfile_requirement("spring-watcher-listen") -%>
   gem "spring-watcher-listen"<%= gemfile_requirement("spring-watcher-listen") %>
@@ -57,6 +46,17 @@ group :development do
 <% unless gemfile_requirement("puma") -%>
   gem "thin", require: false
 <% end -%>
+end
+
+group :development, :test do
+  gem "brakeman", require: false
+  gem "bundler-audit", ">= 0.5.0", require: false
+  gem "byebug"
+  gem "overcommit", ">= 0.37.0", require: false
+  gem "rubocop", ">= 0.80.0", require: false
+  gem "rubocop-minitest", require: false
+  gem "rubocop-performance", require: false
+  gem "rubocop-rails", require: false
 end
 
 group :test do

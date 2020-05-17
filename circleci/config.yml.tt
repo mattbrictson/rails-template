@@ -29,6 +29,7 @@ commands:
             gem install bundler -v <%=  Bundler::VERSION %> --conservative --no-document
             bundle config --local deployment true
             bundle config --local path vendor/bundle
+            bundle config --local without development:production
             bundle install --jobs=4 --retry=3
             bundle clean
       - save_cache:
