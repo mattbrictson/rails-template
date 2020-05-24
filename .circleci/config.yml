@@ -30,6 +30,10 @@ jobs:
           command: |
             sudo npm i -g yarn
             sudo ln -sf /usr/bin/yarn /usr/local/bin/yarn
+      - restore_cache:
+          name: Restore yarn cache
+          keys:
+            - yarn-v1-{{ arch }}
       - run:
           name: Install bundler
           command: |
@@ -63,6 +67,11 @@ jobs:
           name: Clean bundler
           command: |
             cd $HOME/scratch/ci_example && bundle clean
+      - save_cache:
+          name: Save yarn cache
+          paths:
+            - $HOME/.cache/yarn
+          key: yarn-v1-{{ arch }}
       - save_cache:
           name: Save bundler cache
           paths:
