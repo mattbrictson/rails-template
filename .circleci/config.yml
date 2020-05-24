@@ -68,12 +68,12 @@ jobs:
       - save_cache:
           name: Save bundler cache
           paths:
-            - $HOME/vendor/bundle
+            - ../vendor/bundle
           key: bundle-v1-{{ arch }}-{{ checksum "Gemfile.tt" }}
       - save_cache:
           name: Save yarn cache
           paths:
-            - $HOME/.cache/yarn
+            - ../.cache/yarn
           key: yarn-v1-{{ arch }}
 
 workflows:
