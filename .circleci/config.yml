@@ -1,0 +1,86 @@
+version: 2.1
+
+executors:
+  ruby:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/ruby:2.6.6-node-browsers
+        environment:
+          PGHOST: 127.0.0.1
+          PGUSER: postgres
+          PGPASS: postgres
+      - image: circleci/postgres:12-alpine
+        environment:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+
+jobs:
+  build:
+    executor: ruby
+    steps:
+      - checkout
+      - run:
+        name: Install node
+        command: |
+          curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash
+          sudo apt-get install -y nodejs
+          sudo ln -sf /usr/bin/node /usr/local/bin/node
+      - run:
+        name: Install yarn
+        command: |
+          sudo npm i -g yarn
+          sudo ln -sf /usr/bin/yarn /usr/local/bin/yarn
+      - run:
+          name: Install bundler
+          command: |
+            gem install bundler --no-document
+            bundle config path $HOME/vendor/bundle
+      - restore_cache:
+          name: Restore bundler cache
+          keys:
+            - bundle-v1-{{ arch }}-{{ checksum "Gemfile.tt" }
+      - run:
+          name: Install rails
+          command: |
+            bundle init
+            bundle add rails --version "~> 5.0.0"
+            bundle install --jobs=4 --retry=3
+      - run:
+          name: Configure git
+          command: |
+            git config --local user.name "Circle CI"
+            git config --local user.email ci@example.com
+      - run:
+          name: Generate app from template
+          command: |
+            mkdir -p $HOME/scratch
+            cd $HOME/scratch
+            rails new ci_example -d postgresql -m $HOME/repo/template.rb << INPUT
+              ci.example.com
+
+            INPUT
+      - run:
+          name: Clean bundler
+          command: |
+            cd $HOME/scratch/ci_example && bundle clean
+      - save_cache:
+          name: Save bundler cache
+          paths:
+            - $HOME/vendor/bundle
+          key: bundle-v1-{{ arch }}-{{ checksum "Gemfile.tt" }
+
+workflows:
+  version: 2
+  commit-workflow:
+    jobs:
+      - build
+  cron-workflow:
+    triggers:
+      - schedule:
+          cron: "0 13 * * 6"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - build
