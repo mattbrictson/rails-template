@@ -33,7 +33,7 @@ jobs:
       - restore_cache:
           name: Restore yarn cache
           keys:
-            - yarn-v1-{{ arch }}
+            - yarn-v2-{{ arch }}
       - run:
           name: Install bundler
           command: |
@@ -42,7 +42,7 @@ jobs:
       - restore_cache:
           name: Restore bundler cache
           keys:
-            - bundle-v1-{{ arch }}-{{ checksum "Gemfile.tt" }}
+            - bundle-v2-{{ arch }}-{{ checksum "Gemfile.tt" }}
       - run:
           name: Install railties
           command: |
@@ -69,12 +69,12 @@ jobs:
           name: Save bundler cache
           paths:
             - ../vendor/bundle
-          key: bundle-v1-{{ arch }}-{{ checksum "Gemfile.tt" }}
+          key: bundle-v2-{{ arch }}-{{ checksum "Gemfile.tt" }}
       - save_cache:
           name: Save yarn cache
           paths:
             - ../.cache/yarn
-          key: yarn-v1-{{ arch }}
+          key: yarn-v2-{{ arch }}
 
 workflows:
   version: 2
