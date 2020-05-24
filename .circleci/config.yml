@@ -38,7 +38,7 @@ jobs:
       - restore_cache:
           name: Restore bundler cache
           keys:
-            - bundle-v1-{{ arch }}-{{ checksum "Gemfile.tt" }
+            - bundle-v1-{{ arch }}-{{ checksum "Gemfile.tt" }}
       - run:
           name: Install rails
           command: |
@@ -67,7 +67,7 @@ jobs:
           name: Save bundler cache
           paths:
             - $HOME/vendor/bundle
-          key: bundle-v1-{{ arch }}-{{ checksum "Gemfile.tt" }
+          key: bundle-v1-{{ arch }}-{{ checksum "Gemfile.tt" }}
 
 workflows:
   version: 2
