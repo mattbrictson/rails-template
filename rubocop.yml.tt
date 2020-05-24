@@ -31,9 +31,7 @@ Layout/HashAlignment:
     - key
 
 Layout/LineLength:
-  Exclude:
-    - "config/**/*"
-    - "db/**/*"
+  Max: 120
 
 Layout/SpaceAroundEqualsInParameterDefault:
   EnforcedStyle: no_space

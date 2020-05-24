@@ -9,9 +9,6 @@ class RetinaImageHelperTest < ActionView::TestCase
     assert_match(%r{\A<img srcset=".*" alt=".*" src=".*" />\z}, tag)
     assert_match(/alt="example"/, tag)
     assert_match(%r{src="/images/example.png"}, tag)
-    assert_match(
-      %r{srcset="/images/example.png 1x,/images/example@2x.png 2x"},
-      tag
-    )
+    assert_match(%r{srcset="/images/example.png 1x,/images/example@2x.png 2x"}, tag)
   end
 end
