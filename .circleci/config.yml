@@ -15,7 +15,7 @@ executors:
           POSTGRES_PASSWORD: postgres
 
 jobs:
-  build:
+  generate:
     executor: ruby
     steps:
       - checkout
@@ -66,21 +66,21 @@ jobs:
           command: |
             cd $HOME/scratch/ci_example && bundle clean
       - save_cache:
-          name: Save yarn cache
-          paths:
-            - $HOME/.cache/yarn
-          key: yarn-v1-{{ arch }}
-      - save_cache:
           name: Save bundler cache
           paths:
             - $HOME/vendor/bundle
           key: bundle-v1-{{ arch }}-{{ checksum "Gemfile.tt" }}
+      - save_cache:
+          name: Save yarn cache
+          paths:
+            - $HOME/.cache/yarn
+          key: yarn-v1-{{ arch }}
 
 workflows:
   version: 2
   commit-workflow:
     jobs:
-      - build
+      - generate
   cron-workflow:
     triggers:
       - schedule:
@@ -90,4 +90,4 @@ workflows:
               only:
                 - master
     jobs:
-      - build
+      - generate
