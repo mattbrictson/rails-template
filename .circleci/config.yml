@@ -20,16 +20,16 @@ jobs:
     steps:
       - checkout
       - run:
-        name: Install node
-        command: |
-          curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash
-          sudo apt-get install -y nodejs
-          sudo ln -sf /usr/bin/node /usr/local/bin/node
+          name: Install node
+          command: |
+            curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash
+            sudo apt-get install -y nodejs
+            sudo ln -sf /usr/bin/node /usr/local/bin/node
       - run:
-        name: Install yarn
-        command: |
-          sudo npm i -g yarn
-          sudo ln -sf /usr/bin/yarn /usr/local/bin/yarn
+          name: Install yarn
+          command: |
+            sudo npm i -g yarn
+            sudo ln -sf /usr/bin/yarn /usr/local/bin/yarn
       - run:
           name: Install bundler
           command: |
@@ -55,7 +55,7 @@ jobs:
           command: |
             mkdir -p $HOME/scratch
             cd $HOME/scratch
-            rails new ci_example -d postgresql -m $HOME/repo/template.rb << INPUT
+            rails new ci_example -d postgresql -m $HOME/repo/template.rb \<< INPUT
               ci.example.com
 
             INPUT
