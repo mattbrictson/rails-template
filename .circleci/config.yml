@@ -43,7 +43,7 @@ jobs:
           name: Install rails
           command: |
             bundle init
-            bundle add rails --version "~> 5.0.0"
+            bundle add rails --version "~> 6.0.0"
             bundle install --jobs=4 --retry=3
       - run:
           name: Configure git
