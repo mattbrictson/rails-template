@@ -1,5 +1,7 @@
 # mattbrictson/rails-template
 
+[![Circle](https://circleci.com/gh/mattbrictson/rails-template.svg?style=shield)](https://app.circleci.com/pipelines/github/mattbrictson/rails-template?branch=master)
+
 ## Description
 
 This is the application template that I use for my Rails 6 projects. As a freelance Rails developer, I need to be able to start new projects quickly and with a good set of defaults. I've assembled this template over the years to include best-practices, tweaks, documentation, and personal preferences, while still generally adhering to the "Rails way".
