@@ -44,11 +44,9 @@ jobs:
           keys:
             - bundle-v1-{{ arch }}-{{ checksum "Gemfile.tt" }}
       - run:
-          name: Install rails
+          name: Install railties
           command: |
-            bundle init
-            bundle add rails --version "~> 6.0.0"
-            bundle install --jobs=4 --retry=3
+            gem install railties --version "~> 6.0.0" --no-document
       - run:
           name: Configure git
           command: |
@@ -59,7 +57,7 @@ jobs:
           command: |
             mkdir -p $HOME/scratch
             cd $HOME/scratch
-            BUNDLE_GEMFILE=$HOME/repo/Gemfile bundle exec rails new ci_example -d postgresql -m $HOME/repo/template.rb \<< INPUT
+            rails new ci_example -d postgresql -m $HOME/repo/template.rb \<< INPUT
               ci.example.com
 
             INPUT
