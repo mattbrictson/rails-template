@@ -2,7 +2,6 @@ version: 2.1
 
 executors:
   ruby:
-    working_directory: ~/repo
     docker:
       - image: circleci/ruby:<%= RUBY_VERSION %>-node-browsers
         environment:
