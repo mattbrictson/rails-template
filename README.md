@@ -1,6 +1,6 @@
 # mattbrictson/rails-template
 
-[![Circle](https://circleci.com/gh/mattbrictson/rails-template.svg?style=shield)](https://app.circleci.com/pipelines/github/mattbrictson/rails-template?branch=master)
+[![Circle](https://circleci.com/gh/mattbrictson/rails-template/tree/main.svg?style=shield)](https://app.circleci.com/pipelines/github/mattbrictson/rails-template?branch=main)
 
 ## Description
 
@@ -32,7 +32,7 @@ To make this the default Rails application template on your system, create a `~/
 
 ```
 -d postgresql
--m https://raw.githubusercontent.com/mattbrictson/rails-template/master/template.rb
+-m https://raw.githubusercontent.com/mattbrictson/rails-template/main/template.rb
 ```
 
 ## Usage
@@ -47,7 +47,7 @@ To generate a Rails application using this template, pass the `-m` option to `ra
 ```
 rails new blog \
   -d postgresql \
-  -m https://raw.githubusercontent.com/mattbrictson/rails-template/master/template.rb
+  -m https://raw.githubusercontent.com/mattbrictson/rails-template/main/template.rb
 ```
 
 *Remember that options must go after the name of the application.* The only database supported by this template is `postgresql`.

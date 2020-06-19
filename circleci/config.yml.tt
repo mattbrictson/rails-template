@@ -134,8 +134,7 @@ workflows:
           filters:
             branches:
               only:
-                - master
-                - development
+                - main
     jobs:
       - static_analysis
       - test

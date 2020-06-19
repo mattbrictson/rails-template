@@ -54,6 +54,7 @@ def apply_template!
   add_eslint_and_run_fix
 
   unless any_local_git_commits?
+    git checkout: "-b main"
     git add: "-A ."
     git commit: "-n -m 'Set up project'"
     if git_repo_specified?
