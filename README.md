@@ -80,7 +80,7 @@ The template will perform the following steps:
 * Utilities
     * [annotate][] – auto-generates schema documentation
     * [autoprefixer-rails][] – automates cross-browser CSS compatibility
-    * [awesome_print][] – try `ap` instead of `puts`
+    * [amazing_print][] – try `ap` instead of `puts`
     * [better_errors][] – useful error pages with interactive stack traces
     * [guard][] – runs tests as you develop; mandatory for effective TDD
     * [livereload][] – magically refreshes browsers whenever you save a file
@@ -114,7 +114,7 @@ Rails generators are very lightly documented; what you’ll find is that most of
 [dotenv]:https://github.com/bkeepers/dotenv
 [annotate]:https://github.com/ctran/annotate_models
 [autoprefixer-rails]:https://github.com/ai/autoprefixer-rails
-[awesome_print]:https://github.com/michaeldv/awesome_print
+[amazing_print]:https://github.com/amazing-print/amazing_print
 [better_errors]:https://github.com/charliesome/better_errors
 [guard]:https://github.com/guard/guard
 [livereload]:https://github.com/guard/guard-livereload
