@@ -14,7 +14,7 @@ module RetinaImageHelper
   # The srcset attribute is supported by modern desktop browsers and iOS 8+.
   def retina_image_tag(src, options={})
     src_1x = image_path(src)
-    src_2x = image_path(src.sub(/^(.*)(\.[^\.]+)$/, '\1@2x\2'))
+    src_2x = image_path(src.sub(/^(.*)(\.[^.]+)$/, '\1@2x\2'))
     srcset = "#{src_1x} 1x,#{src_2x} 2x"
 
     image_tag(src, options.reverse_merge(srcset: srcset, alt: ""))
