@@ -53,6 +53,7 @@ def apply_template!
   template "eslintrc.js", ".eslintrc.js"
   template "prettierrc.js", ".prettierrc.js"
   add_eslint_and_run_fix
+  add_foreman_start_script
 
   unless any_local_git_commits?
     git checkout: "-b main"
@@ -186,6 +187,11 @@ def create_initial_migration
   return if Dir["db/migrate/**/*.rb"].any?
   run_with_clean_bundler_env "bin/rails generate migration initial_migration"
   run_with_clean_bundler_env "bin/rake db:migrate"
+end
+
+def add_foreman_start_script
+  run_with_clean_bundler_env "yarn add --dev foreman"
+  add_package_json_script(start: "nf start -p 3000 -j Procfile.dev")
 end
 
 def add_eslint_and_run_fix
