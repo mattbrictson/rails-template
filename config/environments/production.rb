@@ -17,7 +17,7 @@ insert_into_file "config/environments/production.rb", after: /# config\.action_m
 
   # Production email config
   config.action_mailer.delivery_method = :postmark
-  config.action_mailer.postmark_settings = { api_token: ENV.fetch("POSTMARK_API_KEY") }
+  config.action_mailer.postmark_settings = { api_token: ENV["POSTMARK_API_KEY"] }
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default_url_options = {
     host: "#{production_hostname}",

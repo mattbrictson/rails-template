@@ -41,22 +41,22 @@ Run the `bin/setup` script. This script will:
 Ensure the following environment variables are set in the deployment environment:
 
 * `DATABASE_URL`
-* `POSTMARK_API_KEY`
 * `RACK_ENV`
 * `RAILS_ENV`
 * `REDIS_URL`
 * `SECRET_KEY_BASE`
-* `SIDEKIQ_WEB_PASSWORD`
-* `SIDEKIQ_WEB_USERNAME`
 
 Optionally:
 
+* `POSTMARK_API_KEY`
 * `RAILS_FORCE_SSL`
 * `RAILS_HOSTNAME`
 * `RAILS_LOG_TO_STDOUT`
 * `RAILS_MAX_THREADS`
 * `RAILS_SERVE_STATIC_FILES`
 * `SIDEKIQ_CONCURRENCY`
+* `SIDEKIQ_WEB_PASSWORD`
+* `SIDEKIQ_WEB_USERNAME`
 * `WEB_CONCURRENCY`
 
 [rbenv]:https://github.com/sstephenson/rbenv
