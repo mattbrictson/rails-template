@@ -21,6 +21,7 @@ def apply_template!
 
   copy_file "Guardfile"
   copy_file "Procfile"
+  copy_file "Procfile.dev"
 
   apply "Rakefile.rb"
   apply "config.ru.rb"

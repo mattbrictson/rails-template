@@ -34,7 +34,10 @@ Run the `bin/setup` script. This script will:
 
 1. Run `bin/rake test` to make sure everything works.
 2. Run `bin/rake test:system` to run system (capybara) tests.
-3. Run `bin/rails s` and `bin/sidekiq` to start the app and Sidekiq; alternatively, start both at once with `heroku local`.
+3. Start the app with `heroku local -f Procfile.dev` or run these processes individually:
+   - Rails: `bin/rails s -b 0.0.0.0`
+   - Webpack: `bin/webpack-dev-server`
+   - Sidekiq: `bin/sidekiq -C config/sidekiq.yml`
 
 ## Deployment
 
