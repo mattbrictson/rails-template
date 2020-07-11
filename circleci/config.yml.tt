@@ -74,8 +74,10 @@ jobs:
   static_analysis:
     executor: ruby
     steps:
+      - install_node
       - checkout
       - bundle_install
+      - yarn_install
       - run:
           name: Run Overcommit
           command: |
