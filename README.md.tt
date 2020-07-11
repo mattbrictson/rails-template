@@ -27,7 +27,7 @@ Run the `bin/setup` script. This script will:
 
 * Check you have the required Ruby version
 * Install dependencies using Bundler and Yarn
-* Create a local copy of `.env`
+* Create a `.env.development` file
 * Create, migrate, and seed the database
 
 ### Run it!
