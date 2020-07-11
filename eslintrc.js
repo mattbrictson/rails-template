@@ -6,14 +6,14 @@ module.exports = {
     commonjs: true,
     es6: true,
     jest: true,
-    node: true
+    node: true,
   },
   parserOptions: {
     ecmaVersion: 2018,
     sourceType: "module",
     ecmaFeatures: {
-      jsx: true
-    }
+      jsx: true,
+    },
   },
   plugins: ["jest", "prettier"],
   rules: {
@@ -22,16 +22,16 @@ module.exports = {
       {
         args: "after-used",
         argsIgnorePattern: "^_",
-        varsIgnorePattern: "^_"
-      }
+        varsIgnorePattern: "^_",
+      },
     ],
     "no-var": "error",
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
   },
   extends: [
     // "react-app",
     "eslint:recommended",
     "plugin:jest/recommended",
-    "prettier"
-  ]
+    "prettier",
+  ],
 };
