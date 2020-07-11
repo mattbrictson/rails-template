@@ -4,9 +4,7 @@ This is a Rails <%= Rails::VERSION::MAJOR %> app.
 
 ## Documentation
 
-This README describes the purpose of this repository and how to set up a development environment. Other sources of documentation are as follows:
-
-* UI and API designs are in `doc/`
+This README describes the purpose of this repository and how to set up a development environment.
 
 ## Prerequisites
 
@@ -28,7 +26,7 @@ If you need help setting up a Ruby development environment, check out this [Rail
 Run the `bin/setup` script. This script will:
 
 * Check you have the required Ruby version
-* Install gems using Bundler
+* Install dependencies using Bundler and Yarn
 * Create a local copy of `.env`
 * Create, migrate, and seed the database
 

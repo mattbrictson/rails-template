@@ -28,7 +28,6 @@ def apply_template!
   apply "bin/template.rb"
   apply "circleci/template.rb"
   apply "config/template.rb"
-  apply "doc/template.rb"
   apply "lib/template.rb"
   apply "test/template.rb"
 
