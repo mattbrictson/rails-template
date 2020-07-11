@@ -8,7 +8,6 @@ gem "autoprefixer-rails"
 gem "bcrypt"<%= gemfile_requirement("bcrypt") %>
 gem "bootsnap"<%= gemfile_requirement("bootsnap") %>, require: false
 gem "coffee-rails"<%= gemfile_requirement("coffee-rails") %>
-gem "dotenv-rails"
 gem "pg"<%= gemfile_requirement("pg") %>
 gem "pgcli-rails"
 gem "puma"<%= gemfile_requirement("puma") %>
@@ -49,6 +48,7 @@ group :development, :test do
   gem "brakeman", require: false
   gem "bundler-audit", require: false
   gem "byebug"
+  gem "dotenv-rails"
   gem "overcommit", require: false
   gem "rubocop", require: false
   gem "rubocop-minitest", require: false

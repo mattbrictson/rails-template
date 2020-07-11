@@ -7,7 +7,7 @@ def setup!
     run  "bundle install"
     run  "bin/yarn install" if File.exist?("yarn.lock")
     run  "bundle exec overcommit --install"
-    copy "example.env"
+    copy "example.env", ".env.development"
     test_local_env_contains_required_keys
     run  "bin/rake tmp:create"
     run  "bin/rake db:create:all"
@@ -64,22 +64,21 @@ def with_clean_bundler_env(&block)
   Bundler.with_clean_env(&block)
 end
 
-def copy(example_path)
-  copy_path = example_path.sub(/\.?example/, "")
-  return if File.exist?(copy_path)
+def copy(source, dest)
+  return if File.exist?(dest)
 
-  log(:magenta, "copy #{example_path} → #{copy_path}") do
-    FileUtils.cp(example_path, copy_path)
+  log(:magenta, "copy #{source} → #{dest}") do
+    FileUtils.cp(source, dest)
   end
 end
 
 def test_local_env_contains_required_keys
   keys = ->(f) { IO.readlines(f).map { |l| l[/^([^#\s][^=\s]*)/, 1] }.compact }
 
-  log(:yellow, "test .env contents") do
-    missing = keys["example.env"] - keys[".env"]
+  log(:yellow, "test .env.development contents") do
+    missing = keys["example.env"] - keys[".env.development"]
     if missing.any?
-      die("Your .env file is missing #{missing.join(', ')}")
+      die("Your .env.development file is missing #{missing.join(', ')}")
     end
   end
 end
