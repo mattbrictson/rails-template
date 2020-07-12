@@ -76,7 +76,7 @@ The template will perform the following steps:
     * [active_type][] – for building simple and effective form/service objects
     * [sidekiq][] – Redis-based job queue implementation for Active Job
 * Configuration
-    * [dotenv][] – in place of the Rails `secrets.yml`
+    * [dotenv][] – for local configuration
 * Utilities
     * [annotate][] – auto-generates schema documentation
     * [autoprefixer-rails][] – automates cross-browser CSS compatibility
