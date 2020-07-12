@@ -53,6 +53,8 @@ Ensure the following environment variables are set in the deployment environment
 
 Optionally:
 
+* `BASIC_AUTH_PASSWORD`
+* `BASIC_AUTH_USERNAME`
 * `POSTMARK_API_KEY`
 * `RAILS_FORCE_SSL`
 * `RAILS_HOSTNAME`
