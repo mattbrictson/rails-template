@@ -4,7 +4,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "<%= RUBY_VERSION %>"
 
 gem "active_type"
+<% if sprockets? -%>
 gem "autoprefixer-rails"
+<% end -%>
 gem "bcrypt"<%= gemfile_requirement("bcrypt") %>
 gem "bootsnap"<%= gemfile_requirement("bootsnap") %>, require: false
 <% if sprockets? -%>
