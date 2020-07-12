@@ -220,4 +220,8 @@ def add_package_json_script(scripts)
   IO.write("package.json", JSON.pretty_generate(package_json) + "\n")
 end
 
+def sprockets?
+  ! options[:skip_sprockets]
+end
+
 apply_template!

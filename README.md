@@ -83,7 +83,6 @@ The template will perform the following steps:
     * [amazing_print][] – try `ap` instead of `puts`
     * [better_errors][] – useful error pages with interactive stack traces
     * [guard][] – runs tests as you develop; mandatory for effective TDD
-    * [livereload][] – magically refreshes browsers whenever you save a file
     * [rubocop][] – enforces Ruby code style
 * Security
     * [brakeman][] and [bundler-audit][] – detect security vulnerabilities
@@ -117,7 +116,6 @@ Rails generators are very lightly documented; what you’ll find is that most of
 [amazing_print]:https://github.com/amazing-print/amazing_print
 [better_errors]:https://github.com/charliesome/better_errors
 [guard]:https://github.com/guard/guard
-[livereload]:https://github.com/guard/guard-livereload
 [rubocop]:https://github.com/bbatsov/rubocop
 [Postmark]:http://postmarkapp.com
 [postmark-rails]:http://www.rubydoc.info/gems/postmark-rails/0.12.0
