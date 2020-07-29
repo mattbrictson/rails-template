@@ -1,12 +1,11 @@
-Rails.application.config.version = begin
-  `git describe --always --tag 2> /dev/null`.chomp
-rescue
-  "N/A"
+TomoReleaseData = begin
+  json_path = Rails.root.join(".tomo_release.json")
+  data = json_path.file? ? JSON.parse(IO.read(json_path)) : {}
+  data.freeze
 end
 
+Rails.application.config.version = TomoReleaseData.fetch("revision", "N/A")
 Rails.application.config.version_time = begin
-  time = Time.zone.parse(`git log -1 --format="%ad" --date=iso 2> /dev/null`)
-  time || Time.zone.now
-rescue
-  Time.zone.now
+  timestamp = TomoReleaseData.fetch("revision_date", Time.current.to_s)
+  Time.zone.parse(timestamp)
 end
