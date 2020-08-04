@@ -41,10 +41,7 @@ def apply_template!
   create_initial_migration
   generate_spring_binstubs
 
-  binstubs = %w[
-    annotate brakeman bundler bundler-audit guard rubocop sidekiq
-    terminal-notifier
-  ]
+  binstubs = %w[brakeman bundler bundler-audit guard rubocop sidekiq terminal-notifier]
   run_with_clean_bundler_env "bundle binstubs #{binstubs.join(' ')} --force"
 
   template "rubocop.yml.tt", ".rubocop.yml"
