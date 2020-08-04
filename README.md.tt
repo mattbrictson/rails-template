@@ -32,12 +32,11 @@ Run the `bin/setup` script. This script will:
 
 ### Run it!
 
-1. Run `bin/rake test` to make sure everything works.
-2. Run `bin/rake test:system` to run system (capybara) tests.
-3. Start the app with `yarn start` or run these processes individually:
+1. Run `bin/rake` to run all tests and lint checks.
+2. Start the app with `yarn start` or run these processes individually:
    - Rails: `bin/rails s -b 0.0.0.0`
    - Webpack: `bin/webpack-dev-server`
-   - Sidekiq: `bin/sidekiq -C config/sidekiq.yml`
+   - Sidekiq: `bin/sidekiq`
 
 Access the app at <http://localhost:3000/>.
 

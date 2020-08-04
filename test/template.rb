@@ -10,3 +10,7 @@ empty_directory_with_keep_file "test/mailers"
 empty_directory_with_keep_file "test/unit"
 empty_directory_with_keep_file "test/unit/lib"
 empty_directory_with_keep_file "test/unit/lib/tasks"
+
+gsub_file "test/application_system_test_case.rb",
+          ":chrome",
+          '(ENV["HEADLESS_CHROME"] ? :headless_chrome : :chrome)'
