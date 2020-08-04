@@ -81,10 +81,11 @@ jobs:
       - run:
           name: Run Overcommit
           command: |
+            gem install overcommit
             git config --local user.name "Circle CI"
             git config --local user.email ci@example.com
-            bundle exec overcommit --sign
-            bundle exec overcommit --run
+            overcommit --sign
+            overcommit --run
       - run:
           name: Run Security Audits
           command: |
