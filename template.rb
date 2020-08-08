@@ -49,7 +49,8 @@ def apply_template!
 
   template "eslintrc.js", ".eslintrc.js"
   template "prettierrc.js", ".prettierrc.js"
-  add_eslint_and_run_fix
+  template "stylelintrc.js", ".stylelintrc.js"
+  add_yarn_lint_and_run_fix
   add_foreman_start_script
 
   unless any_local_git_commits?
@@ -191,17 +192,26 @@ def add_foreman_start_script
   add_package_json_script(start: "nf start -p 3000 -j Procfile.dev")
 end
 
-def add_eslint_and_run_fix
+def add_yarn_lint_and_run_fix
   packages = %w[
     babel-eslint
     eslint
     eslint-config-prettier
     eslint-plugin-jest
     eslint-plugin-prettier prettier
+    npm-run-all
+    stylelint
+    stylelint-config-recommended-scss
+    stylelint-config-standard
+    stylelint-declaration-use-variable
+    stylelint-scss
   ]
   run_with_clean_bundler_env "yarn add #{packages.join(' ')} -D"
-  add_package_json_script(lint: "eslint 'app/javascript/**/*.{js,jsx}'")
-  run_with_clean_bundler_env "yarn lint --fix"
+  add_package_json_script("lint": "npm-run-all -c lint:*")
+  add_package_json_script("lint:js": "eslint 'app/{assets,javascript}/**/*.{js,jsx}'")
+  add_package_json_script("lint:css": "stylelint 'app/{assets,javascript}/**/*.{css,scss}'")
+  run_with_clean_bundler_env "yarn lint:js --fix"
+  run_with_clean_bundler_env "yarn lint:css --fix"
 end
 
 def add_package_json_script(scripts)

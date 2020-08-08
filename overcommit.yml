@@ -10,6 +10,8 @@ PreCommit:
     required_executable: npx
     command: ["npx", "--no-install", "eslint", "-f", "compact"]
     include:
+      - app/assets/**/*.js
+      - app/assets/**/*.jsx
       - app/javascript/**/*.js
       - app/javascript/**/*.jsx
 
@@ -30,6 +32,16 @@ PreCommit:
     required_executable: bundle
     command: ["bundle", "exec", "rubocop"]
     on_warn: fail
+
+  Stylelint:
+    enabled: true
+    required_executable: npx
+    command: ["npx", "--no-install", "stylelint"]
+    include:
+      - app/assets/**/*.css
+      - app/assets/**/*.scss
+      - app/javascript/**/*.css
+      - app/javascript/**/*.scss
 
   TrailingWhitespace:
     enabled: true
