@@ -53,6 +53,7 @@ group :development, :test do
   gem "bundler-audit", require: false
   gem "byebug"
   gem "dotenv-rails"
+  gem "launchy"
   gem "rubocop", require: false
   gem "rubocop-minitest", require: false
   gem "rubocop-performance", require: false
@@ -61,7 +62,6 @@ end
 
 group :test do
   gem "capybara"<%= gemfile_requirement("capybara") %>
-  gem "launchy"
   gem "minitest-ci", require: false
   gem "mock_redis"
   gem "selenium-webdriver"

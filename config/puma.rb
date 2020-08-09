@@ -42,3 +42,7 @@ end
 
 # Allow puma to be restarted by `rails restart` command.
 plugin :tmp_restart
+
+# Automatically open the browser when in development
+require_relative "../lib/puma/plugin/open"
+plugin :open
