@@ -36,8 +36,8 @@ def apply_template!
   empty_directory ".git/safe"
 
   run_with_clean_bundler_env "bundle update"
-  run_with_clean_bundler_env "bin/setup"
   run_with_clean_bundler_env "bin/rails webpacker:install"
+  run_with_clean_bundler_env "bin/setup"
   create_initial_migration
   generate_spring_binstubs
 

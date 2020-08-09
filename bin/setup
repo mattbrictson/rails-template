@@ -13,6 +13,7 @@ def setup!
     run  "bin/rake db:create:all"
     run  "bin/rake db:migrate"
     run  "bin/rake db:seed"
+    run  "bin/webpack --display errors-only"
   end
 end
 
