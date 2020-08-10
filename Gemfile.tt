@@ -63,7 +63,6 @@ end
 group :test do
   gem "capybara"<%= gemfile_requirement("capybara") %>
   gem "minitest-ci", require: false
-  gem "mock_redis"
   gem "selenium-webdriver"
   gem "shoulda-context"
   gem "shoulda-matchers"
