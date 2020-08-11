@@ -34,8 +34,6 @@ end
 group :development do
   gem "amazing_print"
   gem "annotate"
-  gem "better_errors"
-  gem "binding_of_caller"
   gem "guard", require: false
   gem "guard-minitest", require: false
   gem "letter_opener"
@@ -46,6 +44,7 @@ group :development do
 <% end -%>
   gem "terminal-notifier", require: false
   gem "terminal-notifier-guard", require: false
+  gem "web-console"<%= gemfile_requirement("web-console") %>
 end
 
 group :development, :test do
