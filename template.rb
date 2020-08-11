@@ -208,8 +208,8 @@ def add_yarn_lint_and_run_fix
   ]
   run_with_clean_bundler_env "yarn add #{packages.join(' ')} -D"
   add_package_json_script("lint": "npm-run-all -c lint:*")
-  add_package_json_script("lint:js": "eslint 'app/{assets,javascript}/**/*.{js,jsx}'")
-  add_package_json_script("lint:css": "stylelint 'app/{assets,javascript}/**/*.{css,scss}'")
+  add_package_json_script("lint:js": "eslint 'app/{assets,components,javascript}/**/*.{js,jsx}'")
+  add_package_json_script("lint:css": "stylelint 'app/{assets,components,javascript}/**/*.{css,scss}'")
   run_with_clean_bundler_env "yarn lint:js --fix"
   run_with_clean_bundler_env "yarn lint:css --fix"
 end

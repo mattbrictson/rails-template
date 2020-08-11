@@ -12,6 +12,8 @@ PreCommit:
     include:
       - app/assets/**/*.js
       - app/assets/**/*.jsx
+      - app/components/**/*.js
+      - app/components/**/*.jsx
       - app/javascript/**/*.js
       - app/javascript/**/*.jsx
 
@@ -40,6 +42,8 @@ PreCommit:
     include:
       - app/assets/**/*.css
       - app/assets/**/*.scss
+      - app/components/**/*.css
+      - app/components/**/*.scss
       - app/javascript/**/*.css
       - app/javascript/**/*.scss
 
