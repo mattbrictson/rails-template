@@ -7,6 +7,13 @@ module.exports = {
     "declaration-no-important": true,
     "max-nesting-depth": 1,
     "no-empty-source": null,
+    "property-no-unknown": [
+      true,
+      {
+        // Allow property used for css-fonts-4 variable fonts
+        ignoreProperties: ["font-named-instance"],
+      },
+    ],
     "scss/at-function-pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
     "scss/at-mixin-pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
     "scss/dollar-variable-pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
@@ -27,7 +34,7 @@ module.exports = {
           "Classes must be in BEM form like `my_component__element--variant`",
       },
     ],
-    "selector-max-compound-selectors": 1,
+    "selector-max-compound-selectors": 2,
     "selector-max-id": 0,
     "selector-no-qualifying-type": true,
     "sh-waqar/declaration-use-variable": [
