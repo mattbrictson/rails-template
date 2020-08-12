@@ -14,3 +14,11 @@ empty_directory_with_keep_file "test/unit/lib/tasks"
 gsub_file "test/application_system_test_case.rb",
           ":chrome",
           '(ENV["HEADLESS_CHROME"] ? :headless_chrome : :chrome)'
+
+insert_into_file "test/application_system_test_case.rb", <<RUBY, before: /^end/
+
+  def setup
+    Capybara.server = :puma, { Silent: true }
+    super
+  end
+RUBY
