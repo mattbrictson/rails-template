@@ -5,8 +5,10 @@ append_to_file "Rakefile" do
   task :default do
     sh "bin/rails test"
     sh "HEADLESS_CHROME=1 bin/rails test:system"
-    system "bin/rubocop"
-    system "bin/yarn lint"
+
+    raise unless
+      system("bin/rubocop") &
+      system("bin/yarn lint")
   end
   RUBY
 end
