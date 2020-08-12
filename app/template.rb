@@ -3,13 +3,17 @@ if sprockets?
   remove_file "app/assets/stylesheets/application.css"
 else
   remove_dir "app/assets"
+  empty_directory_with_keep_file "app/javascript/fonts"
   empty_directory_with_keep_file "app/javascript/images"
   empty_directory "app/javascript/stylesheets"
-  create_file "app/javascript/stylesheets/application.scss"
+  empty_directory "app/javascript/stylesheets/mixins"
+  copy_file "app/javascript/stylesheets/colors.scss"
+  copy_file "app/javascript/stylesheets/common.scss"
+  copy_file "app/javascript/stylesheets/mixins/typography.scss"
   append_to_file "app/javascript/packs/application.js" do
     <<~JAVASCRIPT
     require.context("../images", true);
-    import "stylesheets/application.scss";
+    import "stylesheets/common.scss";
     JAVASCRIPT
   end
 end

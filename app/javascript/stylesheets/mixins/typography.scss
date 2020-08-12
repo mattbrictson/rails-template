@@ -1,0 +1,16 @@
+$font-sans-serif: -apple-system, BlinkMacSystemFont, sans-serif;
+
+// Type scale:
+// 12, 14, 16, 18, 20, 24, 30, 36, 48, 60, 72px
+
+@mixin body {
+  font-family: $font-sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+@mixin headline {
+  font-family: $font-sans-serif;
+  font-size: 24px;
+  line-height: 1;
+}
