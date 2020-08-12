@@ -37,9 +37,9 @@ def apply_template!
 
   run_with_clean_bundler_env "bundle update"
   run_with_clean_bundler_env "bin/rails webpacker:install"
-  run_with_clean_bundler_env "bin/setup"
-  create_initial_migration
+  create_database_and_initial_migration
   generate_spring_binstubs
+  run_with_clean_bundler_env "bin/setup"
 
   binstubs = %w[brakeman bundler bundler-audit guard rubocop sidekiq terminal-notifier]
   run_with_clean_bundler_env "bundle binstubs #{binstubs.join(' ')} --force"
@@ -181,10 +181,10 @@ def run_rubocop_autocorrections
   run_with_clean_bundler_env "bin/rubocop -a --fail-level A > /dev/null || true"
 end
 
-def create_initial_migration
+def create_database_and_initial_migration
   return if Dir["db/migrate/**/*.rb"].any?
+  run_with_clean_bundler_env "bin/rake db:create"
   run_with_clean_bundler_env "bin/rails generate migration initial_migration"
-  run_with_clean_bundler_env "bin/rake db:migrate"
 end
 
 def add_foreman_start_script
