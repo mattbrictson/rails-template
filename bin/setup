@@ -4,7 +4,7 @@ def setup!
   within_project_root do
     test "ruby -v" => ruby_version
     run  "gem install bundler #{bundler_ver_arg} --no-document --conservative"
-    run  "bundle install"
+    run  "bundle check || bundle install"
     run  "bin/yarn install" if File.exist?("yarn.lock")
     run  "overcommit --install" if overcommit_present?
     copy "example.env", ".env.development"
@@ -57,9 +57,8 @@ end
 
 def run(command)
   log(:blue, "run  #{command}") do
-    shell = "#{command} > /dev/null"
     with_clean_bundler_env do
-      system(shell) or die("#{command} exited with non-zero status")
+      system(command) or die("#{command} exited with non-zero status")
     end
   end
 end
