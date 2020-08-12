@@ -8,6 +8,13 @@ def apply_template!
   assert_postgresql
   add_template_repository_to_source_path
 
+  # We're going to handle bundler and webpacker ourselves.
+  # Setting these options will prevent Rails from running them unnecessarily.
+  self.options = options.merge(
+    skip_bundle: true,
+    skip_webpack_install: true
+  )
+
   template "Gemfile.tt", force: true
 
   template "README.md.tt", force: true
@@ -37,8 +44,9 @@ def apply_template!
 
   run_with_clean_bundler_env "bundle update"
   run_with_clean_bundler_env "bin/rails webpacker:install"
+  install_dart_sass unless sprockets?
   create_database_and_initial_migration
-  generate_spring_binstubs
+  run_with_clean_bundler_env "bundle exec spring binstub --all"
   run_with_clean_bundler_env "bin/setup"
 
   binstubs = %w[brakeman bundler bundler-audit guard rubocop sidekiq terminal-notifier]
@@ -225,6 +233,17 @@ def add_package_json_script(scripts)
     "scripts" => package_json["scripts"].sort.to_h
   }.merge(package_json)
   IO.write("package.json", JSON.pretty_generate(package_json) + "\n")
+end
+
+def install_dart_sass
+  run_with_clean_bundler_env "yarn add -D sass" unless sprockets?
+  insert_into_file "config/webpack/environment.js", <<~JAVASCRIPT, before: /^module\.exports/
+    const sassLoader = environment.loaders
+      .get("sass")
+      .use.find((el) => el.loader === "sass-loader");
+    sassLoader.options.implementation = require("sass");
+
+  JAVASCRIPT
 end
 
 def sprockets?
