@@ -8,6 +8,12 @@ gsub_file "config/routes.rb", /  # root 'welcome#index'/ do
   '  root "home#index"'
 end
 
+insert_into_file "config/spring.rb", "Spring.quiet = true\n", before: /^Spring\.watch/
+
+gsub_file "config/routes.rb", /  # root 'welcome#index'/ do
+  '  root "home#index"'
+end
+
 copy_file "config/initializers/generators.rb"
 copy_file "config/initializers/rotate_log.rb"
 copy_file "config/initializers/version.rb"
