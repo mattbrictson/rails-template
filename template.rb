@@ -46,8 +46,8 @@ def apply_template!
   run_with_clean_bundler_env "bin/rails webpacker:install"
   install_dart_sass unless sprockets?
   create_database_and_initial_migration
-  run_with_clean_bundler_env "bundle exec spring binstub --all"
   run_with_clean_bundler_env "bin/setup"
+  run_with_clean_bundler_env "bundle exec spring binstub --all"
 
   binstubs = %w[brakeman bundler bundler-audit guard rubocop sidekiq terminal-notifier]
   run_with_clean_bundler_env "bundle binstubs #{binstubs.join(' ')} --force"
