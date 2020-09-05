@@ -8,12 +8,12 @@ else
   empty_directory "app/javascript/stylesheets"
   empty_directory "app/javascript/stylesheets/mixins"
   copy_file "app/javascript/stylesheets/colors.scss"
-  copy_file "app/javascript/stylesheets/common.scss"
+  copy_file "app/javascript/stylesheets/application.scss"
   copy_file "app/javascript/stylesheets/mixins/typography.scss"
   append_to_file "app/javascript/packs/application.js" do
     <<~JAVASCRIPT
     require.context("../images", true);
-    import "stylesheets/common.scss";
+    import "stylesheets/application.scss";
     JAVASCRIPT
   end
 end

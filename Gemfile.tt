@@ -25,7 +25,7 @@ gem "sidekiq"
 <% if gemfile_requirement("turbolinks") -%>
 gem "turbolinks"<%= gemfile_requirement("turbolinks") %>
 <% end -%>
-gem "webpacker"<%= gemfile_requirement("webpacker") %>
+gem "webpacker", "~> 5.2"
 
 group :production do
   gem "postmark-rails"
