@@ -205,7 +205,6 @@ def add_yarn_lint_and_run_fix
     babel-eslint
     eslint
     eslint-config-prettier
-    eslint-plugin-jest
     eslint-plugin-prettier prettier
     npm-run-all
     stylelint

@@ -5,7 +5,6 @@ module.exports = {
     browser: true,
     commonjs: true,
     es6: true,
-    jest: true,
     node: true,
   },
   parserOptions: {
@@ -15,7 +14,7 @@ module.exports = {
       jsx: true,
     },
   },
-  plugins: ["jest", "prettier"],
+  plugins: ["prettier"],
   rules: {
     "no-unused-vars": [
       "error",
@@ -29,9 +28,9 @@ module.exports = {
     "prettier/prettier": "error",
   },
   extends: [
+    // "plugin:jest/recommended",
     // "react-app",
     "eslint:recommended",
-    "plugin:jest/recommended",
     "prettier",
   ],
 };
