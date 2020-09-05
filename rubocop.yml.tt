@@ -10,18 +10,10 @@ AllCops:
   TargetRubyVersion: <%= RUBY_VERSION[/\d+\.\d+/] %>
   Exclude:
     - "bin/*"
-    - Capfile
-    - config/boot.rb
-    - config/environment.rb
-    - config/initializers/version.rb
     - db/schema.rb
     - "node_modules/**/*"
-    - "bower_components/**/*"
     - "tmp/**/*"
     - "vendor/**/*"
-    - Gemfile
-    - Guardfile
-    - Rakefile
 
 Layout/HashAlignment:
   EnforcedColonStyle:
