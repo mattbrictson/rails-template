@@ -1,4 +1,5 @@
 uncomment_lines "config/environments/production.rb", /config\.force_ssl = true/
+gsub_file "config/environments/production.rb", /\bSTDOUT\b/, "$stdout"
 gsub_file "config/environments/production.rb",
           "config.force_ssl = true",
           'config.force_ssl = ENV["RAILS_FORCE_SSL"].present?'
