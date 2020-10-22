@@ -11,11 +11,12 @@ empty_directory_with_keep_file "test/unit"
 empty_directory_with_keep_file "test/unit/lib"
 empty_directory_with_keep_file "test/unit/lib/tasks"
 
-gsub_file "test/application_system_test_case.rb",
-          ":chrome",
-          '(ENV["HEADLESS_CHROME"] ? :headless_chrome : :chrome)'
-
-insert_into_file "test/application_system_test_case.rb", <<RUBY, before: /^end/
+gsub_file "test/application_system_test_case.rb", /^  driven_by :selenium.*$/, <<~RUBY
+  driven_by :selenium,
+             using: (ENV["HEADLESS_CHROME"] ? :headless_chrome : :chrome),
+             screen_size: [1400, 1400] do |options|
+     options.add_argument("no-sandbox")
+  end
 
   def setup
     Capybara.server = :puma, { Silent: true }

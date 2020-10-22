@@ -1,14 +1,18 @@
 version: 2.1
 
+orbs:
+  browser-tools: circleci/browser-tools@1.1.0
+
 executors:
   ruby:
     docker:
-      - image: circleci/ruby:<%= RUBY_VERSION %>-node-browsers
+      - image: cimg/ruby:<%= RUBY_VERSION %>-browsers
         environment:
           PGHOST: 127.0.0.1
           PGUSER: postgres
           PGPASS: postgres
           RAILS_ENV: test
+          HEADLESS_CHROME: "1"
       - image: circleci/postgres:12-alpine
         environment:
           POSTGRES_USER: postgres
@@ -34,20 +38,6 @@ commands:
           paths:
             - ./vendor/bundle
           key: bundle-v1-{{ arch }}-{{ checksum ".ruby-version" }}-{{ checksum "Gemfile.lock" }}
-  install_node:
-    description: Install latest versions of Node and Yarn
-    steps:
-      - run:
-          name: Install Node
-          command: |
-            curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash
-            sudo apt-get install -y nodejs
-            sudo ln -sf /usr/bin/node /usr/local/bin/node
-      - run:
-          name: Install Yarn
-          command: |
-            sudo npm i -g yarn
-            sudo ln -sf /usr/bin/yarn /usr/local/bin/yarn
   set_up_database:
     steps:
       - run:
@@ -74,7 +64,6 @@ jobs:
   static_analysis:
     executor: ruby
     steps:
-      - install_node
       - checkout
       - bundle_install
       - yarn_install
@@ -94,7 +83,6 @@ jobs:
   test:
     executor: ruby
     steps:
-      - install_node
       - checkout
       - bundle_install
       - yarn_install
@@ -107,7 +95,7 @@ jobs:
   test_system:
     executor: ruby
     steps:
-      - install_node
+      - browser-tools/install-chrome
       - checkout
       - bundle_install
       - yarn_install
