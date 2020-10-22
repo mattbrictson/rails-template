@@ -15,7 +15,7 @@ gem "coffee-rails"<%= gemfile_requirement("coffee-rails") %>
 gem "pg"<%= gemfile_requirement("pg") %>
 gem "pgcli-rails"
 gem "puma"<%= gemfile_requirement("puma") %>
-gem "rack-canonical-host", "~> 1.0"
+gem "rack-canonical-host"
 gem "rails", "~> <%= Rails.version[/\d+\.\d+\.\d+/] %>"
 gem "redis"<%= gemfile_requirement("redis") %>
 <% if sprockets? -%>
@@ -25,7 +25,7 @@ gem "sidekiq"
 <% if gemfile_requirement("turbolinks") -%>
 gem "turbolinks"<%= gemfile_requirement("turbolinks") %>
 <% end -%>
-gem "webpacker", "~> 5.2"
+gem "webpacker"
 
 group :production do
   gem "postmark-rails"
