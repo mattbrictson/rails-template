@@ -4,7 +4,7 @@ executors:
   ruby:
     working_directory: ~/repo
     docker:
-      - image: circleci/ruby:2.6.6-node-browsers
+      - image: cimg/ruby:2.7.2-browsers
         environment:
           PGHOST: 127.0.0.1
           PGUSER: postgres
@@ -19,17 +19,6 @@ jobs:
     executor: ruby
     steps:
       - checkout
-      - run:
-          name: Install node
-          command: |
-            curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash
-            sudo apt-get install -y nodejs
-            sudo ln -sf /usr/bin/node /usr/local/bin/node
-      - run:
-          name: Install yarn
-          command: |
-            sudo npm i -g yarn
-            sudo ln -sf /usr/bin/yarn /usr/local/bin/yarn
       - restore_cache:
           name: Restore yarn cache
           keys:
