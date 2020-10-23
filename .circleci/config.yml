@@ -39,8 +39,8 @@ jobs:
       - run:
           name: Configure git
           command: |
-            git config --local user.name "Circle CI"
-            git config --local user.email ci@example.com
+            git config --global user.name "Circle CI"
+            git config --global user.email ci@example.com
       - run:
           name: Generate app from template
           command: |
