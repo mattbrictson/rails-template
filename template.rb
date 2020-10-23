@@ -166,7 +166,7 @@ def preexisting_git_repo?
 end
 
 def any_local_git_commits?
-  system("git log &> /dev/null")
+  system("git log > /dev/null 2>&1")
 end
 
 def run_with_clean_bundler_env(cmd)
