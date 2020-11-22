@@ -1,7 +1,7 @@
 append_to_file "Rakefile" do
   <<~RUBY
 
-  Rake::Task[:default].prerequisites.clear
+  Rake::Task[:default].prerequisites.clear if Rake::Task.task_defined?(:default)
   task :default do
     sh "bin/rails test"
     sh "HEADLESS_CHROME=1 bin/rails test:system"
