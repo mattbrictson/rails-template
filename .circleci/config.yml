@@ -9,7 +9,7 @@ executors:
           PGHOST: 127.0.0.1
           PGUSER: postgres
           PGPASS: postgres
-      - image: circleci/postgres:12-alpine
+      - image: circleci/postgres:13-ram
         environment:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
