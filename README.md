@@ -8,16 +8,17 @@ This is the application template that I use for my Rails 6 projects. As a freela
 
 For older versions of Rails, use these branches:
 
-* [Rails 4.2.x](https://github.com/mattbrictson/rails-template/tree/rails-42)
-* [Rails 5.0.x](https://github.com/mattbrictson/rails-template/tree/rails-50)
-* [Rails 5.1.x](https://github.com/mattbrictson/rails-template/tree/rails-51)
+* [Rails 6.0.x](https://github.com/mattbrictson/rails-template/tree/rails-60)
 * [Rails 5.2.x](https://github.com/mattbrictson/rails-template/tree/rails-52)
+* [Rails 5.1.x](https://github.com/mattbrictson/rails-template/tree/rails-51)
+* [Rails 5.0.x](https://github.com/mattbrictson/rails-template/tree/rails-50)
+* [Rails 4.2.x](https://github.com/mattbrictson/rails-template/tree/rails-42)
 
 ## Requirements
 
 This template currently works with:
 
-* Rails 6.0.x
+* Rails 6.1.x
 * Bundler 2.x
 * PostgreSQL
 * chromedriver

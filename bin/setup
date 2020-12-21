@@ -9,10 +9,10 @@ def setup!
     run  "overcommit --install" if overcommit_present?
     copy "example.env", ".env.development"
     test_local_env_contains_required_keys
-    run  "bin/rake tmp:create"
-    run  "bin/rake db:prepare"
-    run  "bin/rake db:test:prepare"
-    run  "bin/rake db:seed"
+    run  "bin/rails tmp:create"
+    run  "bin/rails db:prepare"
+    run  "bin/rails db:test:prepare"
+    run  "bin/rails db:seed"
     run  "bin/webpack --display errors-only"
   end
 end
