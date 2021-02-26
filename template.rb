@@ -7,6 +7,7 @@ def apply_template!
   assert_valid_options
   assert_postgresql
   add_template_repository_to_source_path
+  class_option :production_domain, type: :string, default: 'example2.com'
 
   # We're going to handle bundler and webpacker ourselves.
   # Setting these options will prevent Rails from running them unnecessarily.
@@ -138,8 +139,7 @@ def git_repo_url
 end
 
 def production_hostname
-  @production_hostname ||=
-    ask_with_default("Production hostname?", :blue, "example.com")
+  @production_hostname ||= production_domain
 end
 
 def gemfile_requirement(name)
