@@ -28,7 +28,6 @@ def apply_template!
 
   copy_file "Guardfile"
   copy_file "Procfile"
-  copy_file "Procfile.dev"
 
   apply "Rakefile.rb"
   apply "config.ru.rb"
@@ -58,7 +57,7 @@ def apply_template!
   template "prettierrc.js", ".prettierrc.js"
   template "stylelintrc.js", ".stylelintrc.js"
   add_yarn_lint_and_run_fix
-  add_foreman_start_script
+  add_yarn_start_script
 
   unless any_local_git_commits?
     git checkout: "-b main"
@@ -194,9 +193,11 @@ def create_database_and_initial_migration
   run_with_clean_bundler_env "bin/rails generate migration initial_migration"
 end
 
-def add_foreman_start_script
-  run_with_clean_bundler_env "yarn add --dev foreman"
-  add_package_json_script(start: "nf start -p 3000 -j Procfile.dev")
+def add_yarn_start_script
+  run_with_clean_bundler_env "yarn add --dev concurrently"
+  add_package_json_script(
+    start: "concurrently --raw --kill-others-on-fail 'bin/rails s -b 0.0.0.0' 'bin/webpack-dev-server' 'bin/sidekiq'"
+  )
 end
 
 def add_yarn_lint_and_run_fix
