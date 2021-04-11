@@ -26,7 +26,6 @@ def apply_template!
   copy_file "overcommit.yml", ".overcommit.yml"
   template "ruby-version.tt", ".ruby-version", force: true
 
-  copy_file "Guardfile"
   copy_file "Procfile"
 
   apply "Rakefile.rb"
@@ -47,7 +46,7 @@ def apply_template!
   create_database_and_initial_migration
   run_with_clean_bundler_env "bin/setup"
 
-  binstubs = %w[brakeman bundler bundler-audit guard rubocop sidekiq terminal-notifier]
+  binstubs = %w[brakeman bundler bundler-audit rubocop sidekiq]
   run_with_clean_bundler_env "bundle binstubs #{binstubs.join(' ')} --force"
 
   template "rubocop.yml.tt", ".rubocop.yml"

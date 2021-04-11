@@ -34,16 +34,12 @@ end
 group :development do
   gem "amazing_print"
   gem "annotate"
-  gem "guard", require: false
-  gem "guard-minitest", require: false
   gem "letter_opener"
   gem "listen"<%= gemfile_requirement("listen") %>
   gem "spring"
 <% if gemfile_requirement("spring-watcher-listen") -%>
   gem "spring-watcher-listen"<%= gemfile_requirement("spring-watcher-listen") %>
 <% end -%>
-  gem "terminal-notifier", require: false
-  gem "terminal-notifier-guard", require: false
   gem "web-console"<%= gemfile_requirement("web-console") %>
 end
 

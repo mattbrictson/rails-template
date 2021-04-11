@@ -82,7 +82,6 @@ The template will perform the following steps:
     * [annotate][] – auto-generates schema documentation
     * [autoprefixer-rails][] – automates cross-browser CSS compatibility
     * [amazing_print][] – try `ap` instead of `puts`
-    * [guard][] – runs tests as you develop; mandatory for effective TDD
     * [rubocop][] – enforces Ruby code style
 * Security
     * [brakeman][] and [bundler-audit][] – detect security vulnerabilities
@@ -114,7 +113,6 @@ Rails generators are very lightly documented; what you’ll find is that most of
 [annotate]:https://github.com/ctran/annotate_models
 [autoprefixer-rails]:https://github.com/ai/autoprefixer-rails
 [amazing_print]:https://github.com/amazing-print/amazing_print
-[guard]:https://github.com/guard/guard
 [rubocop]:https://github.com/bbatsov/rubocop
 [Postmark]:http://postmarkapp.com
 [postmark-rails]:http://www.rubydoc.info/gems/postmark-rails/0.12.0
