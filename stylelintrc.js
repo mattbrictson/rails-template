@@ -7,6 +7,7 @@ module.exports = {
     "declaration-no-important": true,
     "max-nesting-depth": 1,
     "no-empty-source": null,
+    "no-invalid-position-at-import-rule": null,
     "property-no-unknown": [
       true,
       {
