@@ -78,7 +78,7 @@ jobs:
       - run:
           name: Run Security Audits
           command: |
-            bundle exec brakeman -q --no-summary
+            bundle exec brakeman --exit-on-warn --no-progress --color --output /dev/stdout
             bundle exec bundle-audit check --update -v
   test:
     executor: ruby
