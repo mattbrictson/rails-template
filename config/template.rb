@@ -15,8 +15,6 @@ gsub_file "config/routes.rb", /  # root 'welcome#index'/ do
   '  root "home#index"'
 end
 
-insert_into_file "config/spring.rb", "Spring.quiet = true\n", before: /^Spring\.watch/
-
 gsub_file "config/routes.rb", /  # root 'welcome#index'/ do
   '  root "home#index"'
 end
