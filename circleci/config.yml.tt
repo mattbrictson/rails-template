@@ -1,7 +1,9 @@
 version: 2.1
 
 orbs:
-  browser-tools: circleci/browser-tools@1.1.0
+  browser-tools: circleci/browser-tools@1.2.2
+  node: circleci/node@4.7.0
+  ruby: circleci/ruby@1.1.4
 
 executors:
   ruby:
@@ -19,25 +21,6 @@ executors:
           POSTGRES_PASSWORD: postgres
 
 commands:
-  bundle_install:
-    description: Install Ruby dependencies with Bundler
-    steps:
-      - restore_cache:
-          keys:
-            - bundle-v1-{{ arch }}-{{ checksum ".ruby-version" }}-{{ checksum "Gemfile.lock" }}
-            - bundle-v1-{{ arch }}-{{ checksum ".ruby-version" }}-
-      - run:
-          name: Install Ruby Dependencies
-          command: |
-            gem install bundler -v <%=  Bundler::VERSION %> --conservative --no-document
-            bundle config --local deployment true
-            bundle config --local path vendor/bundle
-            bundle config --local without development:production
-            bundle check || (bundle install --jobs=4 --retry=3 && bundle clean)
-      - save_cache:
-          paths:
-            - ./vendor/bundle
-          key: bundle-v1-{{ arch }}-{{ checksum ".ruby-version" }}-{{ checksum "Gemfile.lock" }}
   set_up_database:
     steps:
       - run:
@@ -45,32 +28,19 @@ commands:
           command: |
             cp example.env .env
             bundle exec rake db:setup
-  yarn_install:
-    description: Install JS dependencies with Yarn
-    steps:
-      - restore_cache:
-          keys:
-            - yarn-cache-v1-{{ arch }}-{{ checksum "yarn.lock" }}
-            - yarn-cache-v1-{{ arch }}
-      - run:
-          name: Install JS Dependencies
-          command: yarn install --frozen-lockfile --cache-folder .yarn-cache
-      - save_cache:
-          paths:
-            - .yarn-cache
-          key: yarn-cache-v1-{{ arch }}-{{ checksum "yarn.lock" }}
 
 jobs:
   static_analysis:
     executor: ruby
     steps:
       - checkout
-      - bundle_install
-      - yarn_install
+      - ruby/install-deps
+      - node/install-packages:
+          pkg-manager: yarn
       - run:
           name: Run Overcommit
           command: |
-            gem install overcommit
+            gem install overcommit --no-document
             git config --local user.name "Circle CI"
             git config --local user.email ci@example.com
             overcommit --sign
@@ -84,8 +54,9 @@ jobs:
     executor: ruby
     steps:
       - checkout
-      - bundle_install
-      - yarn_install
+      - ruby/install-deps
+      - node/install-packages:
+          pkg-manager: yarn
       - set_up_database
       - run:
           name: Run Tests
@@ -97,8 +68,9 @@ jobs:
     steps:
       - browser-tools/install-chrome
       - checkout
-      - bundle_install
-      - yarn_install
+      - ruby/install-deps
+      - node/install-packages:
+          pkg-manager: yarn
       - set_up_database
       - run:
           name: Run System Tests
