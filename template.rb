@@ -202,15 +202,15 @@ end
 def add_yarn_lint_and_run_fix
   packages = %w[
     babel-eslint
-    eslint
+    eslint@^7.32.0
     eslint-config-prettier
     eslint-plugin-prettier prettier
     npm-run-all
-    stylelint
-    stylelint-config-recommended-scss
-    stylelint-config-standard
+    stylelint@^13.13.1
+    stylelint-config-recommended-scss@^4.3.0
+    stylelint-config-standard@^22.0.0
     stylelint-declaration-use-variable
-    stylelint-scss
+    stylelint-scss@^3.21.0
   ]
   run_with_clean_bundler_env "yarn add #{packages.join(' ')} -D"
   add_package_json_script("lint": "npm-run-all -c lint:*")
