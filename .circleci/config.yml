@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  node: circleci/node@4.7.0
+
 executors:
   ruby:
     working_directory: ~/repo
@@ -18,6 +21,10 @@ jobs:
   generate:
     executor: ruby
     steps:
+      - node/install:
+          install-yarn: true
+          install-npm: false
+          node-version: "16.13.0"
       - checkout
       - restore_cache:
           name: Restore yarn cache

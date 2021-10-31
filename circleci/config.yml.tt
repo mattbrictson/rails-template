@@ -21,6 +21,14 @@ executors:
           POSTGRES_PASSWORD: postgres
 
 commands:
+  install_node_dependencies:
+    steps:
+      - node/install:
+          install-yarn: true
+          install-npm: false
+          node-version: "16.13.0"
+      - node/install-packages:
+          pkg-manager: yarn
   set_up_database:
     steps:
       - run:
@@ -35,8 +43,7 @@ jobs:
     steps:
       - checkout
       - ruby/install-deps
-      - node/install-packages:
-          pkg-manager: yarn
+      - install_node_dependencies
       - run:
           name: Run Overcommit
           command: |
@@ -55,8 +62,7 @@ jobs:
     steps:
       - checkout
       - ruby/install-deps
-      - node/install-packages:
-          pkg-manager: yarn
+      - install_node_dependencies
       - set_up_database
       - run:
           name: Run Tests
@@ -69,8 +75,7 @@ jobs:
       - browser-tools/install-chrome
       - checkout
       - ruby/install-deps
-      - node/install-packages:
-          pkg-manager: yarn
+      - install_node_dependencies
       - set_up_database
       - run:
           name: Run System Tests
