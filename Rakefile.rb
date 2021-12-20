@@ -8,7 +8,7 @@ append_to_file "Rakefile" do
 
     raise unless
       system("bin/rubocop") &
-      system("bin/yarn lint")
+      system("yarn lint")
   end
   RUBY
 end

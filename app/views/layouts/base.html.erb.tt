@@ -13,15 +13,8 @@
 
     <!-- <%= app_const_base.titleize %> <%%= Rails.application.config.version %> (<%%= l(Rails.application.config.version_time) %>) -->
 
-    <%%# CSS should go closest to the top of the document as possible. %>
-<% if sprockets? -%>
-    <%%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track": "reload" %>
-<% else -%>
-    <%%= stylesheet_pack_tag "application", "data-turbolinks-track": "reload" %>
-<% end -%>
-
-    <%%# JavaScript must be in head for Turbolinks to work. %>
-    <%%= javascript_pack_tag "application", "data-turbolinks-track": "reload" %>
+    <%%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
 
     <%%= yield(:head) %>
 

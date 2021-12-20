@@ -5,12 +5,11 @@ def setup!
     test "ruby -v" => ruby_version
     run  "gem install bundler #{bundler_ver_arg} --no-document --conservative"
     run  "bundle check || bundle install"
-    run  "bin/yarn install" if File.exist?("yarn.lock")
+    run  "yarn install" if File.exist?("yarn.lock")
     run  "overcommit --install" if overcommit_present?
     copy "example.env", ".env.development"
     test_local_env_contains_required_keys
     run  "bin/rails tmp:create db:prepare db:test:prepare db:seed"
-    run  "bin/webpack --display errors-only"
   end
 end
 

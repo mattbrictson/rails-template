@@ -1,19 +1,12 @@
 require "bundler"
 require "json"
-RAILS_REQUIREMENT = "~> 6.1.0".freeze
+RAILS_REQUIREMENT = "~> 7.0.0".freeze
 
 def apply_template!
   assert_minimum_rails_version
   assert_valid_options
   assert_postgresql
   add_template_repository_to_source_path
-
-  # We're going to handle bundler and webpacker ourselves.
-  # Setting these options will prevent Rails from running them unnecessarily.
-  self.options = options.merge(
-    skip_bundle: true,
-    skip_webpack_install: true
-  )
 
   template "Gemfile.tt", force: true
 
@@ -22,7 +15,6 @@ def apply_template!
 
   template "example.env.tt"
   copy_file "editorconfig", ".editorconfig"
-  copy_file "gitignore", ".gitignore", force: true
   copy_file "overcommit.yml", ".overcommit.yml"
   template "ruby-version.tt", ".ruby-version", force: true
 
@@ -40,31 +32,35 @@ def apply_template!
   git :init unless preexisting_git_repo?
   empty_directory ".git/safe"
 
-  run_with_clean_bundler_env "bundle update"
-  run_with_clean_bundler_env "bin/rails webpacker:install"
-  install_dart_sass unless sprockets?
-  create_database_and_initial_migration
-  run_with_clean_bundler_env "bin/setup"
+  after_bundle do
+    apply "app/assets/template.rb"
 
-  binstubs = %w[brakeman bundler bundler-audit rubocop sidekiq]
-  run_with_clean_bundler_env "bundle binstubs #{binstubs.join(' ')} --force"
+    run_with_clean_bundler_env "bundle update"
+    create_database_and_initial_migration
+    run_with_clean_bundler_env "bin/setup"
 
-  template "rubocop.yml.tt", ".rubocop.yml"
-  run_rubocop_autocorrections
+    binstubs = %w[brakeman bundler bundler-audit rubocop sidekiq]
+    run_with_clean_bundler_env "bundle binstubs #{binstubs.join(' ')} --force"
 
-  template "eslintrc.js", ".eslintrc.js"
-  template "prettierrc.js", ".prettierrc.js"
-  template "stylelintrc.js", ".stylelintrc.js"
-  add_yarn_lint_and_run_fix
-  add_yarn_start_script
+    append_to_file("Procfile.dev", "worker: bin/sidekiq")
 
-  unless any_local_git_commits?
-    git checkout: "-b main"
-    git add: "-A ."
-    git commit: "-n -m 'Set up project'"
-    if git_repo_specified?
-      git remote: "add origin #{git_repo_url.shellescape}"
-      git push: "-u origin --all"
+    template "rubocop.yml.tt", ".rubocop.yml"
+    run_rubocop_autocorrections
+
+    template "eslintrc.js", ".eslintrc.js"
+    template "prettierrc.js", ".prettierrc.js"
+    template "stylelintrc.js", ".stylelintrc.js"
+    add_yarn_lint_and_run_fix
+    add_yarn_start_script
+
+    unless any_local_git_commits?
+      git checkout: "-b main"
+      git add: "-A ."
+      git commit: "-n -m 'Set up project'"
+      if git_repo_specified?
+        git remote: "add origin #{git_repo_url.shellescape}"
+        git push: "-u origin --all"
+      end
     end
   end
 end
@@ -193,29 +189,26 @@ def create_database_and_initial_migration
 end
 
 def add_yarn_start_script
-  run_with_clean_bundler_env "yarn add --dev concurrently"
-  add_package_json_script(
-    start: "concurrently --raw --kill-others-on-fail 'bin/rails s -b 0.0.0.0' 'bin/webpack-dev-server' 'bin/sidekiq'"
-  )
+  add_package_json_script(start: "bin/dev")
 end
 
 def add_yarn_lint_and_run_fix
   packages = %w[
-    babel-eslint
-    eslint@^7.32.0
+    eslint
     eslint-config-prettier
-    eslint-plugin-prettier prettier
+    eslint-plugin-prettier
     npm-run-all
-    stylelint@^13.13.1
-    stylelint-config-recommended-scss@^4.3.0
-    stylelint-config-standard@^22.0.0
+    prettier
+    stylelint
+    stylelint-config-recommended-scss
+    stylelint-config-standard
     stylelint-declaration-use-variable
-    stylelint-scss@^3.21.0
+    stylelint-scss
   ]
   run_with_clean_bundler_env "yarn add #{packages.join(' ')} -D"
   add_package_json_script("lint": "npm-run-all -c lint:*")
-  add_package_json_script("lint:js": "eslint 'app/{assets,components,javascript}/**/*.{js,jsx}'")
-  add_package_json_script("lint:css": "stylelint 'app/{assets,components,javascript}/**/*.{css,scss}'")
+  add_package_json_script("lint:js": "eslint 'app/{components,javascript}/**/*.{js,jsx}'")
+  add_package_json_script("lint:css": "stylelint 'app/{components,assets/stylesheets}/**/*.{css,scss}'")
   run_with_clean_bundler_env "yarn lint:js --fix"
   run_with_clean_bundler_env "yarn lint:css --fix"
 end
@@ -231,21 +224,6 @@ def add_package_json_script(scripts)
     "scripts" => package_json["scripts"].sort.to_h
   }.merge(package_json)
   IO.write("package.json", JSON.pretty_generate(package_json) + "\n")
-end
-
-def install_dart_sass
-  run_with_clean_bundler_env "yarn add -D sass" unless sprockets?
-  insert_into_file "config/webpack/environment.js", <<~JAVASCRIPT, before: /^module\.exports/
-    const sassLoader = environment.loaders
-      .get("sass")
-      .use.find((el) => el.loader === "sass-loader");
-    sassLoader.options.implementation = require("sass");
-
-  JAVASCRIPT
-end
-
-def sprockets?
-  ! options[:skip_sprockets]
 end
 
 apply_template!

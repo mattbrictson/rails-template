@@ -1,6 +1,6 @@
-@use "~stylesheets/mixins/typography";
+@use "./mixins/typography";
 
-@import "~stylesheets/colors";
+@import "./colors";
 
 body {
   @include typography.body;
