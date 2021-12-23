@@ -1,6 +1,6 @@
 require "bundler"
 require "json"
-RAILS_REQUIREMENT = "~> 6.1.0".freeze
+RAILS_REQUIREMENT = "~> 7.0.0".freeze
 
 def apply_template!
   assert_minimum_rails_version
@@ -10,10 +10,10 @@ def apply_template!
 
   # We're going to handle bundler and webpacker ourselves.
   # Setting these options will prevent Rails from running them unnecessarily.
-  self.options = options.merge(
-    skip_bundle: true,
-    skip_webpack_install: true
-  )
+  # self.options = options.merge(
+  #   skip_bundle: true,
+  #   skip_webpack_install: true
+  # )
 
   template "Gemfile.tt", force: true
 
