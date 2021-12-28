@@ -22,7 +22,6 @@ def apply_template!
 
   apply "Rakefile.rb"
   apply "config.ru.rb"
-  apply "app/template.rb"
   apply "bin/template.rb"
   apply "circleci/template.rb"
   apply "config/template.rb"
@@ -34,6 +33,7 @@ def apply_template!
 
   after_bundle do
     apply "app/assets/template.rb"
+    apply "app/template.rb"
 
     run_with_clean_bundler_env "bundle update"
     create_database_and_initial_migration
@@ -57,7 +57,7 @@ def apply_template!
     add_yarn_lint_and_run_fix
     add_yarn_start_script
 
-    unless File.read(".gitignore").match?(/^node_modules/)
+    unless File.read(".gitignore").match?(%{^/?node_modules})
       append_to_file ".gitignore", "node_modules"
     end
 
