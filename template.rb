@@ -57,6 +57,10 @@ def apply_template!
     add_yarn_lint_and_run_fix
     add_yarn_start_script
 
+    unless File.read(".gitignore").match?(/^node_modules/)
+      append_to_file ".gitignore", "node_modules"
+    end
+
     unless any_local_git_commits?
       git checkout: "-b main"
       git add: "-A ."
