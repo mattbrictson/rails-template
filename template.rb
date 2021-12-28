@@ -42,7 +42,11 @@ def apply_template!
     binstubs = %w[brakeman bundler bundler-audit rubocop sidekiq]
     run_with_clean_bundler_env "bundle binstubs #{binstubs.join(' ')} --force"
 
-    append_to_file("Procfile.dev", "worker: bin/sidekiq")
+    if File.exist?("bin/dev")
+      append_to_file "Procfile.dev", "worker: bin/sidekiq"
+    else
+      remove_file "Procfile.dev"
+    end
 
     template "rubocop.yml.tt", ".rubocop.yml"
     run_rubocop_autocorrections
@@ -189,7 +193,14 @@ def create_database_and_initial_migration
 end
 
 def add_yarn_start_script
-  add_package_json_script(start: "bin/dev")
+  return add_package_json_script(start: "bin/dev") if File.exist?("bin/dev")
+
+  run_with_clean_bundler_env "yarn add --dev concurrently"
+
+  procs = ["'bin/rails s -b 0.0.0.0'", "bin/sidekiq"]
+  procs << "'bin/webpack-dev-server'" if File.exist?("bin/webpack-dev-server")
+
+  add_package_json_script(start: "concurrently --raw --kill-others-on-fail #{procs.join(" ")}")
 end
 
 def add_yarn_lint_and_run_fix
@@ -207,23 +218,16 @@ def add_yarn_lint_and_run_fix
   ]
   run_with_clean_bundler_env "yarn add #{packages.join(' ')} -D"
   add_package_json_script("lint": "npm-run-all -c lint:*")
-  add_package_json_script("lint:js": "eslint 'app/{components,javascript}/**/*.{js,jsx}'")
-  add_package_json_script("lint:css": "stylelint 'app/{components,assets/stylesheets}/**/*.{css,scss}'")
+  add_package_json_script("lint:js": "eslint 'app/{components,frontend,javascript}/**/*.{js,jsx}'")
+  add_package_json_script("lint:css": "stylelint 'app/{components,frontend,assets/stylesheets}/**/*.{css,scss}'")
   run_with_clean_bundler_env "yarn lint:js --fix"
   run_with_clean_bundler_env "yarn lint:css --fix"
 end
 
 def add_package_json_script(scripts)
-  package_json = JSON.parse(IO.read("package.json"))
-  package_json["scripts"] ||= {}
   scripts.each do |name, script|
-    package_json["scripts"][name.to_s] = script
+    run ["npm", "set-script", name.to_s.shellescape, script.shellescape].join(" ")
   end
-  package_json = {
-    "name" => package_json["name"],
-    "scripts" => package_json["scripts"].sort.to_h
-  }.merge(package_json)
-  IO.write("package.json", JSON.pretty_generate(package_json) + "\n")
 end
 
 apply_template!
