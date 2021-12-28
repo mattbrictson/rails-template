@@ -4,20 +4,20 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "<%= RUBY_VERSION %>"
 
 gem "active_type"
-gem "bcrypt"<%= gemfile_requirement("bcrypt") %>
-gem "bootsnap", require: false
-gem "cssbundling-rails"
-gem "jsbundling-rails"
-gem "pg"<%= gemfile_requirement("pg") %>
+<%= gemfile_entry "bcrypt", force: true -%>
+<%= gemfile_entry "bootsnap" -%>
+<%= gemfile_entry "cssbundling-rails" -%>
+<%= gemfile_entry "jsbundling-rails" -%>
+<%= gemfile_entry "pg" -%>
 gem "pgcli-rails"
-gem "puma"<%= gemfile_requirement("puma") %>
+<%= gemfile_entry "puma" -%>
 gem "rack-canonical-host"
 gem "rails", "~> <%= Rails.version[/\d+\.\d+\.\d+/] %>"
-gem "redis"<%= gemfile_requirement("redis") %>
+<%= gemfile_entry "redis", force: true -%>
 gem "sidekiq"
-gem "sprockets-rails"
-gem "stimulus-rails"
-gem "turbo-rails"
+<%= gemfile_entry "sprockets-rails" -%>
+<%= gemfile_entry "stimulus-rails" -%>
+<%= gemfile_entry "turbo-rails" -%>
 
 group :production do
   gem "postmark-rails"
@@ -27,13 +27,12 @@ group :development do
   gem "amazing_print"
   gem "annotate"
   gem "letter_opener"
-  gem "web-console"<%= gemfile_requirement("web-console") %>
+  <%= gemfile_entry "web-console" -%>
 end
 
 group :development, :test do
   gem "brakeman", require: false
   gem "bundler-audit", require: false
-  gem "byebug"
   gem "dotenv-rails"
   gem "launchy"
   gem "rubocop", require: false
@@ -43,10 +42,10 @@ group :development, :test do
 end
 
 group :test do
-  gem "capybara"<%= gemfile_requirement("capybara") %>
+  <%= gemfile_entry "capybara" -%>
   gem "minitest-ci", require: false
-  gem "selenium-webdriver"
+  <%= gemfile_entry "selenium-webdriver" -%>
   gem "shoulda-context"
   gem "shoulda-matchers"
-  gem "webdrivers"
+  <%= gemfile_entry "webdrivers" -%>
 end

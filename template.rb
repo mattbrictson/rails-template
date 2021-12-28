@@ -140,10 +140,15 @@ def production_hostname
     ask_with_default("Production hostname?", :blue, "example.com")
 end
 
-def gemfile_requirement(name)
+def gemfile_entry(name, version=nil, require: true, force: false)
   @original_gemfile ||= IO.read("Gemfile")
-  req = @original_gemfile[/gem\s+['"]#{name}['"]\s*(,[><~= \t\d\.\w'"]*)?.*$/, 1]
-  req && req.gsub("'", %(")).strip.sub(/^,\s*"/, ', "')
+  entry = @original_gemfile[/^\s*gem #{Regexp.quote(name.inspect)}.*$/]
+  return if entry.nil? && !force
+
+  require = (entry && entry[/\brequire:\s*([\S]+)/, 1]) || require
+  version = (entry && entry[/, "([^"]+)"/, 1]) || version
+  args = [name.inspect, version&.inspect, ("require: false" if require != true)].compact
+  "gem #{args.join(", ")}\n"
 end
 
 def ask_with_default(question, color, default)
