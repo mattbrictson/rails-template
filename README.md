@@ -4,10 +4,11 @@
 
 ## Description
 
-This is the application template that I use for my Rails 6 projects. As a freelance Rails developer, I need to be able to start new projects quickly and with a good set of defaults. I've assembled this template over the years to include best-practices, tweaks, documentation, and personal preferences, while still generally adhering to the "Rails way".
+This is the application template that I recommend for Rails 7 projects. I've assembled this template over the years to include best-practices, tweaks, documentation, and personal preferences, while still generally adhering to the "Rails way".
 
 For older versions of Rails, use these branches:
 
+* [Rails 6.1.x](https://github.com/mattbrictson/rails-template/tree/rails-61)
 * [Rails 6.0.x](https://github.com/mattbrictson/rails-template/tree/rails-60)
 * [Rails 5.2.x](https://github.com/mattbrictson/rails-template/tree/rails-52)
 * [Rails 5.1.x](https://github.com/mattbrictson/rails-template/tree/rails-51)
@@ -18,10 +19,9 @@ For older versions of Rails, use these branches:
 
 This template currently works with:
 
-* Rails 6.1.x
+* Rails 7.0.x
 * Bundler 2.x
 * PostgreSQL
-* chromedriver
 
 If you need help setting up a Ruby development environment, check out my [Rails OS X Setup Guide](https://mattbrictson.com/rails-osx-setup-guide).
 
@@ -32,21 +32,23 @@ If you need help setting up a Ruby development environment, check out my [Rails 
 To make this the default Rails application template on your system, create a `~/.railsrc` file with these contents:
 
 ```
+--css sass
 -d postgresql
 -m https://raw.githubusercontent.com/mattbrictson/rails-template/main/template.rb
 ```
 
 ## Usage
 
-This template assumes you will store your project in a remote git repository (e.g. Bitbucket or GitHub) and that you will deploy to a production environment. It will prompt you for this information in order to pre-configure your app, so be ready to provide:
+This template assumes you will store your project in a remote git repository (e.g. GitHub) and that you will deploy to a production environment. It will prompt you for this information in order to pre-configure your app, so be ready to provide:
 
-1. The git URL of your (freshly created and empty) Bitbucket/GitHub repository
+1. The git URL of your (freshly created and empty) GitHub repository
 2. The hostname of your production server
 
 To generate a Rails application using this template, pass the `-m` option to `rails new`, like this:
 
 ```
 rails new blog \
+  --css sass \
   -d postgresql \
   -m https://raw.githubusercontent.com/mattbrictson/rails-template/main/template.rb
 ```
@@ -64,10 +66,9 @@ rails new blog
 The template will perform the following steps:
 
 1. Generate your application files and directories
-2. Ensure bundler is installed
-3. Create the development and test databases
-4. Commit everything to git
-5. Push the project to the remote git repository you specified
+2. Create the development and test databases
+3. Commit everything to git
+4. Push the project to the remote git repository you specified
 
 ## What is included?
 
@@ -80,7 +81,6 @@ The template will perform the following steps:
     * [dotenv][] – for local configuration
 * Utilities
     * [annotate][] – auto-generates schema documentation
-    * [autoprefixer-rails][] – automates cross-browser CSS compatibility
     * [amazing_print][] – try `ap` instead of `puts`
     * [rubocop][] – enforces Ruby code style
 * Security
@@ -111,7 +111,6 @@ Rails generators are very lightly documented; what you’ll find is that most of
 [sidekiq]:http://sidekiq.org
 [dotenv]:https://github.com/bkeepers/dotenv
 [annotate]:https://github.com/ctran/annotate_models
-[autoprefixer-rails]:https://github.com/ai/autoprefixer-rails
 [amazing_print]:https://github.com/amazing-print/amazing_print
 [rubocop]:https://github.com/bbatsov/rubocop
 [Postmark]:http://postmarkapp.com
