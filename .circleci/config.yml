@@ -23,7 +23,7 @@ jobs:
     steps:
       - node/install:
           install-yarn: true
-          install-npm: true
+          install-npm: false
           lts: true
       - checkout
       - restore_cache:
