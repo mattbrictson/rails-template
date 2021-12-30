@@ -19,6 +19,7 @@ def apply_template!
   template "ruby-version.tt", ".ruby-version", force: true
 
   copy_file "Procfile"
+  copy_file "package.json"
 
   apply "Rakefile.rb"
   apply "config.ru.rb"
@@ -57,9 +58,7 @@ def apply_template!
     add_yarn_lint_and_run_fix
     add_yarn_start_script
 
-    unless File.read(".gitignore").match?(%{^/?node_modules})
-      append_to_file ".gitignore", "node_modules"
-    end
+    append_to_file ".gitignore", "node_modules" unless File.read(".gitignore").match?(%{^/?node_modules})
 
     unless any_local_git_commits?
       git checkout: "-b main"
