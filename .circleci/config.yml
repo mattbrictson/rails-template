@@ -7,7 +7,7 @@ executors:
   ruby:
     working_directory: ~/repo
     docker:
-      - image: cimg/ruby:2.7.2-browsers
+      - image: cimg/ruby:3.0.3-browsers
         environment:
           PGHOST: 127.0.0.1
           PGUSER: postgres
@@ -42,7 +42,7 @@ jobs:
       - run:
           name: Install railties
           command: |
-            gem install railties --version "~> 6.1.0" --no-document
+            gem install railties --version "~> 7.0.0" --no-document
       - run:
           name: Configure git
           command: |
