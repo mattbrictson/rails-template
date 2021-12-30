@@ -52,11 +52,6 @@ PreCommit:
     exclude:
       - "**/db/structure.sql"
 
-  YamlSyntax:
-    enabled: true
-    exclude:
-      - "test/fixtures/**/*.yml"
-
   YarnCheck:
     enabled: true
 

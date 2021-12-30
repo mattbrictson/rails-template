@@ -1,3 +1,5 @@
+@use "sass:color";
+
 // This starter palette is courtesy of https://github.com/mrmrs/colors (MIT license)
 :root {
   // == cool =======
@@ -20,5 +22,5 @@
   --silver: #dddddd;
   --gray: #aaaaaa;
   --black: #111111;
-  --black-transparent: #{transparentize(#111111, 0.9)};
+  --black-transparent: #{color.adjust(#111, $alpha: -0.9)};
 }
