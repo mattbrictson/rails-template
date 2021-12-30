@@ -33,9 +33,7 @@ commands:
     steps:
       - run:
           name: Set Up Database
-          command: |
-            cp example.env .env
-            bundle exec rake db:setup
+          command: bundle exec rake db:setup
 
 jobs:
   static_analysis:
