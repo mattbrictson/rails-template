@@ -50,11 +50,19 @@ jobs:
             git config --local user.email ci@example.com
             overcommit --sign
             overcommit --run
+
+  security_audits:
+    executor: ruby
+    steps:
+      - checkout
+      - ruby/install-deps
       - run:
-          name: Run Security Audits
-          command: |
-            bundle exec brakeman --exit-on-warn --no-progress --color --output /dev/stdout
-            bundle exec bundle-audit check --update -v
+          name: Brakeman
+          command: bundle exec brakeman --exit-on-warn --no-progress --color --output /dev/stdout
+      - run:
+          name: Bundle Audit
+          command: bundle exec bundle-audit check --update -v
+
   test:
     executor: ruby
     steps:
@@ -67,6 +75,7 @@ jobs:
           command: bundle exec rake test TESTOPTS="--ci-dir=./reports"
       - store_test_results:
           path: ./reports
+
   test_system:
     executor: ruby
     steps:
@@ -91,17 +100,6 @@ workflows:
   commit-workflow:
     jobs:
       - static_analysis
-      - test
-      - test_system
-  cron-workflow:
-    triggers:
-      - schedule:
-          cron: "0 13 * * 1,2,3,4,5"
-          filters:
-            branches:
-              only:
-                - main
-    jobs:
-      - static_analysis
+      - security_audits
       - test
       - test_system
