@@ -32,7 +32,6 @@ If you need help setting up a Ruby development environment, check out my [Rails 
 To make this the default Rails application template on your system, create a `~/.railsrc` file with these contents:
 
 ```
---css sass
 -d postgresql
 -m https://raw.githubusercontent.com/mattbrictson/rails-template/main/template.rb
 ```
@@ -48,7 +47,6 @@ To generate a Rails application using this template, pass the `-m` option to `ra
 
 ```
 rails new blog \
-  --css sass \
   -d postgresql \
   -m https://raw.githubusercontent.com/mattbrictson/rails-template/main/template.rb
 ```
