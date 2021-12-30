@@ -23,8 +23,8 @@ jobs:
     steps:
       - node/install:
           install-yarn: true
-          install-npm: false
-          node-version: "16.13.0"
+          install-npm: true
+          lts: true
       - checkout
       - restore_cache:
           name: Restore yarn cache

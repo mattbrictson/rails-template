@@ -26,7 +26,7 @@ commands:
       - node/install:
           install-yarn: true
           install-npm: false
-          node-version: "16.13.0"
+          lts: true
       - node/install-packages:
           pkg-manager: yarn
   set_up_database:
