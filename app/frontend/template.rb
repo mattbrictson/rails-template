@@ -21,3 +21,10 @@ if package_json.match?(%r{@hotwired/stimulus})
     import "~/controllers";
   JS
 end
+
+# Remove sprockets
+gsub_file "Gemfile", /^gem "sprockets.*\n/, ""
+remove_file "config/initializers/assets.rb"
+remove_dir "app/assets"
+comment_lines "config/environments/development.rb", /^\s*config\.assets\./
+comment_lines "config/environments/production.rb", /^\s*config\.assets\./

@@ -43,7 +43,7 @@ def apply_template!
     apply "app/assets/template.rb"
 
     if install_vite?
-      File.rename("app/javascript", "app/frontend")
+      File.rename("app/javascript", "app/frontend") if File.exist?("app/javascript")
       run_with_clean_bundler_env "bundle exec vite install"
       run "yarn add sass"
       apply "app/frontend/template.rb"

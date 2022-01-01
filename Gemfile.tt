@@ -16,7 +16,7 @@ gem "rack-canonical-host"
 gem "rails", "~> <%= Rails.version[/\d+\.\d+\.\d+/] %>"
 <%= gemfile_entry "redis", force: true -%>
 gem "sidekiq"
-<%= gemfile_entry "sprockets-rails" unless install_vite? -%>
+<%= gemfile_entry "sprockets-rails" -%>
 <%= gemfile_entry "stimulus-rails" -%>
 <%= gemfile_entry "turbo-rails" -%>
 <%= %Q{gem "vite_rails"\n} if install_vite? -%>
