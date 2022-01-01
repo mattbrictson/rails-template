@@ -33,9 +33,19 @@ gsub_file "app/views/layouts/base.html.erb", %r{^\s*<title>.*</title>}, <<-ERB
     <meta name="apple-mobile-web-app-title" content="#{app_const_base.titleize}">
 ERB
 
-insert_into_file "app/views/layouts/base.html.erb", <<-ERB, before: %r{^\s*</head>}
+insert_into_file "app/views/layouts/base.html.erb", <<-ERB.rstrip, before: %r{^\s*</head>}
     <%= yield(:head) %>
 ERB
+
+if install_vite?
+  gsub_file "app/views/layouts/base.html.erb", /^.*<%= stylesheet_link_tag.*$/, ""
+  gsub_file "app/views/layouts/base.html.erb",
+            /vite_javascript_tag 'application' %>/,
+            'vite_javascript_tag "application", "data-turbo-track": "reload" %>'
+  insert_into_file "app/views/layouts/base.html.erb", <<-ERB, before: /^.*<%= vite_javascript_tag/
+    <%= vite_stylesheet_tag "application.scss", "data-turbo-track": "reload" %>
+  ERB
+end
 
 copy_file "app/views/layouts/application.html.erb"
 copy_file "app/views/shared/_flash.html.erb"

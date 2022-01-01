@@ -6,9 +6,9 @@ ruby "<%= RUBY_VERSION %>"
 gem "active_type"
 <%= gemfile_entry "bcrypt", force: true -%>
 <%= gemfile_entry "bootsnap" -%>
-<%= gemfile_entry "cssbundling-rails" -%>
-<%= gemfile_entry "importmap-rails" -%>
-<%= gemfile_entry "jsbundling-rails" -%>
+<%= gemfile_entry "cssbundling-rails" unless install_vite? -%>
+<%= gemfile_entry "importmap-rails" unless install_vite? -%>
+<%= gemfile_entry "jsbundling-rails" unless install_vite? -%>
 <%= gemfile_entry "pg" -%>
 gem "pgcli-rails"
 <%= gemfile_entry "puma" -%>
@@ -19,6 +19,7 @@ gem "sidekiq"
 <%= gemfile_entry "sprockets-rails" -%>
 <%= gemfile_entry "stimulus-rails" -%>
 <%= gemfile_entry "turbo-rails" -%>
+<%= %Q{gem "vite_rails"\n} if install_vite? -%>
 
 group :production do
   gem "postmark-rails"

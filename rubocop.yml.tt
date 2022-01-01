@@ -23,6 +23,10 @@ Layout/HashAlignment:
     - table
     - key
 
+Layout/LineLength:
+  Exclude:
+    - "config/initializers/content_security_policy.rb"
+
 Layout/SpaceAroundEqualsInParameterDefault:
   EnforcedStyle: no_space
 

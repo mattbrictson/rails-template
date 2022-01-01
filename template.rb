@@ -8,6 +8,13 @@ def apply_template!
   assert_postgresql
   add_template_repository_to_source_path
 
+  if install_vite?
+    self.options = options.merge(
+      css: nil,
+      skip_asset_pipeline: true
+    )
+  end
+
   template "Gemfile.tt", force: true
 
   template "README.md.tt", force: true
@@ -34,9 +41,16 @@ def apply_template!
 
   after_bundle do
     apply "app/assets/template.rb"
+
+    if install_vite?
+      File.rename("app/javascript", "app/frontend") if File.exist?("app/javascript")
+      run_with_clean_bundler_env "bundle exec vite install"
+      run "yarn add sass"
+      apply "app/frontend/template.rb"
+    end
+
     apply "app/template.rb"
 
-    run_with_clean_bundler_env "bundle update"
     create_database_and_initial_migration
     run_with_clean_bundler_env "bin/setup"
 
@@ -207,8 +221,10 @@ def add_yarn_start_script
 
   run_with_clean_bundler_env "yarn add --dev concurrently"
 
-  procs = ["'bin/rails s -b 0.0.0.0'", "bin/sidekiq"]
-  procs << "'bin/webpack-dev-server'" if File.exist?("bin/webpack-dev-server")
+  procs = ["'bin/rails s -b 0.0.0.0'"]
+  procs << "'bin/vite dev'" if File.exist?("bin/vite")
+  procs << "bin/webpack-dev-server" if File.exist?("bin/webpack-dev-server")
+  procs << "bin/sidekiq"
 
   add_package_json_script(start: "concurrently --raw --kill-others-on-fail #{procs.join(" ")}")
 end
@@ -240,4 +256,7 @@ def add_package_json_script(scripts)
   end
 end
 
+def install_vite?
+  options[:javascript] == "vite"
+end
 apply_template!
