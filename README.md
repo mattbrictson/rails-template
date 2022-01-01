@@ -70,6 +70,16 @@ The template will perform the following steps:
 
 ## What is included?
 
+#### Optional support for `vite_rails`⚡️
+
+Add the `--javascript vite` option to the `rails new` command to get started with Vite! [Vite][vite] is an easy to use alternative to Webpack(er), and much more powerful than the standard import map and css/jsbundling-rails options that are built into Rails.
+
+- Frontend code (JS, CSS, images) will be placed in `app/frontend/`
+- Run `yarn start` to start the development server with hot reloading
+- SCSS will be used for styles (the `--css` option will be ignored)
+
+If you don't specify `--javascript vite`, then this template will use the standard Rails 7 behavior.
+
 #### These gems are added to the standard Rails stack
 
 * Core
@@ -119,3 +129,4 @@ Rails generators are very lightly documented; what you’ll find is that most of
 [application templates]:http://guides.rubyonrails.org/generators.html#application-templates
 [template.rb]: template.rb
 [thor]: https://github.com/erikhuda/thor
+[vite]: https://vite-ruby.netlify.app
