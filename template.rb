@@ -57,11 +57,7 @@ def apply_template!
     binstubs = %w[brakeman bundler bundler-audit rubocop sidekiq]
     run_with_clean_bundler_env "bundle binstubs #{binstubs.join(' ')} --force"
 
-    if File.exist?("bin/dev")
-      append_to_file "Procfile.dev", "worker: bin/sidekiq"
-    else
-      remove_file "Procfile.dev"
-    end
+    remove_file "Procfile.dev" unless File.exist?("bin/dev")
 
     template "rubocop.yml.tt", ".rubocop.yml"
     run_rubocop_autocorrections
@@ -224,7 +220,6 @@ def add_yarn_start_script
   procs = ["'bin/rails s -b 0.0.0.0'"]
   procs << "'bin/vite dev'" if File.exist?("bin/vite")
   procs << "bin/webpack-dev-server" if File.exist?("bin/webpack-dev-server")
-  procs << "bin/sidekiq"
 
   add_package_json_script(start: "concurrently --raw --kill-others-on-fail #{procs.join(" ")}")
 end

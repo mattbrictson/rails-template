@@ -14,8 +14,6 @@ gem "pgcli-rails"
 <%= gemfile_entry "puma" -%>
 gem "rack-canonical-host"
 gem "rails", "~> <%= Rails.version[/\d+\.\d+\.\d+/] %>"
-<%= gemfile_entry "redis", force: true -%>
-gem "sidekiq"
 <%= gemfile_entry "sprockets-rails" -%>
 <%= gemfile_entry "stimulus-rails" -%>
 <%= gemfile_entry "turbo-rails" -%>
@@ -23,6 +21,7 @@ gem "sidekiq"
 
 group :production do
   gem "postmark-rails"
+  gem "sidekiq"
 end
 
 group :development do

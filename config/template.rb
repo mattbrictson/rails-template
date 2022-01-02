@@ -33,4 +33,4 @@ apply "config/environments/production.rb"
 apply "config/environments/test.rb"
 
 route 'root "home#index"'
-route %Q(mount Sidekiq::Web => "/sidekiq" # monitoring console\n)
+route %Q(mount Sidekiq::Web => "/sidekiq" if defined?(Sidekiq) # monitoring console\n)

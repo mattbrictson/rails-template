@@ -2,9 +2,6 @@ copy_file "app/controllers/home_controller.rb"
 copy_file "app/controllers/concerns/basic_auth.rb"
 copy_file "app/helpers/layout_helper.rb"
 
-remove_dir "app/jobs"
-empty_directory_with_keep_file "app/workers"
-
 insert_into_file "app/controllers/application_controller.rb", after: /^class ApplicationController.*\n/ do
   <<-RUBY
   include BasicAuth
