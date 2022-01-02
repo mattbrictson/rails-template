@@ -1,8 +1,5 @@
 ---
 :queues:
   - default
-  - mailers
-  - active_storage_analysis
-  - active_storage_purge
 
 :concurrency: <%= ENV.fetch("SIDEKIQ_CONCURRENCY", "1") %>
