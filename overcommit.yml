@@ -14,6 +14,8 @@ PreCommit:
       - app/assets/**/*.jsx
       - app/components/**/*.js
       - app/components/**/*.jsx
+      - app/frontend/**/*.js
+      - app/frontend/**/*.jsx
       - app/javascript/**/*.js
       - app/javascript/**/*.jsx
 
@@ -44,6 +46,8 @@ PreCommit:
       - app/assets/**/*.scss
       - app/components/**/*.css
       - app/components/**/*.scss
+      - app/frontend/**/*.css
+      - app/frontend/**/*.scss
       - app/javascript/**/*.css
       - app/javascript/**/*.scss
 
