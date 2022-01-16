@@ -4,7 +4,7 @@ append_to_file "Rakefile" do
   Rake::Task[:default].prerequisites.clear if Rake::Task.task_defined?(:default)
   task :default do
     sh "bin/rails test"
-    sh "HEADLESS_CHROME=1 bin/rails test:system"
+    sh "bin/rails test:system"
 
     raise unless
       system("bin/rubocop") &

@@ -14,7 +14,6 @@ executors:
           PGUSER: postgres
           PGPASS: postgres
           RAILS_ENV: test
-          HEADLESS_CHROME: "1"
       - image: circleci/postgres:13-ram
         environment:
           POSTGRES_USER: postgres
