@@ -12,7 +12,6 @@ This project requires:
 
 * Ruby <%= RUBY_VERSION %>, preferably managed using [rbenv][]
 * PostgreSQL must be installed and accepting connections
-* [Redis][] must be installed and running on localhost with the default port
 
 On a Mac, you can obtain all of the above packages using [Homebrew][].
 
@@ -62,5 +61,4 @@ Optionally:
 * `WEB_CONCURRENCY`
 
 [rbenv]:https://github.com/sstephenson/rbenv
-[redis]:http://redis.io
 [Homebrew]:http://brew.sh
