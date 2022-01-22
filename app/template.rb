@@ -39,9 +39,6 @@ if install_vite?
   gsub_file "app/views/layouts/base.html.erb",
             /vite_javascript_tag 'application' %>/,
             'vite_javascript_tag "application", "data-turbo-track": "reload" %>'
-  insert_into_file "app/views/layouts/base.html.erb", <<-ERB, before: /^.*<%= vite_javascript_tag/
-    <%= vite_stylesheet_tag "application.scss", "data-turbo-track": "reload" %>
-  ERB
 end
 
 copy_file "app/views/layouts/application.html.erb"

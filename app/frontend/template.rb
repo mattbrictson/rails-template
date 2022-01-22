@@ -8,8 +8,6 @@ copy_file "app/assets/stylesheets/mixins/typography.scss", "app/frontend/stylesh
 
 gsub_file "app/frontend/stylesheets/index.scss", /@use "\./, '@use "~/stylesheets'
 
-copy_file "app/frontend/entrypoints/application.scss"
-
 package_json = File.read("package.json")
 if package_json.match?(%r{@hotwired/turbo-rails})
   prepend_to_file "app/frontend/entrypoints/application.js", <<~JS
@@ -19,6 +17,7 @@ end
 if package_json.match?(%r{@hotwired/stimulus})
   prepend_to_file "app/frontend/entrypoints/application.js", <<~JS
     import "~/controllers";
+    import "~/stylesheets/index.scss";
   JS
 end
 
