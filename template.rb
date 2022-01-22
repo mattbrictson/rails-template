@@ -42,6 +42,13 @@ def apply_template!
   after_bundle do
     apply "app/assets/template.rb"
 
+    append_to_file ".gitignore", <<~IGNORE
+
+      # Ignore application config.
+      /.env.development
+      /.env.*local
+    IGNORE
+
     if install_vite?
       File.rename("app/javascript", "app/frontend") if File.exist?("app/javascript")
       run_with_clean_bundler_env "bundle exec vite install"
