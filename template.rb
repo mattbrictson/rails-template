@@ -40,8 +40,6 @@ def apply_template!
   empty_directory ".git/safe"
 
   after_bundle do
-    apply "app/assets/template.rb"
-
     append_to_file ".gitignore", <<~IGNORE
 
       # Ignore application config.
@@ -52,7 +50,7 @@ def apply_template!
     if install_vite?
       File.rename("app/javascript", "app/frontend") if File.exist?("app/javascript")
       run_with_clean_bundler_env "bundle exec vite install"
-      run "yarn add sass"
+      run "yarn add sass @picocss/pico"
       apply "app/frontend/template.rb"
     end
 

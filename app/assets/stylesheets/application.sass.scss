@@ -1,9 +1,0 @@
-@use "./mixins/typography";
-
-@import "./colors";
-
-body {
-  @include typography.body;
-  background-color: var(--white);
-  color: var(--black);
-}

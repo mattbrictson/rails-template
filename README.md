@@ -87,6 +87,8 @@ If you don't specify `--javascript vite`, then this template will use the standa
     * [sidekiq][] – Redis-based job queue implementation for Active Job
 * Configuration
     * [dotenv][] – for local configuration
+* Style
+    * [Pico.css][pico] - a great-looking default stylesheet
 * Utilities
     * [annotate][] – auto-generates schema documentation
     * [amazing_print][] – try `ap` instead of `puts`
@@ -121,6 +123,7 @@ Rails generators are very lightly documented; what you’ll find is that most of
 [annotate]:https://github.com/ctran/annotate_models
 [amazing_print]:https://github.com/amazing-print/amazing_print
 [rubocop]:https://github.com/bbatsov/rubocop
+[pico]:https://picocss.com
 [Postmark]:http://postmarkapp.com
 [postmark-rails]:http://www.rubydoc.info/gems/postmark-rails/0.12.0
 [brakeman]:https://github.com/presidentbeef/brakeman
