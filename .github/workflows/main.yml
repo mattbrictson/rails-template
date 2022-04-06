@@ -14,3 +14,13 @@ jobs:
           reporter: github-pr-review # Default is github-pr-check
           rubocop_version: 0.1.6
           rubocop_flags: --format progress
+      - name: fasterer
+        uses: vk26/action-fasterer@v1
+        with:
+          github_token: ${{ secrets.github_token }}
+          reporter: github-pr-review # Default is github-pr-check
+      - name: reek
+        uses: reviewdog/action-reek@v1
+        with:
+          reek_version: gemfile
+          reporter: github-pr-review # Default is github-pr-check
