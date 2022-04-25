@@ -12,7 +12,7 @@ empty_directory_with_keep_file "test/unit/lib/tasks"
 
 gsub_file "test/application_system_test_case.rb", /^  driven_by :selenium.*$/, <<~RUBY
   driven_by :selenium,
-             using: (ENV["DISABLE_HEADLESS_CHROME"] ? :chrome : :headless_chrome),
+             using: (ENV["DISABLE_HEADLESS_CHROME"].present? ? :chrome : :headless_chrome),
              screen_size: [1400, 1400] do |options|
      options.add_argument("no-sandbox")
   end

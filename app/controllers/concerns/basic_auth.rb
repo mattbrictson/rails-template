@@ -8,12 +8,13 @@ module BasicAuth
   private
 
   def require_basic_auth
-    return true if ENV["BASIC_AUTH_USERNAME"].blank?
-    return true if ENV["BASIC_AUTH_PASSWORD"].blank?
+    expected_username = ENV.fetch("BASIC_AUTH_USERNAME", nil)
+    expected_password = ENV.fetch("BASIC_AUTH_PASSWORD", nil)
+    return true if expected_username.blank? || expected_password.blank?
 
     authenticate_or_request_with_http_basic do |username, password|
-      ActiveSupport::SecurityUtils.secure_compare(username, ENV["BASIC_AUTH_USERNAME"]) & \
-        ActiveSupport::SecurityUtils.secure_compare(password, ENV["BASIC_AUTH_PASSWORD"])
+      ActiveSupport::SecurityUtils.secure_compare(username, expected_username) & \
+        ActiveSupport::SecurityUtils.secure_compare(password, expected_password)
     end
   end
 end

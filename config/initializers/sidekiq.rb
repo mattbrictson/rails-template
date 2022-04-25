@@ -17,8 +17,8 @@ require "sidekiq/web"
 
 Sidekiq::Web.app_url = "/"
 
-sidekiq_username = ENV["SIDEKIQ_WEB_USERNAME"]
-sidekiq_password = ENV["SIDEKIQ_WEB_PASSWORD"]
+sidekiq_username = ENV.fetch("SIDEKIQ_WEB_USERNAME", nil)
+sidekiq_password = ENV.fetch("SIDEKIQ_WEB_PASSWORD", nil)
 
 Sidekiq::Web.use(Rack::Auth::Basic, "Sidekiq") do |username, password|
   if sidekiq_username.present? && sidekiq_password.present?

@@ -32,7 +32,7 @@ commands:
     steps:
       - run:
           name: Set Up Database
-          command: bundle exec rake db:setup
+          command: bundle exec rake db:schema:load
 
 jobs:
   static_analysis:
