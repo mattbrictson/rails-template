@@ -1,9 +1,9 @@
 version: 2.1
 
 orbs:
-  browser-tools: circleci/browser-tools@1.2.2
-  node: circleci/node@4.7.0
-  ruby: circleci/ruby@1.1.4
+  browser-tools: circleci/browser-tools@1.2.5
+  node: circleci/node@5.0.2
+  ruby: circleci/ruby@1.6.0
 
 executors:
   ruby:
@@ -14,7 +14,7 @@ executors:
           PGUSER: postgres
           PGPASS: postgres
           RAILS_ENV: test
-      - image: circleci/postgres:13-ram
+      - image: cimg/postgres:14.2
         environment:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
@@ -24,15 +24,13 @@ commands:
     steps:
       - node/install:
           install-yarn: true
-          install-npm: false
-          lts: true
       - node/install-packages:
           pkg-manager: yarn
   set_up_database:
     steps:
       - run:
           name: Set Up Database
-          command: bundle exec rake db:schema:load
+          command: bundle exec rake db:create db:schema:load
 
 jobs:
   static_analysis:
@@ -67,7 +65,6 @@ jobs:
     steps:
       - checkout
       - ruby/install-deps
-      - install_node_dependencies
       - set_up_database
       - run:
           name: Run Tests
@@ -79,15 +76,14 @@ jobs:
     executor: ruby
     steps:
       - browser-tools/install-chrome
+      - browser-tools/install-chromedriver
       - checkout
       - ruby/install-deps
       - install_node_dependencies
       - set_up_database
       - run:
           name: Run System Tests
-          command: |
-            bundle exec rake webdrivers:chromedriver:update
-            bundle exec rake test:system TESTOPTS="--ci-dir=./reports"
+          command: bundle exec rake test:system TESTOPTS="--ci-dir=./reports"
       - store_test_results:
           path: ./reports
       - store_artifacts:
