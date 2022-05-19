@@ -8,6 +8,7 @@ append_to_file "Rakefile" do
 
     raise unless
       system("bin/rubocop") &
+      system("bin/erblint --lint-all") &
       system("yarn lint")
   end
   RUBY

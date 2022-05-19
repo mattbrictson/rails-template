@@ -93,6 +93,7 @@ If you don't specify `--javascript vite`, then this template will use the standa
     * [annotate][] – auto-generates schema documentation
     * [amazing_print][] – try `ap` instead of `puts`
     * [rubocop][] – enforces Ruby code style
+    * [erblint][] – applies rubocop rules within html.erb files
 * Security
     * [brakeman][] and [bundler-audit][] – detect security vulnerabilities
 * Testing
@@ -123,6 +124,7 @@ Rails generators are very lightly documented; what you’ll find is that most of
 [annotate]:https://github.com/ctran/annotate_models
 [amazing_print]:https://github.com/amazing-print/amazing_print
 [rubocop]:https://github.com/bbatsov/rubocop
+[erblint]:https://github.com/Shopify/erb-lint
 [pico]:https://picocss.com
 [Postmark]:http://postmarkapp.com
 [postmark-rails]:http://www.rubydoc.info/gems/postmark-rails/0.12.0

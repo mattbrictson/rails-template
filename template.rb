@@ -22,6 +22,7 @@ def apply_template!
 
   template "example.env.tt"
   copy_file "editorconfig", ".editorconfig"
+  copy_file "erb-lint.yml", ".erb-lint.yml"
   copy_file "overcommit.yml", ".overcommit.yml"
   template "ruby-version.tt", ".ruby-version", force: true
 
@@ -59,7 +60,7 @@ def apply_template!
     create_database_and_initial_migration
     run_with_clean_bundler_env "bin/setup"
 
-    binstubs = %w[brakeman bundler bundler-audit rubocop sidekiq]
+    binstubs = %w[brakeman bundler bundler-audit erb_lint rubocop sidekiq]
     run_with_clean_bundler_env "bundle binstubs #{binstubs.join(' ')} --force"
 
     remove_file "Procfile.dev" unless File.exist?("bin/dev")
@@ -209,6 +210,7 @@ end
 
 def run_rubocop_autocorrections
   run_with_clean_bundler_env "bin/rubocop -A --fail-level A > /dev/null || true"
+  run_with_clean_bundler_env "bin/erblint --lint-all -a > /dev/null || true"
 end
 
 def create_database_and_initial_migration

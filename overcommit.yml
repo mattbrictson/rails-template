@@ -5,6 +5,12 @@ PreCommit:
   BundleCheck:
     enabled: true
 
+  ErbLint:
+    enabled: true
+    required_executable: bundle
+    command: ["bundle", "exec", "erblint"]
+    include: "**/*.html.erb"
+
   EsLint:
     enabled: true
     required_executable: npx

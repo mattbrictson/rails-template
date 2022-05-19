@@ -29,6 +29,7 @@ group :development do
   gem "annotate"
   gem "brakeman", require: false
   gem "bundler-audit", require: false
+  gem "erb_lint", require: false
   gem "letter_opener"
   gem "rubocop", require: false
   gem "rubocop-minitest", require: false
