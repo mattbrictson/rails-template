@@ -255,7 +255,7 @@ end
 
 def add_package_json_script(scripts)
   scripts.each do |name, script|
-    run ["npm", "set-script", name.to_s.shellescape, script.shellescape].join(" ")
+    run ["npm", "pkg", "set", "scripts.#{name.to_s.shellescape}=#{script.shellescape}"].join(" ")
   end
 end
 
