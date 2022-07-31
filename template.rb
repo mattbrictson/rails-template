@@ -73,6 +73,7 @@ def apply_template!
     template "stylelintrc.js", ".stylelintrc.js"
     add_yarn_lint_and_run_fix
     add_yarn_start_script
+    simplify_package_json_deps
 
     append_to_file ".gitignore", "node_modules" unless File.read(".gitignore").match?(%{^/?node_modules})
 
@@ -222,7 +223,7 @@ end
 def add_yarn_start_script
   return add_package_json_script(start: "bin/dev") if File.exist?("bin/dev")
 
-  run_with_clean_bundler_env "yarn add --dev concurrently"
+  run_with_clean_bundler_env "yarn add concurrently"
 
   procs = ["'bin/rails s -b 0.0.0.0'"]
   procs << "'bin/vite dev'" if File.exist?("bin/vite")
@@ -244,7 +245,7 @@ def add_yarn_lint_and_run_fix
     stylelint-declaration-use-variable
     stylelint-scss
   ]
-  run_with_clean_bundler_env "yarn add #{packages.join(' ')} -D"
+  run_with_clean_bundler_env "yarn add #{packages.join(' ')}"
   add_package_json_script("lint": "npm-run-all -c lint:*")
   add_package_json_script("lint:js": "eslint 'app/{components,frontend,javascript}/**/*.{js,jsx}'")
   add_package_json_script("lint:css": "stylelint 'app/{components,frontend,assets/stylesheets}/**/*.{css,scss}'")
@@ -256,6 +257,16 @@ def add_package_json_script(scripts)
   scripts.each do |name, script|
     run ["npm", "set-script", name.to_s.shellescape, script.shellescape].join(" ")
   end
+end
+
+def simplify_package_json_deps
+  package_json = JSON.parse(File.read("package.json"))
+  package_json["dependencies"] = package_json["dependencies"]
+    .merge(package_json.delete("devDependencies") || {})
+    .sort_by { |key, _| key }
+    .to_h
+
+  File.write("package.json", JSON.pretty_generate(package_json))
 end
 
 def install_vite?
