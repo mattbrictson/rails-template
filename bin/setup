@@ -32,11 +32,8 @@ end
 def test(opts)
   command, output = opts.first
 
-  log(:yellow, "test #{command}") do
-    unless `#{command}`.include?(output)
-      die("#{command} does not include #{output}")
-    end
-  end
+  log(:yellow, "test #{command}")
+  die("#{command} does not include #{output}") unless `#{command}`.include?(output)
 end
 
 def ruby_version
@@ -46,10 +43,9 @@ def ruby_version
 end
 
 def run(command)
-  log(:blue, "run  #{command}") do
-    with_clean_bundler_env do
-      system(command) or die("#{command} exited with non-zero status")
-    end
+  log(:blue, "run  #{command}")
+  with_clean_bundler_env do
+    system(command) or die("#{command} exited with non-zero status")
   end
 end
 
@@ -61,32 +57,23 @@ end
 def copy(source, dest)
   return if File.exist?(dest)
 
-  log(:magenta, "copy #{source} → #{dest}") do
-    FileUtils.cp(source, dest)
-  end
+  log(:magenta, "copy #{source} → #{dest}")
+  FileUtils.cp(source, dest)
 end
 
 def test_local_env_contains_required_keys
   keys = ->(f) { IO.readlines(f).map { |l| l[/^([^#\s][^=\s]*)/, 1] }.compact }
 
-  log(:yellow, "test .env.development contents") do
-    missing = keys["example.env"] - keys[".env.development"]
-    if missing.any?
-      die("Your .env.development file is missing #{missing.join(', ')}")
-    end
+  log(:yellow, "test .env.development contents")
+  missing = keys["example.env"] - keys[".env.development"]
+  if missing.any?
+    die("Your .env.development file is missing #{missing.join(', ')}")
   end
 end
 
 def log(color, message, out=$stdout, &block)
   message.sub!(/^(\S*)/) { HighLine::String.new($1).public_send(color) }
-
-  if block_given?
-    out.print("#{message}… ")
-    yield
-    log(:green, "✔︎")
-  else
-    out.puts(message)
-  end
+  out.puts(message)
 end
 
 def die(message)
