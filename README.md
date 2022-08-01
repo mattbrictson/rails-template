@@ -94,6 +94,7 @@ If you don't specify `--javascript vite`, then this template will use the standa
     * [amazing_print][] – try `ap` instead of `puts`
     * [rubocop][] – enforces Ruby code style
     * [erblint][] – applies rubocop rules within html.erb files
+    * [syntax_suggest][] – for easier troubleshooting of Ruby syntax errors
 * Security
     * [brakeman][] and [bundler-audit][] – detect security vulnerabilities
 * Testing
@@ -135,3 +136,4 @@ Rails generators are very lightly documented; what you’ll find is that most of
 [template.rb]: template.rb
 [thor]: https://github.com/erikhuda/thor
 [vite]: https://vite-ruby.netlify.app
+[syntax_suggest]: https://github.com/zombocom/syntax_suggest

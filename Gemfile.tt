@@ -42,6 +42,7 @@ group :development, :test do
   gem "byebug"
   gem "dotenv-rails"
   gem "launchy"
+  gem "syntax_suggest"
 end
 
 group :test do
