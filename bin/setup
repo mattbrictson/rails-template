@@ -8,7 +8,8 @@ def setup!
     run  "overcommit --install" if overcommit_present?
     copy "example.env", ".env.development"
     test_local_env_contains_required_keys
-    run  "bin/rails tmp:create db:prepare db:test:prepare db:seed"
+    run  "RAILS_ENV=test bin/rails db:drop db:create"
+    run  "SKIP_TEST_DATABASE=1  bin/rails tmp:create db:prepare db:seed"
   end
 end
 
