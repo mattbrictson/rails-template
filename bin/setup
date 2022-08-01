@@ -26,7 +26,7 @@ def within_project_root(&block)
 end
 
 def overcommit_present?
-  system("which overcommit > /dev/null 2>&1")
+  system("which overcommit > /dev/null 2>&1") && system("overcommit -v > /dev/null 2>&1")
 end
 
 def test(opts)
