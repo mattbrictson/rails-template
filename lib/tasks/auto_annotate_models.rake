@@ -20,7 +20,7 @@ if Rails.env.development?
       "root_dir"                   => "",
       "include_version"            => "false",
       "require"                    => "",
-      "exclude_tests"              => "false",
+      "exclude_tests"              => "true",
       "exclude_fixtures"           => "false",
       "exclude_factories"          => "false",
       "exclude_serializers"        => "false",
