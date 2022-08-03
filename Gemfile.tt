@@ -7,6 +7,7 @@ gem "active_type"
 <%= gemfile_entry "bcrypt", force: true -%>
 <%= gemfile_entry "bootsnap" -%>
 <%= gemfile_entry "cssbundling-rails" unless install_vite? -%>
+gem "good_migrations"
 <%= gemfile_entry "importmap-rails" unless install_vite? -%>
 <%= gemfile_entry "jsbundling-rails" unless install_vite? -%>
 <%= gemfile_entry "pg" -%>
