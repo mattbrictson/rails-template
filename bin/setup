@@ -25,7 +25,9 @@ def within_project_root(&block)
 end
 
 def overcommit_present?
-  system("which overcommit > /dev/null 2>&1") && system("overcommit -v > /dev/null 2>&1")
+  with_clean_bundler_env do
+    system("which overcommit > /dev/null 2>&1") && system("overcommit -v > /dev/null 2>&1")
+  end
 end
 
 def ruby_version
