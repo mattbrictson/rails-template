@@ -26,6 +26,7 @@ def apply_template!
   copy_file "overcommit.yml", ".overcommit.yml"
   template "ruby-version.tt", ".ruby-version", force: true
 
+  copy_file "Thorfile"
   copy_file "Procfile"
   copy_file "package.json"
 
@@ -60,7 +61,7 @@ def apply_template!
     create_database_and_initial_migration
     run_with_clean_bundler_env "bin/setup"
 
-    binstubs = %w[brakeman bundler bundler-audit erb_lint rubocop sidekiq]
+    binstubs = %w[brakeman bundler bundler-audit erb_lint rubocop sidekiq thor]
     run_with_clean_bundler_env "bundle binstubs #{binstubs.join(' ')} --force"
 
     remove_file "Procfile.dev" unless File.exist?("bin/dev")
