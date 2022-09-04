@@ -18,7 +18,7 @@ ERB
 insert_into_file "app/views/layouts/base.html.erb", <<-ERB, after: "<head>"
 
     <!-- #{app_const_base.titleize} <%= Rails.application.config.version %> (<%= l(Rails.application.config.version_time) %>) -->
-
+    <%= capybara_lockstep if defined?(Capybara::Lockstep) %>
 ERB
 
 gsub_file "app/views/layouts/base.html.erb", %r{^\s*<title>.*</title>}, <<-ERB

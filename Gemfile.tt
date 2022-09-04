@@ -48,6 +48,7 @@ end
 
 group :test do
   <%= gemfile_entry "capybara" -%>
+  gem "capybara-lockstep"
   gem "minitest-ci", require: false
   <%= gemfile_entry "selenium-webdriver" -%>
   gem "shoulda-context"

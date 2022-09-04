@@ -99,6 +99,7 @@ If you don't specify `--javascript vite`, then this template will use the standa
 * Security
     * [brakeman][] and [bundler-audit][] – detect security vulnerabilities
 * Testing
+    * [capybara-lockstep][] – for more reliable browser testing
     * [shoulda][] – shortcuts for common ActiveRecord tests
 
 #### Postmark
@@ -139,3 +140,4 @@ Rails generators are very lightly documented; what you’ll find is that most of
 [vite]: https://vite-ruby.netlify.app
 [syntax_suggest]: https://github.com/zombocom/syntax_suggest
 [good_migrations]: https://github.com/testdouble/good-migrations
+[capybara-lockstep]: https://github.com/makandra/capybara-lockstep
