@@ -13,6 +13,10 @@ return unless defined?(Sidekiq)
 #   config.redis = redis_opts
 # end
 
+# Enable Rails CurrentAttributes to flow transparently through to Sidekiq jobs
+# require "sidekiq/middleware/current_attributes"
+# Sidekiq::CurrentAttributes.persist(Myapp::Current)
+
 require "sidekiq/web"
 
 Sidekiq::Web.app_url = "/"
