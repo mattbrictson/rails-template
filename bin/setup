@@ -39,7 +39,7 @@ end
 def run(command)
   log(:blue, "run  #{command}")
   with_clean_bundler_env do
-    system(command) or die("#{command} exited with non-zero status")
+    system(command, exception: true)
   end
 end
 
