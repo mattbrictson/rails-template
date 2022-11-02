@@ -8,7 +8,6 @@ AllCops:
   DisplayStyleGuide: true
   NewCops: enable
   TargetRubyVersion: <%= RUBY_VERSION[/\d+\.\d+/] %>
-  ActiveSupportExtensionsEnabled: true
   Exclude:
     - "bin/*"
     - db/schema.rb
