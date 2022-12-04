@@ -3,6 +3,9 @@ empty_directory_with_keep_file "app/frontend/images"
 
 copy_file "app/frontend/stylesheets/index.scss"
 
+copy_file "app/helpers/vite_inline_svg_helper.rb"
+copy_file "test/helpers/vite_inline_svg_helper_test.rb"
+
 package_json = File.read("package.json")
 if package_json.match?(%r{@hotwired/turbo-rails})
   prepend_to_file "app/frontend/entrypoints/application.js", <<~JS
