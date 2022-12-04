@@ -23,7 +23,7 @@ ERB
 
 gsub_file "app/views/layouts/base.html.erb", %r{^\s*<title>.*</title>}, <<-ERB
     <title>
-      <%= strip_tags(yield(:title)) + " – " if content_for?(:title) %>
+      <%= "\#{strip_tags(yield(:title))} – " if content_for?(:title) %>
       #{app_const_base.titleize}
     </title>
     <%# Specifies the default name of home screen bookmark in iOS %>
