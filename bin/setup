@@ -30,12 +30,6 @@ def overcommit_present?
   end
 end
 
-def ruby_version
-  @ruby_version ||= begin
-    IO.read(".ruby-version").strip
-  end
-end
-
 def run(command)
   log(:blue, "run  #{command}")
   with_clean_bundler_env do
@@ -65,9 +59,8 @@ def test_local_env_contains_required_keys
   end
 end
 
-def log(color, message, out=$stdout, &block)
-  message.sub!(/^(\S*)/) { HighLine::String.new($1).public_send(color) }
-  out.puts(message)
+def log(color, message, out=$stdout)
+  out.puts(message.sub(/^(\S*)/) { HighLine::String.new($1).public_send(color) })
 end
 
 def die(message)
