@@ -231,7 +231,7 @@ def add_yarn_start_script
   procs << "'bin/vite dev'" if File.exist?("bin/vite")
   procs << "bin/webpack-dev-server" if File.exist?("bin/webpack-dev-server")
 
-  add_package_json_script(start: "concurrently --raw --kill-others-on-fail #{procs.join(" ")}")
+  add_package_json_script(start: "concurrently -i -k --kill-others-on-fail -p none #{procs.join(" ")}")
 end
 
 def add_yarn_lint_and_run_fix
