@@ -242,15 +242,13 @@ def add_yarn_lint_and_run_fix
     npm-run-all
     prettier
     stylelint
-    stylelint-config-recommended-scss
     stylelint-config-standard
     stylelint-declaration-use-variable
-    stylelint-scss
   ]
   run_with_clean_bundler_env "yarn add #{packages.join(' ')}"
   add_package_json_script("lint": "npm-run-all -c lint:*")
   add_package_json_script("lint:js": "eslint 'app/{components,frontend,javascript}/**/*.{js,jsx}'")
-  add_package_json_script("lint:css": "stylelint 'app/{components,frontend,assets/stylesheets}/**/*.{css,scss}'")
+  add_package_json_script("lint:css": "stylelint 'app/{components,frontend,assets/stylesheets}/**/*.css'")
   run_with_clean_bundler_env "yarn lint:js --fix"
   run_with_clean_bundler_env "yarn lint:css --fix"
 end

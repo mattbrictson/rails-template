@@ -49,13 +49,9 @@ PreCommit:
     command: ["npx", "--no-install", "stylelint"]
     include:
       - app/assets/**/*.css
-      - app/assets/**/*.scss
       - app/components/**/*.css
-      - app/components/**/*.scss
       - app/frontend/**/*.css
-      - app/frontend/**/*.scss
       - app/javascript/**/*.css
-      - app/javascript/**/*.scss
 
   TrailingWhitespace:
     enabled: true

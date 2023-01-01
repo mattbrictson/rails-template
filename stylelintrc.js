@@ -1,6 +1,6 @@
 module.exports = {
   plugins: ["stylelint-declaration-use-variable"],
-  extends: ["stylelint-config-standard", "stylelint-config-recommended-scss"],
+  extends: ["stylelint-config-standard"],
   rules: {
     "declaration-empty-line-before": null,
     "declaration-colon-newline-after": null,
@@ -15,11 +15,6 @@ module.exports = {
         ignoreProperties: ["font-named-instance"],
       },
     ],
-    "scss/at-function-pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
-    "scss/at-mixin-pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
-    "scss/dollar-variable-pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
-    "scss/no-duplicate-dollar-variables": true,
-    "scss/selector-no-redundant-nesting-selector": true,
     "selector-class-pattern": [
       // classes must be in BEM form, like this:
       // my_component
