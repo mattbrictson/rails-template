@@ -14,6 +14,8 @@ blocks:
     dependencies: []
     task:
       env_vars:
+        - name: BUNDLE_PATH
+          value: "./vendor/bundle"
         - name: BUNDLE_CLEAN
           value: "true"
       jobs:
@@ -23,9 +25,12 @@ blocks:
             - git config --global user.name Semaphore
             - git config --global user.email ci@example.com
             - git config --global init.defaultBranch main
-            - gem install railties --version "~> 7.0.0" --no-document
-            - mkdir ~/scratch
-            - "rails new ~/scratch/ci_example -d postgresql -m template.rb \<< INPUT\nci.example.com\n\nINPUT"
+            - bundle init
+            - echo 'gem "rails", "~> 7.0.0' >> Gemfile
+            - bundle lock
+            - cache restore
+            - bundle check && bundle install
+            - cache store
+            - mkdir -p ~/scratch/ci_example
             - cd ~/scratch/ci_example
-            - BUNDLE_PATH=./vendor/bundle bundle install
-            - artifact push workflow ~/scratch/ci_example
+            - "rails new . -d postgresql -m template.rb \<< INPUT\nci.example.com\n\nINPUT"
