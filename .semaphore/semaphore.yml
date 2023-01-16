@@ -1,0 +1,31 @@
+version: v1.0
+name: CI
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu2004
+global_job_config:
+  env_vars:
+    - name: BUNDLE_CLEAN
+      value: "true"
+    - name: BUNDLE_PATH
+      value: "./vendor/bundle"
+  prologue:
+    commands:
+      - sem-version ruby 3.2
+      - sem-version node 'lts/*'
+blocks:
+  - name: Generate project
+    dependencies: []
+    task:
+      jobs:
+        - name: rails new
+          commands:
+            - checkout
+            - git config --global user.name Semaphore
+            - git config --global user.email ci@example.com
+            - gem install railties --version "~> 7.0.0" --no-document
+            - mkdir scratch
+            - cd scratch
+            - "rails new ci_example -d postgresql -m ../template.rb \<< INPUT\nci.example.com\n\nINPUT"
+            - artifact push workflow ci_example
