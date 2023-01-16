@@ -1,0 +1,32 @@
+version: v1.0
+name: CI
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu2004
+global_job_config:
+  prologue:
+    commands:
+      - sem-version ruby 3.2
+      - sem-version node 'lts/*'
+blocks:
+  - name: Generate project
+    dependencies: []
+    task:
+      jobs:
+        - name: rails new
+          commands:
+            - checkout
+            - cache restore "gems-${SEMAPHORE_GIT_BRANCH}-,gems-main-"
+            - git config --global user.name Semaphore
+            - git config --global user.email ci@example.com
+            - git config --global init.defaultBranch main
+            - bundle config set --global path $HOME/vendor/bundle
+            - bundle init
+            - echo 'gem "rails", "~> 7.0.0"' >> Gemfile
+            - bundle check || bundle install
+            - mkdir -p ~/scratch/ci_example
+            - cd ~/scratch/ci_example
+            - "bundle e rails new . -d postgresql -m template.rb \<< INPUT\nci.example.com\n\nINPUT"
+            - bundle clean
+            - cache store "gems-${SEMAPHORE_GIT_BRANCH}-$(checksum Gemfile.lock)" $HOME/vendor/bundle
