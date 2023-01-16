@@ -1,0 +1,86 @@
+version: v1.0
+name: CI
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu2004
+global_job_config:
+  env_vars:
+    - name: BUNDLE_CLEAN
+      value: "true"
+    - name: BUNDLE_DEPLOYMENT
+      value: "true"
+    - name: BUNDLE_PATH
+      value: "./vendor/bundle"
+    - name: RAILS_ENV
+      value: "test"
+  prologue:
+    commands:
+      - checkout
+      - cache restore
+      - sem-version ruby $(cat .ruby-version)
+      - sem-version node $(cat .node-version)
+after_pipeline:
+  task:
+    jobs:
+      - name: Publish Results
+        commands:
+          - test-results gen-pipeline-report
+blocks:
+  - name: Install dependencies
+    dependencies: []
+    task:
+      jobs:
+        - name: bundle install && npx ci
+          commands:
+            - bundle check || bundle install
+            - npx --yes ci
+            - cache store
+  - name: Test
+    dependencies: ["Install dependencies"]
+    task:
+      env_vars:
+        - name: DATABASE_URL
+          value: "postgresql://postgres:@0.0.0.0:5432/test"
+      prologue:
+        commands:
+          - sem-service start postgres 14
+          - bundle exec rake db:create db:schema:load
+      epilogue:
+        commands:
+          - test-results publish ./reports
+      jobs:
+        - name: test
+          commands:
+            - bundle exec rake test TESTOPTS="--ci-dir=./reports"
+        - name: test:system
+          commands:
+            - mkdir -p ./tmp/screenshots
+            - bundle exec rake test:system TESTOPTS="--ci-dir=./reports"
+            - artifact push job ./tmp/screenshots
+  - name: Lint
+    dependencies: ["Install dependencies"]
+    task:
+      jobs:
+        - name: erblint
+          commands:
+            - bin/erblint --lint-all
+        - name: eslint
+          commands:
+            - yarn lint:js
+        - name: rubocop
+          commands:
+            - bin/rubocop
+        - name: stylelint
+          commands:
+            - yarn lint:css
+  - name: Security
+    dependencies: ["Install dependencies"]
+    task:
+      jobs:
+        - name: brakeman
+          commands:
+            - bundle exec brakeman --exit-on-warn --no-progress --color --output /dev/stdout
+        - name: bundle-audit
+          commands:
+            - bundle exec bundle-audit check --update -v
