@@ -13,20 +13,27 @@ blocks:
   - name: Generate project
     dependencies: []
     task:
+      env_vars:
+        - name: BUNDLE_SYSTEM
+          value: "true"
       jobs:
         - name: rails new
           commands:
+            - export GEM_HOME=$HOME/gems
+            - export GEM_PATH=$HOME/gems
+            - export PATH=$GEM_HOME/bin:$PATH
+            - cache restore "gemhome-${SEMAPHORE_GIT_BRANCH}-,gemhome-main-"
+            - mkdir ~/rails-template
+            - cd ~/rails-template
             - checkout
-            - cache restore "gems-${SEMAPHORE_GIT_BRANCH}-,gems-main-"
             - git config --global user.name Semaphore
             - git config --global user.email ci@example.com
             - git config --global init.defaultBranch main
-            - bundle config set --global path $HOME/vendor/bundle
-            - bundle init
-            - echo 'gem "rails", "~> 7.0.0"' >> Gemfile
-            - bundle check || bundle install
-            - mkdir -p ~/scratch/ci_example
-            - cd ~/scratch/ci_example
-            - "bundle e rails new . -d postgresql -m template.rb \<< INPUT\nci.example.com\n\nINPUT"
-            - bundle clean
-            - cache store "gems-${SEMAPHORE_GIT_BRANCH}-$(checksum Gemfile.lock)" $HOME/vendor/bundle
+            - gem install railties --version "~> 7.0.0" --no-document
+            - mkdir -p ~/scratch
+            - cd ~/scratch
+            - "bundle e rails new ci_example -d postgresql -m ~/rails-template/template.rb \<< INPUT\nci.example.com\n\nINPUT"
+            - cd ci_example
+            - bundle clean --force
+            - cd
+            - cache store "gemhome-${SEMAPHORE_GIT_BRANCH}-$(checksum Gemfile.lock)" gems
