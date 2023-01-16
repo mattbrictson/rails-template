@@ -24,6 +24,7 @@ def apply_template!
   copy_file "editorconfig", ".editorconfig"
   copy_file "erb-lint.yml", ".erb-lint.yml"
   copy_file "overcommit.yml", ".overcommit.yml"
+  template "node-version.tt", ".node-version", force: true
   template "ruby-version.tt", ".ruby-version", force: true
 
   copy_file "Thorfile"
@@ -33,7 +34,7 @@ def apply_template!
   apply "Rakefile.rb"
   apply "config.ru.rb"
   apply "bin/template.rb"
-  apply "circleci/template.rb"
+  apply "semaphore/template.rb"
   apply "config/template.rb"
   apply "lib/template.rb"
   apply "test/template.rb"
