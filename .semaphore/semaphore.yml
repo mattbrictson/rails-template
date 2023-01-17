@@ -37,7 +37,8 @@ blocks:
             - 'export RUBY_GEMS_DIR=$(ruby -e puts\ \`gem\ env\`\[/INSTALLATION\ DIRECTORY:\ \(.\*\)/,\ 1\])'
             - cache store "gems-${SEMAPHORE_GIT_WORKING_BRANCH}-$(checksum Gemfile.lock)" $RUBY_GEMS_DIR
             - cd ..
-            - artifact push workflow ci_example
+            - tar cfz ci_example.tgz ci_example
+            - artifact push workflow ci_example.tgz
   - name: Test
     dependencies: ["Generate project"]
     task:
@@ -47,7 +48,8 @@ blocks:
       prologue:
         commands:
           - sem-service start postgres 14
-          - artifact pull workflow ci_example
+          - artifact pull workflow ci_example.tgz
+          - tar xfz ci_example.tgz
           - cd ci_example
           - bundle exec rake db:create db:schema:load
       epilogue:
