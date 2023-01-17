@@ -23,8 +23,6 @@ blocks:
         - name: rails new
           commands:
             - sem-service start postgres 14
-            - mkdir ~/rails-template
-            - cd ~/rails-template
             - checkout
             - git config --global user.name Semaphore
             - git config --global user.email ci@example.com
