@@ -36,4 +36,5 @@ blocks:
             - "rails new ci_example -d postgresql -m ~/rails-template/template.rb \<< INPUT\nci.example.com\n\nINPUT"
             - cd ci_example
             - bundle clean --force
-            - cache store "gems-${SEMAPHORE_GIT_WORKING_BRANCH}-$(checksum Gemfile.lock)" $(ruby -e 'puts `gem env`[/INSTALLATION DIRECTORY: (.*)/, 1]')
+            - 'export RUBY_GEMS_DIR=$(ruby -e puts\ \`gem\ env\`\[/INSTALLATION\ DIRECTORY:\ \(.\*\)/,\ 1\])'
+            - cache store "gems-${SEMAPHORE_GIT_WORKING_BRANCH}-$(checksum Gemfile.lock)" $RUBY_GEMS_DIR
