@@ -6,15 +6,14 @@ agent:
     os_image: ubuntu2004
 global_job_config:
   env_vars:
-    - name: BUNDLE_SYSTEM
-      value: "true"
+    - name: BUNDLE_PATH
+      value: "./vendor/bundle"
     - name: DATABASE_URL
       value: "postgresql://postgres:@0.0.0.0:5432/test"
   prologue:
     commands:
       - sem-version ruby 3.2
       - sem-version node 'lts/*'
-      - cache restore "gems-${SEMAPHORE_GIT_WORKING_BRANCH}-,gems-main-"
 blocks:
   - name: Generate project
     dependencies: []
@@ -22,6 +21,7 @@ blocks:
       jobs:
         - name: rails new
           commands:
+            - cache restore "gems-${SEMAPHORE_GIT_WORKING_BRANCH}-,gems-main-"
             - sem-service start postgres 14
             - checkout
             - git config --global user.name Semaphore
@@ -29,13 +29,14 @@ blocks:
             - git config --global init.defaultBranch main
             - gem install railties --version "~> 7.0.0" --no-document
             - gem install bundler --no-document
-            - mkdir -p ~/scratch
-            - cd ~/scratch
-            - "rails new ci_example -d postgresql -m ~/rails-template/template.rb \<< INPUT\nci.example.com\n\nINPUT"
-            - cd ci_example
-            - bundle clean --force
             - 'export RUBY_GEMS_DIR=$(ruby -e puts\ \`gem\ env\`\[/INSTALLATION\ DIRECTORY:\ \(.\*\)/,\ 1\])'
             - cache store "gems-${SEMAPHORE_GIT_WORKING_BRANCH}-$(checksum Gemfile.lock)" $RUBY_GEMS_DIR
+            - mkdir -p ~/scratch/ci_example
+            - cd ~/scratch/ci_example
+            - cache restore "bundle-${SEMAPHORE_GIT_WORKING_BRANCH}-,bundle-main-"
+            - "rails new . -d postgresql -m ~/rails-template/template.rb \<< INPUT\nci.example.com\n\nINPUT"
+            - bundle clean
+            - cache store "bundle-${SEMAPHORE_GIT_WORKING_BRANCH}-$(checksum Gemfile.lock)" vendor/bundle
             - cd ..
             - tar cfz ci_example.tgz ci_example
             - artifact push workflow ci_example.tgz
