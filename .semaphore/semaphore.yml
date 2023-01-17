@@ -1,0 +1,97 @@
+version: v1.0
+name: CI
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu2004
+global_job_config:
+  env_vars:
+    - name: BUNDLE_PATH
+      value: "./vendor/bundle"
+    - name: DATABASE_URL
+      value: "postgresql://postgres:@0.0.0.0:5432/test"
+  prologue:
+    commands:
+      - sem-version ruby 3.2
+      - sem-version node 'lts/*'
+blocks:
+  - name: Generate project
+    dependencies: []
+    task:
+      jobs:
+        - name: rails new
+          commands:
+            - sem-service start postgres 14
+            - checkout
+            - git config --global user.name Semaphore
+            - git config --global user.email ci@example.com
+            - git config --global init.defaultBranch main
+            - gem install railties --version "~> 7.0.0" --no-document
+            - gem install bundler --no-document
+            - mkdir -p ~/scratch/ci_example
+            - cd ~/scratch/ci_example
+            - cache restore "bundle-${SEMAPHORE_GIT_WORKING_BRANCH}-,bundle-main-"
+            - "rails new . -d postgresql -m ~/rails-template/template.rb \<< INPUT\nci.example.com\n\nINPUT"
+            - bundle clean
+            - cache store "bundle-${SEMAPHORE_GIT_WORKING_BRANCH}-$(checksum Gemfile.lock)" vendor/bundle
+            - cd ..
+            - tar cfz ci_example.tgz ci_example
+            - artifact push workflow ci_example.tgz
+  - name: Test
+    dependencies: ["Generate project"]
+    task:
+      prologue:
+        commands:
+          - sem-service start postgres 14
+          - artifact pull workflow ci_example.tgz
+          - tar xfz ci_example.tgz
+          - cd ci_example
+          - bundle exec rake db:create db:schema:load
+      epilogue:
+        commands:
+          - test-results publish ./reports
+      jobs:
+        - name: test
+          commands:
+            - bundle exec rake test TESTOPTS="--ci-dir=./reports"
+        - name: test:system
+          commands:
+            - mkdir -p ./tmp/screenshots
+            - bundle exec rake test:system TESTOPTS="--ci-dir=./reports"
+            - artifact push job ./tmp/screenshots
+  - name: Lint
+    dependencies: ["Generate project"]
+    task:
+      prologue:
+        commands:
+          - artifact pull workflow ci_example.tgz
+          - tar xfz ci_example.tgz
+          - cd ci_example
+      jobs:
+        - name: erblint
+          commands:
+            - bin/erblint --lint-all
+        - name: eslint
+          commands:
+            - yarn lint:js
+        - name: rubocop
+          commands:
+            - bin/rubocop
+        - name: stylelint
+          commands:
+            - yarn lint:css
+  - name: Security
+    dependencies: ["Generate project"]
+    task:
+      prologue:
+        commands:
+          - artifact pull workflow ci_example.tgz
+          - tar xfz ci_example.tgz
+          - cd ci_example
+      jobs:
+        - name: brakeman
+          commands:
+            - bundle exec brakeman --exit-on-warn --no-progress --color --output /dev/stdout
+        - name: bundle-audit
+          commands:
+            - bundle exec bundle-audit check --update -v
