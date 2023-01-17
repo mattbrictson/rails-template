@@ -14,9 +14,6 @@ global_job_config:
     commands:
       - sem-version ruby 3.2
       - sem-version node 'lts/*'
-      - export GEM_HOME=$HOME/gems
-      - export GEM_PATH=$HOME/gems
-      - export PATH=$GEM_HOME/bin:$PATH
       - cache restore "gems-${SEMAPHORE_GIT_WORKING_BRANCH}-,gems-main-"
 blocks:
   - name: Generate project
@@ -39,4 +36,4 @@ blocks:
             - "rails new ci_example -d postgresql -m ~/rails-template/template.rb \<< INPUT\nci.example.com\n\nINPUT"
             - cd ci_example
             - bundle clean --force
-            - cache store "gems-${SEMAPHORE_GIT_WORKING_BRANCH}-$(checksum Gemfile.lock)" $GEM_HOME
+            - cache store "gems-${SEMAPHORE_GIT_WORKING_BRANCH}-$(checksum Gemfile.lock)" $(ruby -e 'puts `gem env`[/INSTALLATION DIRECTORY: (.*)/, 1]')
