@@ -1,6 +1,6 @@
 # mattbrictson/rails-template
 
-[![Circle](https://circleci.com/gh/mattbrictson/rails-template/tree/main.svg?style=shield)](https://app.circleci.com/pipelines/github/mattbrictson/rails-template?branch=main)
+[![Build Status](https://mattbrictson.semaphoreci.com/badges/rails-template/branches/main.svg?style=shields)](https://mattbrictson.semaphoreci.com/projects/rails-template)
 
 ## Description
 
