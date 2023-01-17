@@ -40,9 +40,6 @@ blocks:
   - name: Test
     dependencies: ["Generate project"]
     task:
-      env_vars:
-        - name: DATABASE_URL
-          value: "postgresql://postgres:@0.0.0.0:5432/test"
       prologue:
         commands:
           - sem-service start postgres 14
@@ -62,3 +59,39 @@ blocks:
             - mkdir -p ./tmp/screenshots
             - bundle exec rake test:system TESTOPTS="--ci-dir=./reports"
             - artifact push job ./tmp/screenshots
+  - name: Lint
+    dependencies: ["Install dependencies"]
+    task:
+      prologue:
+        commands:
+          - artifact pull workflow ci_example.tgz
+          - tar xfz ci_example.tgz
+          - cd ci_example
+      jobs:
+        - name: erblint
+          commands:
+            - bin/erblint --lint-all
+        - name: eslint
+          commands:
+            - yarn lint:js
+        - name: rubocop
+          commands:
+            - bin/rubocop
+        - name: stylelint
+          commands:
+            - yarn lint:css
+  - name: Security
+    dependencies: ["Install dependencies"]
+    task:
+      prologue:
+        commands:
+          - artifact pull workflow ci_example.tgz
+          - tar xfz ci_example.tgz
+          - cd ci_example
+      jobs:
+        - name: brakeman
+          commands:
+            - bundle exec brakeman --exit-on-warn --no-progress --color --output /dev/stdout
+        - name: bundle-audit
+          commands:
+            - bundle exec bundle-audit check --update -v
