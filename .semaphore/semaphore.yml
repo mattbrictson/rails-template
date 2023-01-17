@@ -34,6 +34,7 @@ blocks:
             - "rails new . -d postgresql -m ~/rails-template/template.rb \<< INPUT\nci.example.com\n\nINPUT"
             - bundle clean
             - cache store "bundle-${SEMAPHORE_GIT_WORKING_BRANCH}-$(checksum Gemfile.lock)" vendor/bundle
+            - rm -rf .git
             - cd ..
             - tar cfz ci_example.tgz ci_example
             - artifact push workflow ci_example.tgz
