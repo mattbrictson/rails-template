@@ -48,6 +48,9 @@ def apply_template!
       # Ignore application config.
       /.env.development
       /.env.*local
+
+      # Ignore locally-installed gems.
+      /vendor/bundle/
     IGNORE
 
     if install_vite?
