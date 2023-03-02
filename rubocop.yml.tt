@@ -1,4 +1,5 @@
 require:
+  - rubocop-capybara
   - rubocop-minitest
   - rubocop-performance
   - rubocop-rails
