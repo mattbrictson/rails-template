@@ -100,6 +100,7 @@ If you don't specify `--javascript vite`, then this template will use the standa
     * [brakeman][] and [bundler-audit][] – detect security vulnerabilities
 * Testing
     * [capybara-lockstep][] – for more reliable browser testing
+    * [factory_bot_rails][] – for easy setup of test data
     * [shoulda][] – shortcuts for common ActiveRecord tests
 
 #### Postmark
@@ -128,6 +129,7 @@ Rails generators are very lightly documented; what you’ll find is that most of
 [amazing_print]:https://github.com/amazing-print/amazing_print
 [rubocop]:https://github.com/bbatsov/rubocop
 [erblint]:https://github.com/Shopify/erb-lint
+[factory_bot_rails]:https://github.com/thoughtbot/factory_bot_rails
 [pico]:https://picocss.com
 [Postmark]:http://postmarkapp.com
 [postmark-rails]:http://www.rubydoc.info/gems/postmark-rails/0.12.0

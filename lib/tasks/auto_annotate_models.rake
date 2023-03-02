@@ -3,7 +3,6 @@ if Rails.env.development?
   task :set_annotation_options do # rubocop:disable Metrics/BlockLength
     # You can override any of these by setting an environment variable of the same name.
     Annotate.set_defaults(
-      "additional_file_patterns"   => ["factories/%PLURALIZED_MODEL_NAME%.rb"],
       "routes"                     => "false",
       "models"                     => "true",
       "position_in_routes"         => "before",
