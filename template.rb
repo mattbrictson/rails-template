@@ -248,7 +248,8 @@ def add_yarn_lint_and_run_fix
     stylelint
     stylelint-config-recommended-scss
     stylelint-config-standard
-    stylelint-declaration-use-variable
+    stylelint-declaration-strict-value
+    stylelint-prettier
     stylelint-scss
   ]
   run_with_clean_bundler_env "yarn add #{packages.join(' ')}"
