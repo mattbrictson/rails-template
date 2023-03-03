@@ -229,13 +229,13 @@ end
 def add_yarn_start_script
   return add_package_json_script(start: "bin/dev") if File.exist?("bin/dev")
 
-  run_with_clean_bundler_env "yarn add concurrently"
-
   procs = ["'bin/rails s -b 0.0.0.0'"]
   procs << "'bin/vite dev'" if File.exist?("bin/vite")
   procs << "bin/webpack-dev-server" if File.exist?("bin/webpack-dev-server")
 
-  add_package_json_script(start: "concurrently -i -k --kill-others-on-fail -p none #{procs.join(" ")}")
+  add_package_json_script(start: "stale-dep && concurrently -i -k --kill-others-on-fail -p none #{procs.join(" ")}")
+  add_package_json_script(postinstall: "stale-dep -u")
+  run_with_clean_bundler_env "yarn add concurrently stale-dep"
 end
 
 def add_yarn_lint_and_run_fix
@@ -245,6 +245,7 @@ def add_yarn_lint_and_run_fix
     eslint-plugin-prettier
     npm-run-all
     prettier
+    stale-dep
     stylelint
     stylelint-config-recommended-scss
     stylelint-config-standard
@@ -252,10 +253,11 @@ def add_yarn_lint_and_run_fix
     stylelint-prettier
     stylelint-scss
   ]
-  run_with_clean_bundler_env "yarn add #{packages.join(' ')}"
   add_package_json_script("lint": "npm-run-all -c lint:*")
-  add_package_json_script("lint:js": "eslint 'app/{components,frontend,javascript}/**/*.{js,jsx}'")
-  add_package_json_script("lint:css": "stylelint 'app/{components,frontend,assets/stylesheets}/**/*.{css,scss}'")
+  add_package_json_script("lint:js": "stale-dep && eslint 'app/{components,frontend,javascript}/**/*.{js,jsx}'")
+  add_package_json_script("lint:css": "stale-dep && stylelint 'app/{components,frontend,assets/stylesheets}/**/*.{css,scss}'")
+  add_package_json_script("postinstall": "stale-dep -u")
+  run_with_clean_bundler_env "yarn add #{packages.join(' ')}"
   run_with_clean_bundler_env "yarn lint:js --fix"
   run_with_clean_bundler_env "yarn lint:css --fix"
 end
@@ -274,6 +276,7 @@ def simplify_package_json_deps
     .to_h
 
   File.write("package.json", JSON.pretty_generate(package_json))
+  run_with_clean_bundler_env "yarn install"
 end
 
 def install_vite?
