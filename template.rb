@@ -244,6 +244,7 @@ def add_yarn_lint_and_run_fix
     eslint-config-prettier
     eslint-plugin-prettier
     npm-run-all
+    postcss
     prettier
     stale-dep
     stylelint
