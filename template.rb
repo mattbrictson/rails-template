@@ -71,7 +71,7 @@ def apply_template!
 
     remove_file "Procfile.dev" unless File.exist?("bin/dev")
 
-    template "rubocop.yml.tt", ".rubocop.yml"
+    copy_file "rubocop.yml", ".rubocop.yml"
     run_rubocop_autocorrections
 
     template "eslintrc.js", ".eslintrc.js"
