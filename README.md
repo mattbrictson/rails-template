@@ -95,7 +95,6 @@ If you don't specify `--javascript vite`, then this template will use the standa
     * [good_migrations][] - prevents app models from being improperly referenced in migrations
     * [rubocop][] – enforces Ruby code style
     * [erblint][] – applies rubocop rules within html.erb files
-    * [syntax_suggest][] – easier troubleshooting of Ruby syntax errors
 * Security
     * [brakeman][] and [bundler-audit][] – detect security vulnerabilities
 * Testing
@@ -140,6 +139,5 @@ Rails generators are very lightly documented; what you’ll find is that most of
 [template.rb]: template.rb
 [thor]: https://github.com/erikhuda/thor
 [vite]: https://vite-ruby.netlify.app
-[syntax_suggest]: https://github.com/zombocom/syntax_suggest
 [good_migrations]: https://github.com/testdouble/good-migrations
 [capybara-lockstep]: https://github.com/makandra/capybara-lockstep
