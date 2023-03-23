@@ -275,7 +275,7 @@ def simplify_package_json_deps
     .sort_by { |key, _| key }
     .to_h
 
-  File.write("package.json", JSON.pretty_generate(package_json))
+  File.write("package.json", JSON.pretty_generate(package_json) + "\n")
   run_with_clean_bundler_env "yarn install"
 end
 
