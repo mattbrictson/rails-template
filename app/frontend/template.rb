@@ -15,7 +15,7 @@ end
 if package_json.match?(%r{@hotwired/stimulus})
   prepend_to_file "app/frontend/entrypoints/application.js", <<~JS
     import "~/controllers";
-    import "~/stylesheets/index.scss";
+    import "~/stylesheets/main.scss";
   JS
 end
 
