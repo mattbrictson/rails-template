@@ -29,6 +29,7 @@ def apply_template!
 
   copy_file "Thorfile"
   copy_file "Procfile"
+  copy_file "Procfile.dev"
   copy_file "package.json"
 
   apply "Rakefile.rb"
@@ -46,18 +47,20 @@ def apply_template!
     append_to_file ".gitignore", <<~IGNORE
 
       # Ignore application config.
-      /.env.development
       /.env.*local
 
       # Ignore locally-installed gems.
       /vendor/bundle/
+
+      yarn-error.log
     IGNORE
 
     if install_vite?
       File.rename("app/javascript", "app/frontend") if File.exist?("app/javascript")
       run_with_clean_bundler_env "bundle exec vite install"
-      run "yarn add autoprefixer sass @picocss/pico"
+      run "yarn add autoprefixer sass tailwindcss"
       copy_file "postcss.config.js"
+      copy_file "vite.config.js"
       apply "app/frontend/template.rb"
     end
 
@@ -243,6 +246,7 @@ def add_yarn_lint_and_run_fix
     eslint
     eslint-config-prettier
     eslint-plugin-prettier
+    eslint-plugin-tailwindcss
     postcss
     prettier
     stale-dep
@@ -280,6 +284,7 @@ def simplify_package_json_deps
 end
 
 def install_vite?
-  options[:javascript] == "vite"
+  # options[:javascript] == "vite"
+  true
 end
 apply_template!
