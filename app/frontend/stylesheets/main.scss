@@ -1,4 +1,6 @@
-@import "@picocss/pico";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 // Uncomment this to disable Pico's responsive sizing and instead respect the user's browser font size setting
 // :root {
