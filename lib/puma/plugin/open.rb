@@ -5,10 +5,10 @@ Puma::Plugin.create do
     return unless defined?(Rails) && defined?(Launchy)
     return unless Rails.env.development?
 
-    tcp = launcher.options[:binds].grep(/^tcp/).first
-    return if tcp.nil?
+    binding = launcher.options[:binds].grep(/^tcp|ssl/).first
+    return if binding.nil?
 
-    url = tcp.sub(/^tcp/, "http").sub("0.0.0.0", "localhost")
+    url = binding.sub(/^tcp/, "http").sub(/^ssl/, "https").sub("0.0.0.0", "localhost")
     Launchy.open(url)
   end
 end
