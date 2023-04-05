@@ -26,7 +26,6 @@ group :production do
 end
 
 group :development do
-  gem "amazing_print"
   gem "annotate"
   gem "brakeman", require: false
   gem "bundler-audit", require: false

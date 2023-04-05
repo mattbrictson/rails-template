@@ -91,7 +91,6 @@ If you don't specify `--javascript vite`, then this template will use the standa
     * [Pico.css][pico] - a great-looking default stylesheet
 * Utilities
     * [annotate][] – auto-generates schema documentation
-    * [amazing_print][] – try `ap` instead of `puts`
     * [good_migrations][] - prevents app models from being improperly referenced in migrations
     * [rubocop][] – enforces Ruby code style
     * [erblint][] – applies rubocop rules within html.erb files
@@ -125,7 +124,6 @@ Rails generators are very lightly documented; what you’ll find is that most of
 [sidekiq]:http://sidekiq.org
 [dotenv]:https://github.com/bkeepers/dotenv
 [annotate]:https://github.com/ctran/annotate_models
-[amazing_print]:https://github.com/amazing-print/amazing_print
 [rubocop]:https://github.com/bbatsov/rubocop
 [erblint]:https://github.com/Shopify/erb-lint
 [factory_bot_rails]:https://github.com/thoughtbot/factory_bot_rails
