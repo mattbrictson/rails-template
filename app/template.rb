@@ -12,8 +12,9 @@ File.rename "app/views/layouts/application.html.erb", "app/views/layouts/base.ht
 
 prepend_to_file "app/views/layouts/base.html.erb", <<~ERB
 <%# The "base" layout contains boilerplate common to *all* views. %>
-
 ERB
+
+gsub_file "app/views/layouts/base.html.erb", "<html>", %(<html lang="en">)
 
 insert_into_file "app/views/layouts/base.html.erb", <<-ERB, after: "<head>"
 
