@@ -23,6 +23,10 @@ This template currently works with:
 * Bundler 2.x
 * PostgreSQL
 
+*When using the optional support for Vite:*
+* Node 16.*
+* Yarn 1.x (if using the optional support for Vite)
+
 If you need help setting up a Ruby development environment, check out my [Rails OS X Setup Guide](https://mattbrictson.com/rails-osx-setup-guide).
 
 ## Installation
