@@ -15,8 +15,6 @@ This project requires:
 
 On a Mac, you can obtain all of the above packages using [Homebrew][].
 
-If you need help setting up a Ruby development environment, check out this [Rails OS X Setup Guide](https://mattbrictson.com/rails-osx-setup-guide).
-
 ## Getting started
 
 ### bin/setup
