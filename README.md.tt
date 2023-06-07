@@ -21,17 +21,29 @@ On a Mac, you can obtain all of the above packages using [Homebrew][].
 
 Run the `bin/setup` script. This script will:
 
-* Check you have the required Ruby version
 * Install dependencies using Bundler and Yarn
 * Create a `.env.development` file
 * Create, migrate, and seed the database
 
 ### Run it!
 
-1. Run `bin/rake` to run all tests and lint checks.
-2. Start the app with `yarn start`
+Start the app with `yarn start`.
 
-Access the app at <http://localhost:3000/>.
+The app will be located at <http://localhost:3000/>.
+
+## Development
+
+To run the full suite of tests and lint checks, run:
+
+```
+$ bin/rake
+```
+
+To auto-correct formatting and linting issues, run:
+
+```
+$ bin/rake fix
+```
 
 ## Deployment
 
@@ -40,7 +52,6 @@ Ensure the following environment variables are set in the deployment environment
 * `DATABASE_URL`
 * `RACK_ENV`
 * `RAILS_ENV`
-* `REDIS_URL`
 * `SECRET_KEY_BASE`
 
 Optionally:
@@ -53,6 +64,7 @@ Optionally:
 * `RAILS_LOG_TO_STDOUT`
 * `RAILS_MAX_THREADS`
 * `RAILS_SERVE_STATIC_FILES`
+* `REDIS_URL`
 * `SIDEKIQ_CONCURRENCY`
 * `SIDEKIQ_WEB_PASSWORD`
 * `SIDEKIQ_WEB_USERNAME`
