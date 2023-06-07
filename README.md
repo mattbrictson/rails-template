@@ -96,8 +96,11 @@ If you don't specify `--javascript vite`, then this template will use the standa
 * Utilities
     * [annotate][] – auto-generates schema documentation
     * [good_migrations][] - prevents app models from being improperly referenced in migrations
+* Linting
     * [rubocop][] – enforces Ruby code style
     * [erblint][] – applies rubocop rules within html.erb files
+    * [stylelint][] – checks (S)CSS files
+    * [eslint][] – checks JS/TS files
 * Security
     * [brakeman][] and [bundler-audit][] – detect security vulnerabilities
 * Testing
@@ -143,3 +146,5 @@ Rails generators are very lightly documented; what you’ll find is that most of
 [vite]: https://vite-ruby.netlify.app
 [good_migrations]: https://github.com/testdouble/good-migrations
 [capybara-lockstep]: https://github.com/makandra/capybara-lockstep
+[eslint]: https://eslint.org
+[stylelint]: https://stylelint.io
