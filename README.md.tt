@@ -6,11 +6,14 @@ This is a Rails <%= Rails::VERSION::MAJOR %> app.
 
 This README describes the purpose of this repository and how to set up a development environment.
 
+<!-- Links to additional project documentation can go here. -->
+
 ## Prerequisites
 
 This project requires:
 
 * Ruby <%= RUBY_VERSION %>, preferably managed using [rbenv][]
+* Node and Yarn 1.x (`npm install -g yarn`)
 * PostgreSQL must be installed and accepting connections
 
 On a Mac, you can obtain all of the above packages using [Homebrew][].
