@@ -2,32 +2,27 @@
 
 [![Build Status](https://mattbrictson.semaphoreci.com/badges/rails-template/branches/main.svg?style=shields)](https://mattbrictson.semaphoreci.com/projects/rails-template)
 
-## Description
+## About
 
 This is the application template that I recommend for Rails 7 projects. I've assembled this template over the years to include best-practices, tweaks, documentation, and personal preferences, while still generally adhering to the "Rails way".
 
-For older versions of Rails, use these branches:
+I've written several blog posts on techniques, helpers, and boilerplate that are included in this template, if you'd like to take a deeper dive:
 
-* [Rails 6.1.x](https://github.com/mattbrictson/rails-template/tree/rails-61)
-* [Rails 6.0.x](https://github.com/mattbrictson/rails-template/tree/rails-60)
-* [Rails 5.2.x](https://github.com/mattbrictson/rails-template/tree/rails-52)
-* [Rails 5.1.x](https://github.com/mattbrictson/rails-template/tree/rails-51)
-* [Rails 5.0.x](https://github.com/mattbrictson/rails-template/tree/rails-50)
-* [Rails 4.2.x](https://github.com/mattbrictson/rails-template/tree/rails-42)
+- [Automatically open the browser when the Rails server starts](https://mattbrictson.com/blog/open-browser-on-rails-start)
+- [Configuring RuboCop to scan the right files in a Rails project](https://mattbrictson.com/blog/including-and-excluding-files-in-rubocop)
+- [Easier Nested Layouts in Rails](https://mattbrictson.com/blog/easier-nested-layouts-in-rails)
+- [The 3 Vite plugins I use on every new Rails project](https://mattbrictson.com/blog/3-vite-rails-plugins)
+- [Inline SVGs with Rails and Vite](https://mattbrictson.com/blog/inline-svg-with-vite-rails)
 
 ## Requirements
 
-This template currently works with:
+This template currently requires:
 
-* Rails 7.0.x
-* Bundler 2.x
+* **Rails 7.0**
 * PostgreSQL
+* Node 16+ and Yarn 1.x
 
-*When using `--javascript vite`:*
-* Node 16 or later
-* Yarn 1.x
-
-If you need help setting up a Ruby development environment, check out my [Rails OS X Setup Guide](https://mattbrictson.com/rails-osx-setup-guide).
+For older versions of Rails, you can use one of [these branches](https://github.com/mattbrictson/rails-template/branches/all) going back all the way to Rails 4.2.
 
 ## Installation
 
