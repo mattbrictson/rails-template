@@ -142,7 +142,7 @@ Rails generators are very lightly documented; what you’ll find is that most of
 [shoulda]:https://github.com/thoughtbot/shoulda
 [application templates]:http://guides.rubyonrails.org/generators.html#application-templates
 [template.rb]: template.rb
-[thor]: https://github.com/erikhuda/thor
+[thor]: https://github.com/rails/thor
 [vite]: https://vite-ruby.netlify.app
 [good_migrations]: https://github.com/testdouble/good-migrations
 [capybara-lockstep]: https://github.com/makandra/capybara-lockstep
