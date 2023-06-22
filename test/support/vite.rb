@@ -1,2 +1,2 @@
-# Build once at the start of testing, since we have autoBuild off
-ViteRuby.commands.build
+# Compile assets at the start of testing if autoBuild is off
+ViteRuby.commands.build unless ViteRuby.config.auto_build
