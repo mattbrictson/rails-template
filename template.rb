@@ -63,6 +63,9 @@ def apply_template!
       copy_file "postcss.config.js"
       copy_file "vite.config.ts", force: true
       apply "app/frontend/template.rb"
+      rewrite_json("config/vite.json") do |vite_json|
+        vite_json["test"]["autoBuild"] = false
+      end
     end
 
     apply "app/template.rb"
@@ -273,14 +276,19 @@ def add_package_json_script(scripts)
 end
 
 def simplify_package_json_deps
-  package_json = JSON.parse(File.read("package.json"))
-  package_json["dependencies"] = package_json["dependencies"]
-    .merge(package_json.delete("devDependencies") || {})
-    .sort_by { |key, _| key }
-    .to_h
-
-  File.write("package.json", JSON.pretty_generate(package_json) + "\n")
+  rewrite_json("package.json") do |package_json|
+    package_json["dependencies"] = package_json["dependencies"]
+      .merge(package_json.delete("devDependencies") || {})
+      .sort_by { |key, _| key }
+      .to_h
+  end
   run_with_clean_bundler_env "yarn install"
+end
+
+def rewrite_json(file)
+  json = JSON.parse(File.read(file))
+  yield(json)
+  File.write(file, JSON.pretty_generate(json) + "\n")
 end
 
 def install_vite?
