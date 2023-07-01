@@ -19,9 +19,11 @@ end
 if package_json.match?(%r{@hotwired/stimulus})
   prepend_to_file "app/frontend/entrypoints/application.js", <<~JS
     import "~/controllers";
-    import "~/stylesheets/index.css";
   JS
 end
+prepend_to_file "app/frontend/entrypoints/application.js", <<~JS
+  import "~/stylesheets/index.css";
+JS
 
 # Remove sprockets
 gsub_file "Gemfile", /^gem "sprockets.*\n/, ""
