@@ -59,7 +59,7 @@ def apply_template!
       File.rename("app/javascript", "app/frontend") if File.exist?("app/javascript")
       run_with_clean_bundler_env "bundle exec vite install"
       run "yarn remove vite-plugin-ruby"
-      run "yarn add autoprefixer postcss rollup sass vite-plugin-rails @picocss/pico"
+      run "yarn add autoprefixer postcss rollup vite-plugin-rails modern-normalize"
       copy_file "postcss.config.js"
       copy_file "vite.config.ts", force: true
       apply "app/frontend/template.rb"
