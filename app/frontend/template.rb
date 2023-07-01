@@ -1,7 +1,9 @@
 empty_directory_with_keep_file "app/frontend/fonts"
 empty_directory_with_keep_file "app/frontend/images"
 
-copy_file "app/frontend/stylesheets/index.scss"
+copy_file "app/frontend/stylesheets/index.css"
+copy_file "app/frontend/stylesheets/base.css"
+copy_file "app/frontend/stylesheets/reset.css"
 
 copy_file "app/frontend/images/example.svg"
 copy_file "app/lib/vite_inline_svg_file_loader.rb"
@@ -17,7 +19,7 @@ end
 if package_json.match?(%r{@hotwired/stimulus})
   prepend_to_file "app/frontend/entrypoints/application.js", <<~JS
     import "~/controllers";
-    import "~/stylesheets/index.scss";
+    import "~/stylesheets/index.css";
   JS
 end
 

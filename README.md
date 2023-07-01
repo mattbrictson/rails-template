@@ -88,8 +88,6 @@ If you don't specify `--javascript vite`, then this template will use the standa
     * [sidekiq][] – Redis-based job queue implementation for Active Job
 * Configuration
     * [dotenv][] – for local configuration
-* Style
-    * [Pico.css][pico] - a great-looking default stylesheet
 * Utilities
     * [annotate][] – auto-generates schema documentation
     * [good_migrations][] - prevents app models from being improperly referenced in migrations
@@ -131,7 +129,6 @@ Rails generators are very lightly documented; what you’ll find is that most of
 [rubocop]:https://github.com/bbatsov/rubocop
 [erblint]:https://github.com/Shopify/erb-lint
 [factory_bot_rails]:https://github.com/thoughtbot/factory_bot_rails
-[pico]:https://picocss.com
 [Postmark]:http://postmarkapp.com
 [postmark-rails]:http://www.rubydoc.info/gems/postmark-rails/0.12.0
 [brakeman]:https://github.com/presidentbeef/brakeman
