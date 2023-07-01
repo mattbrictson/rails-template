@@ -254,16 +254,14 @@ def add_yarn_lint_and_run_fix
     prettier
     stale-dep
     stylelint
-    stylelint-config-recommended-scss
     stylelint-config-standard
     stylelint-declaration-strict-value
     stylelint-prettier
-    stylelint-scss
   ]
   add_package_json_script("fix": "npm run -- lint:js --fix && npm run -- lint:css --fix")
   add_package_json_script("lint": "npm run lint:js && npm run lint:css")
   add_package_json_script("lint:js": "stale-dep && eslint 'app/{components,frontend,javascript}/**/*.{js,jsx}'")
-  add_package_json_script("lint:css": "stale-dep && stylelint 'app/{components,frontend,assets/stylesheets}/**/*.{css,scss}'")
+  add_package_json_script("lint:css": "stale-dep && stylelint 'app/{components,frontend,assets/stylesheets}/**/*.css'")
   add_package_json_script("postinstall": "stale-dep -u")
   run_with_clean_bundler_env "yarn add #{packages.join(' ')}"
   run_with_clean_bundler_env "yarn fix"

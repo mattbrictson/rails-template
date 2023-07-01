@@ -1,10 +1,6 @@
 module.exports = {
   plugins: ["stylelint-declaration-strict-value"],
-  extends: [
-    "stylelint-config-standard",
-    "stylelint-config-recommended-scss",
-    "stylelint-prettier/recommended",
-  ],
+  extends: ["stylelint-config-standard", "stylelint-prettier/recommended"],
   rules: {
     "color-hex-length": null,
     "declaration-empty-line-before": null,
@@ -33,11 +29,6 @@ module.exports = {
         ],
       },
     ],
-    "scss/at-function-pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
-    "scss/at-mixin-pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
-    "scss/dollar-variable-pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
-    "scss/no-duplicate-dollar-variables": true,
-    "scss/selector-no-redundant-nesting-selector": true,
     "selector-class-pattern": [
       // classes must be in BEM form, like this:
       // my_component
