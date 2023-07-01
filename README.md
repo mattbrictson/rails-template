@@ -77,7 +77,7 @@ Add the `--javascript vite` option to the `rails new` command to get started wit
 
 - Frontend code (JS, CSS, images) will be placed in `app/frontend/`
 - Run `yarn start` to start the development server with hot reloading
-- Plain CSS with [modern-normalize](https://github.com/sindresorhus/modern-normalize) be used for styles (the `--css` option will be ignored)
+- Plain CSS with [modern-normalize](https://github.com/sindresorhus/modern-normalize) will be used for styles (the `--css` option will be ignored)
 
 If you don't specify `--javascript vite`, then this template will use the standard Rails 7 behavior.
 
