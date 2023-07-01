@@ -1,0 +1,258 @@
+require:
+  - rubocop-capybara
+  - rubocop-minitest
+  - rubocop-performance
+  - rubocop-rails
+
+inherit_mode:
+  merge:
+    - Include
+
+AllCops:
+  DisplayCopNames: true
+  DisplayStyleGuide: true
+  NewCops: enable
+  Include:
+    - .tomo/**/*.rb
+  Exclude:
+    # ignore bin/* except for bin/setup
+    - !ruby/regexp /<%= Regexp.quote(File.expand_path("bin", __dir__)) %>\/(?!setup).*/
+    - .git/**/*
+    - db/*schema.rb
+    - log/**/*
+    - node_modules/**/*
+    - public/**/*
+    - storage/**/*
+    - tmp/**/*
+    - vendor/**/*
+
+Layout/ArgumentAlignment:
+  EnforcedStyle: with_fixed_indentation
+
+Layout/ExtraSpacing:
+  AllowForAlignment: false
+  AllowBeforeTrailingComments: true
+  ForceEqualSignAlignment: false
+
+Layout/FirstArrayElementIndentation:
+  EnforcedStyle: consistent
+
+Layout/FirstArrayElementLineBreak:
+  Enabled: true
+
+Layout/FirstHashElementLineBreak:
+  Enabled: true
+
+Layout/FirstMethodArgumentLineBreak:
+  Enabled: true
+
+Layout/HashAlignment:
+  EnforcedHashRocketStyle: key
+  EnforcedColonStyle: key
+  EnforcedLastArgumentHashStyle: always_inspect
+
+Layout/LineLength:
+  Exclude:
+    - config/initializers/content_security_policy.rb
+
+Layout/MultilineArrayLineBreaks:
+  Enabled: true
+
+Layout/MultilineHashKeyLineBreaks:
+  Enabled: true
+
+Layout/MultilineMethodArgumentLineBreaks:
+  Enabled: true
+
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
+Layout/MultilineOperationIndentation:
+  EnforcedStyle: indented
+
+Layout/SpaceInsideHashLiteralBraces:
+  EnforcedStyle: no_space
+  EnforcedStyleForEmptyBraces: no_space
+
+Lint/AmbiguousBlockAssociation:
+  Enabled: false
+
+Lint/DuplicateBranch:
+  Enabled: false
+
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/BlockLength:
+  Max: 25
+  Exclude:
+    - config/**/*
+    - test/**/*
+
+Metrics/ClassLength:
+  Max: 200
+  Exclude:
+    - test/**/*
+
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+Metrics/MethodLength:
+  Max: 25
+  Exclude:
+    - db/migrate/*
+    - test/**/*
+
+Metrics/ModuleLength:
+  Max: 200
+  Exclude:
+    - config/**/*
+
+Metrics/ParameterLists:
+  Max: 6
+
+Metrics/PerceivedComplexity:
+  Max: 8
+
+Minitest/AssertPredicate:
+  Enabled: false
+
+Minitest/AssertTruthy:
+  Enabled: false
+
+Minitest/EmptyLineBeforeAssertionMethods:
+  Enabled: false
+
+Minitest/MultipleAssertions:
+  Enabled: false
+
+Minitest/RefuteFalse:
+  Enabled: false
+
+Minitest/RefutePredicate:
+  Enabled: false
+
+Naming/FileName:
+  Exclude:
+    - .tomo/plugins/*.rb
+
+Naming/MemoizedInstanceVariableName:
+  Enabled: false
+
+Naming/VariableNumber:
+  Enabled: false
+
+Rails/ApplicationRecord:
+  Exclude:
+    - db/migrate/**
+
+Rails/BulkChangeTable:
+  Enabled: false
+
+Rails/DefaultScope:
+  Enabled: true
+
+Rails/Delegate:
+  Enabled: false
+
+Rails/EnvironmentVariableAccess:
+  Enabled: false
+
+Rails/HasAndBelongsToMany:
+  Enabled: false
+
+Rails/HttpStatus:
+  Enabled: false
+
+Rails/I18nLocaleTexts:
+  Enabled: false
+
+Rails/Inquiry:
+  Enabled: false
+
+Rails/NotNullColumn:
+  Enabled: false
+
+Rails/RakeEnvironment:
+  Enabled: false
+
+Rails/RefuteMethods:
+  Enabled: false
+
+Rails/RequireDependency:
+  Enabled: true
+
+Rails/RootPathnameMethods:
+  Enabled: false
+
+Rails/SkipsModelValidations:
+  Enabled: false
+
+Rails/Validation:
+  Enabled: false
+
+Style/Alias:
+  Enabled: false
+
+Style/AsciiComments:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/DoubleNegation:
+  Enabled: false
+
+Style/EmptyMethod:
+  EnforcedStyle: expanded
+
+Style/FetchEnvVar:
+  Enabled: false
+
+Style/FormatStringToken:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/GuardClause:
+  Enabled: false
+
+Style/IfUnlessModifier:
+  Enabled: false
+
+Style/ModuleFunction:
+  Enabled: false
+
+Style/NumericPredicate:
+  Enabled: false
+
+Style/PerlBackrefs:
+  Enabled: false
+
+Style/RescueStandardError:
+  EnforcedStyle: implicit
+
+Style/SingleLineMethods:
+  AllowIfMethodIsEmpty: false
+
+Style/StringConcatenation:
+  Enabled: false
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Style/StringLiteralsInInterpolation:
+  EnforcedStyle: double_quotes
+
+Style/SymbolArray:
+  Enabled: false
+
+Style/TrivialAccessors:
+  AllowPredicates: true
+
+Style/YodaExpression:
+  Enabled: false

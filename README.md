@@ -1,29 +1,30 @@
 # mattbrictson/rails-template
 
-[![Circle](https://circleci.com/gh/mattbrictson/rails-template/tree/main.svg?style=shield)](https://app.circleci.com/pipelines/github/mattbrictson/rails-template?branch=main)
+[![Build Status](https://mattbrictson.semaphoreci.com/badges/rails-template/branches/main.svg?style=shields)](https://mattbrictson.semaphoreci.com/projects/rails-template)
 
-## Description
+## About
 
 This is the application template that I recommend for Rails 7 projects. I've assembled this template over the years to include best-practices, tweaks, documentation, and personal preferences, while still generally adhering to the "Rails way".
 
-For older versions of Rails, use these branches:
+I've written several blog posts on techniques, helpers, and boilerplate that are included in this template, if you'd like to take a deeper dive:
 
-* [Rails 6.1.x](https://github.com/mattbrictson/rails-template/tree/rails-61)
-* [Rails 6.0.x](https://github.com/mattbrictson/rails-template/tree/rails-60)
-* [Rails 5.2.x](https://github.com/mattbrictson/rails-template/tree/rails-52)
-* [Rails 5.1.x](https://github.com/mattbrictson/rails-template/tree/rails-51)
-* [Rails 5.0.x](https://github.com/mattbrictson/rails-template/tree/rails-50)
-* [Rails 4.2.x](https://github.com/mattbrictson/rails-template/tree/rails-42)
+- [Tips for writing Rails tasks with Thor instead of Rake](https://mattbrictson.com/blog/rails-tasks-with-thor)
+- [Automatically open the browser when the Rails server starts](https://mattbrictson.com/blog/open-browser-on-rails-start)
+- [Configuring RuboCop to scan the right files in a Rails project](https://mattbrictson.com/blog/including-and-excluding-files-in-rubocop)
+- [Easier Nested Layouts in Rails](https://mattbrictson.com/blog/easier-nested-layouts-in-rails)
+- [The 3 Vite plugins I use on every new Rails project](https://mattbrictson.com/blog/3-vite-rails-plugins)
+- [Inline SVGs with Rails and Vite](https://mattbrictson.com/blog/inline-svg-with-vite-rails)
 
 ## Requirements
 
-This template currently works with:
+This template currently requires:
 
-* Rails 7.0.x
-* Bundler 2.x
+* **Rails 7.0**
+* **Ruby 3.1 or newer**
 * PostgreSQL
+* Node 16+ and Yarn 1.x
 
-If you need help setting up a Ruby development environment, check out my [Rails OS X Setup Guide](https://mattbrictson.com/rails-osx-setup-guide).
+For older versions of Rails, you can use one of [these branches](https://github.com/mattbrictson/rails-template/branches/all) going back all the way to Rails 4.2.
 
 ## Installation
 
@@ -87,19 +88,19 @@ If you don't specify `--javascript vite`, then this template will use the standa
     * [sidekiq][] – Redis-based job queue implementation for Active Job
 * Configuration
     * [dotenv][] – for local configuration
-* Style
-    * [Pico.css][pico] - a great-looking default stylesheet
 * Utilities
     * [annotate][] – auto-generates schema documentation
-    * [amazing_print][] – try `ap` instead of `puts`
     * [good_migrations][] - prevents app models from being improperly referenced in migrations
+* Linting
     * [rubocop][] – enforces Ruby code style
     * [erblint][] – applies rubocop rules within html.erb files
-    * [syntax_suggest][] – easier troubleshooting of Ruby syntax errors
+    * [stylelint][] – checks (S)CSS files
+    * [eslint][] – checks JS/TS files
 * Security
     * [brakeman][] and [bundler-audit][] – detect security vulnerabilities
 * Testing
     * [capybara-lockstep][] – for more reliable browser testing
+    * [factory_bot_rails][] – for easy setup of test data
     * [shoulda][] – shortcuts for common ActiveRecord tests
 
 #### Postmark
@@ -125,10 +126,9 @@ Rails generators are very lightly documented; what you’ll find is that most of
 [sidekiq]:http://sidekiq.org
 [dotenv]:https://github.com/bkeepers/dotenv
 [annotate]:https://github.com/ctran/annotate_models
-[amazing_print]:https://github.com/amazing-print/amazing_print
 [rubocop]:https://github.com/bbatsov/rubocop
 [erblint]:https://github.com/Shopify/erb-lint
-[pico]:https://picocss.com
+[factory_bot_rails]:https://github.com/thoughtbot/factory_bot_rails
 [Postmark]:http://postmarkapp.com
 [postmark-rails]:http://www.rubydoc.info/gems/postmark-rails/0.12.0
 [brakeman]:https://github.com/presidentbeef/brakeman
@@ -136,8 +136,9 @@ Rails generators are very lightly documented; what you’ll find is that most of
 [shoulda]:https://github.com/thoughtbot/shoulda
 [application templates]:http://guides.rubyonrails.org/generators.html#application-templates
 [template.rb]: template.rb
-[thor]: https://github.com/erikhuda/thor
+[thor]: https://github.com/rails/thor
 [vite]: https://vite-ruby.netlify.app
-[syntax_suggest]: https://github.com/zombocom/syntax_suggest
 [good_migrations]: https://github.com/testdouble/good-migrations
 [capybara-lockstep]: https://github.com/makandra/capybara-lockstep
+[eslint]: https://eslint.org
+[stylelint]: https://stylelint.io

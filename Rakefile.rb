@@ -11,5 +11,12 @@ append_to_file "Rakefile" do
       system("bin/erblint --lint-all") &
       system("yarn lint")
   end
+
+  task :fix do
+    raise unless
+      system("bin/rubocop -a") &
+      system("bin/erblint --lint-all -a") &
+      system("yarn fix")
+  end
   RUBY
 end

@@ -2,9 +2,13 @@ empty_directory_with_keep_file "app/frontend/fonts"
 empty_directory_with_keep_file "app/frontend/images"
 
 copy_file "app/frontend/stylesheets/index.css"
+copy_file "app/frontend/stylesheets/base.css"
+copy_file "app/frontend/stylesheets/reset.css"
 
-copy_file "app/helpers/vite_inline_svg_helper.rb"
-copy_file "test/helpers/vite_inline_svg_helper_test.rb"
+copy_file "app/frontend/images/example.svg"
+copy_file "app/lib/vite_inline_svg_file_loader.rb"
+copy_file "app/helpers/inline_svg_helper.rb"
+copy_file "test/helpers/inline_svg_helper_test.rb"
 
 package_json = File.read("package.json")
 if package_json.match?(%r{@hotwired/turbo-rails})

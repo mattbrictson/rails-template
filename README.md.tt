@@ -6,16 +6,17 @@ This is a Rails <%= Rails::VERSION::MAJOR %> app.
 
 This README describes the purpose of this repository and how to set up a development environment.
 
+<!-- Links to additional project documentation can go here. -->
+
 ## Prerequisites
 
 This project requires:
 
 * Ruby <%= RUBY_VERSION %>, preferably managed using [rbenv][]
+* Node and Yarn 1.x (`npm install -g yarn`)
 * PostgreSQL must be installed and accepting connections
 
 On a Mac, you can obtain all of the above packages using [Homebrew][].
-
-If you need help setting up a Ruby development environment, check out this [Rails OS X Setup Guide](https://mattbrictson.com/rails-osx-setup-guide).
 
 ## Getting started
 
@@ -23,17 +24,29 @@ If you need help setting up a Ruby development environment, check out this [Rail
 
 Run the `bin/setup` script. This script will:
 
-* Check you have the required Ruby version
 * Install dependencies using Bundler and Yarn
 * Create a `.env.development` file
 * Create, migrate, and seed the database
 
 ### Run it!
 
-1. Run `bin/rake` to run all tests and lint checks.
-2. Start the app with `yarn start`
+Start the app with `yarn start`.
 
-Access the app at <http://localhost:3000/>.
+The app will be located at <http://localhost:3000/>.
+
+## Development
+
+To run the full suite of tests and lint checks, run:
+
+```
+$ bin/rake
+```
+
+To auto-correct formatting and linting issues, run:
+
+```
+$ bin/rake fix
+```
 
 ## Deployment
 
@@ -42,7 +55,6 @@ Ensure the following environment variables are set in the deployment environment
 * `DATABASE_URL`
 * `RACK_ENV`
 * `RAILS_ENV`
-* `REDIS_URL`
 * `SECRET_KEY_BASE`
 
 Optionally:
@@ -55,6 +67,7 @@ Optionally:
 * `RAILS_LOG_TO_STDOUT`
 * `RAILS_MAX_THREADS`
 * `RAILS_SERVE_STATIC_FILES`
+* `REDIS_URL`
 * `SIDEKIQ_CONCURRENCY`
 * `SIDEKIQ_WEB_PASSWORD`
 * `SIDEKIQ_WEB_USERNAME`

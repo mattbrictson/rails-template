@@ -2,13 +2,13 @@
 
 def setup!
   within_project_root do
-    run  "bundle check > /dev/null 2>&1 || bundle install"
-    run  "yarn install" if File.exist?("yarn.lock")
-    run  "overcommit --install" if overcommit_present?
+    run "bundle check > /dev/null 2>&1 || bundle install"
+    run "yarn install" if File.exist?("yarn.lock")
+    run "overcommit --install" if overcommit_present?
     copy "example.env", ".env.development"
     test_local_env_contains_required_keys
-    run  "RAILS_ENV=test bin/rails db:drop db:create"
-    run  "SKIP_TEST_DATABASE=1  bin/rails tmp:create db:prepare db:seed"
+    run "RAILS_ENV=test bin/rails db:drop db:create"
+    run "SKIP_TEST_DATABASE=1  bin/rails tmp:create db:prepare db:seed"
   end
 end
 
@@ -20,8 +20,8 @@ gemfile do
   gem "highline"
 end
 
-def within_project_root(&block)
-  Dir.chdir(File.expand_path("..", __dir__), &block)
+def within_project_root(&)
+  Dir.chdir(File.expand_path("..", __dir__), &)
 end
 
 def overcommit_present?
@@ -37,9 +37,10 @@ def run(command)
   end
 end
 
-def with_clean_bundler_env(&block)
-  return block.call unless defined?(Bundler)
-  Bundler.with_clean_env(&block)
+def with_clean_bundler_env(&)
+  return yield unless defined?(Bundler)
+
+  Bundler.with_clean_env(&)
 end
 
 def copy(source, dest)
@@ -50,16 +51,16 @@ def copy(source, dest)
 end
 
 def test_local_env_contains_required_keys
-  keys = ->(f) { IO.readlines(f).map { |l| l[/^([^#\s][^=\s]*)/, 1] }.compact }
+  keys = ->(f) { File.readlines(f).filter_map { |l| l[/^([^#\s][^=\s]*)/, 1] } }
 
   log(:yellow, "test .env.development contents")
   missing = keys["example.env"] - keys[".env.development"]
   if missing.any?
-    die("Your .env.development file is missing #{missing.join(', ')}")
+    die("Your .env.development file is missing #{missing.join(", ")}")
   end
 end
 
-def log(color, message, out=$stdout)
+def log(color, message, out = $stdout)
   out.puts(message.sub(/^(\S*)/) { HighLine::String.new($1).public_send(color) })
 end
 

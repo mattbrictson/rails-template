@@ -24,6 +24,7 @@ def apply_template!
   copy_file "editorconfig", ".editorconfig"
   copy_file "erb-lint.yml", ".erb-lint.yml"
   copy_file "overcommit.yml", ".overcommit.yml"
+  template "node-version.tt", ".node-version", force: true
   template "ruby-version.tt", ".ruby-version", force: true
 
   copy_file "Thorfile"
@@ -33,10 +34,12 @@ def apply_template!
   apply "Rakefile.rb"
   apply "config.ru.rb"
   apply "bin/template.rb"
-  apply "circleci/template.rb"
+  apply "semaphore/template.rb"
   apply "config/template.rb"
   apply "lib/template.rb"
   apply "test/template.rb"
+
+  empty_directory_with_keep_file "app/lib"
 
   git :init unless preexisting_git_repo?
   empty_directory ".git/safe"
@@ -47,14 +50,22 @@ def apply_template!
       # Ignore application config.
       /.env.development
       /.env.*local
+
+      # Ignore locally-installed gems.
+      /vendor/bundle/
     IGNORE
 
     if install_vite?
       File.rename("app/javascript", "app/frontend") if File.exist?("app/javascript")
       run_with_clean_bundler_env "bundle exec vite install"
-      run "yarn add autoprefixer sass @picocss/pico"
+      run "yarn remove vite-plugin-ruby"
+      run "yarn add autoprefixer postcss rollup vite-plugin-rails modern-normalize"
       copy_file "postcss.config.js"
+      copy_file "vite.config.ts", force: true
       apply "app/frontend/template.rb"
+      rewrite_json("config/vite.json") do |vite_json|
+        vite_json["test"]["autoBuild"] = false
+      end
     end
 
     apply "app/template.rb"
@@ -67,7 +78,7 @@ def apply_template!
 
     remove_file "Procfile.dev" unless File.exist?("bin/dev")
 
-    template "rubocop.yml.tt", ".rubocop.yml"
+    copy_file "rubocop.yml", ".rubocop.yml"
     run_rubocop_autocorrections
 
     template "eslintrc.js", ".eslintrc.js"
@@ -197,8 +208,8 @@ end
 
 def run_with_clean_bundler_env(cmd)
   success = if defined?(Bundler)
-              if Bundler.respond_to?(:with_unbundled_env)
-                Bundler.with_unbundled_env { run(cmd) }
+              if Bundler.respond_to?(:with_original_env)
+                Bundler.with_original_env { run(cmd) }
               else
                 Bundler.with_clean_env { run(cmd) }
               end
@@ -225,13 +236,13 @@ end
 def add_yarn_start_script
   return add_package_json_script(start: "bin/dev") if File.exist?("bin/dev")
 
-  run_with_clean_bundler_env "yarn add concurrently"
-
   procs = ["'bin/rails s -b 0.0.0.0'"]
   procs << "'bin/vite dev'" if File.exist?("bin/vite")
   procs << "bin/webpack-dev-server" if File.exist?("bin/webpack-dev-server")
 
-  add_package_json_script(start: "concurrently -i -k --kill-others-on-fail -p none #{procs.join(" ")}")
+  add_package_json_script(start: "stale-dep && concurrently -i -k --kill-others-on-fail -p none #{procs.join(" ")}")
+  add_package_json_script(postinstall: "stale-dep -u")
+  run_with_clean_bundler_env "yarn add concurrently stale-dep"
 end
 
 def add_yarn_lint_and_run_fix
@@ -239,18 +250,21 @@ def add_yarn_lint_and_run_fix
     eslint
     eslint-config-prettier
     eslint-plugin-prettier
-    npm-run-all
+    postcss
     prettier
+    stale-dep
     stylelint
     stylelint-config-standard
-    stylelint-declaration-use-variable
+    stylelint-declaration-strict-value
+    stylelint-prettier
   ]
+  add_package_json_script("fix": "npm run -- lint:js --fix && npm run -- lint:css --fix")
+  add_package_json_script("lint": "npm run lint:js && npm run lint:css")
+  add_package_json_script("lint:js": "stale-dep && eslint 'app/{components,frontend,javascript}/**/*.{js,jsx}'")
+  add_package_json_script("lint:css": "stale-dep && stylelint 'app/{components,frontend,assets/stylesheets}/**/*.css}'")
+  add_package_json_script("postinstall": "stale-dep -u")
   run_with_clean_bundler_env "yarn add #{packages.join(' ')}"
-  add_package_json_script("lint": "npm-run-all -c lint:*")
-  add_package_json_script("lint:js": "eslint 'app/{components,frontend,javascript}/**/*.{js,jsx}'")
-  add_package_json_script("lint:css": "stylelint 'app/{components,frontend,assets/stylesheets}/**/*.css'")
-  run_with_clean_bundler_env "yarn lint:js --fix"
-  run_with_clean_bundler_env "yarn lint:css --fix"
+  run_with_clean_bundler_env "yarn fix"
 end
 
 def add_package_json_script(scripts)
@@ -260,13 +274,19 @@ def add_package_json_script(scripts)
 end
 
 def simplify_package_json_deps
-  package_json = JSON.parse(File.read("package.json"))
-  package_json["dependencies"] = package_json["dependencies"]
-    .merge(package_json.delete("devDependencies") || {})
-    .sort_by { |key, _| key }
-    .to_h
+  rewrite_json("package.json") do |package_json|
+    package_json["dependencies"] = package_json["dependencies"]
+      .merge(package_json.delete("devDependencies") || {})
+      .sort_by { |key, _| key }
+      .to_h
+  end
+  run_with_clean_bundler_env "yarn install"
+end
 
-  File.write("package.json", JSON.pretty_generate(package_json))
+def rewrite_json(file)
+  json = JSON.parse(File.read(file))
+  yield(json)
+  File.write(file, JSON.pretty_generate(json) + "\n")
 end
 
 def install_vite?

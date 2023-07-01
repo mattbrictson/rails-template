@@ -1,10 +1,11 @@
 module.exports = {
-  plugins: ["stylelint-declaration-use-variable"],
-  extends: ["stylelint-config-standard"],
+  plugins: ["stylelint-declaration-strict-value"],
+  extends: ["stylelint-config-standard", "stylelint-prettier/recommended"],
   rules: {
+    "color-hex-length": null,
     "declaration-empty-line-before": null,
-    "declaration-colon-newline-after": null,
     "declaration-no-important": true,
+    "import-notation": null,
     "max-nesting-depth": 1,
     "no-empty-source": null,
     "no-invalid-position-at-import-rule": null,
@@ -13,6 +14,19 @@ module.exports = {
       {
         // Allow property used for css-fonts-4 variable fonts
         ignoreProperties: ["font-named-instance"],
+      },
+    ],
+    "scale-unlimited/declaration-strict-value": [
+      "/color/",
+      {
+        disableFix: true,
+        ignoreValues: [
+          "currentcolor",
+          "inherit",
+          "initial",
+          "transparent",
+          "unset",
+        ],
       },
     ],
     "selector-class-pattern": [
@@ -33,21 +47,6 @@ module.exports = {
     "selector-max-compound-selectors": 2,
     "selector-max-id": 0,
     "selector-no-qualifying-type": true,
-    "sh-waqar/declaration-use-variable": [
-      [
-        "/color/",
-        {
-          ignoreValues: [
-            "currentcolor",
-            "inherit",
-            "initial",
-            "transparent",
-            "unset",
-          ],
-        },
-      ],
-    ],
-    "string-quotes": "double",
-    "value-list-comma-newline-after": null,
+    "shorthand-property-no-redundant-values": null,
   },
 };
