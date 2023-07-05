@@ -12,6 +12,7 @@ I've written several blog posts on techniques, helpers, and boilerplate that are
 - [Automatically open the browser when the Rails server starts](https://mattbrictson.com/blog/open-browser-on-rails-start)
 - [Configuring RuboCop to scan the right files in a Rails project](https://mattbrictson.com/blog/including-and-excluding-files-in-rubocop)
 - [Easier Nested Layouts in Rails](https://mattbrictson.com/blog/easier-nested-layouts-in-rails)
+- [Fixing slow, flaky system tests in Vite-Rails](https://mattbrictson.com/blog/faster-vite-test-without-autobuild)
 - [The 3 Vite plugins I use on every new Rails project](https://mattbrictson.com/blog/3-vite-rails-plugins)
 - [Inline SVGs with Rails and Vite](https://mattbrictson.com/blog/inline-svg-with-vite-rails)
 
