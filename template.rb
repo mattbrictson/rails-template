@@ -249,7 +249,7 @@ def add_yarn_lint_and_run_fix
   packages = %w[
     eslint
     eslint-config-prettier
-    eslint-plugin-prettier
+    eslint-plugin-prettier@^5.0.0-alpha.2
     postcss
     prettier
     stale-dep
@@ -263,7 +263,7 @@ def add_yarn_lint_and_run_fix
   add_package_json_script("lint:js": "stale-dep && eslint 'app/{components,frontend,javascript}/**/*.{js,jsx}'")
   add_package_json_script("lint:css": "stale-dep && stylelint 'app/{components,frontend,assets/stylesheets}/**/*.css'")
   add_package_json_script("postinstall": "stale-dep -u")
-  run_with_clean_bundler_env "yarn add #{packages.join(' ')}"
+  run_with_clean_bundler_env "yarn add #{packages.map(&:shellescape).join(' ')}"
   run_with_clean_bundler_env "yarn fix"
 end
 
