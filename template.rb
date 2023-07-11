@@ -249,7 +249,7 @@ def add_yarn_lint_and_run_fix
   packages = %w[
     eslint
     eslint-config-prettier
-    eslint-plugin-prettier@^5.0.0-alpha.2
+    eslint-plugin-prettier
     postcss
     prettier
     stale-dep
