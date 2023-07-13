@@ -30,6 +30,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: "lts/*"
+      - run: "TEMPLATE_HOME=`pwd`"
       - run: git config --global user.name 'github-actions[bot]'
       - run: git config --global user.email 'github-actions[bot]@users.noreply.github.com'
       - run: git config --global init.defaultBranch main
@@ -37,4 +38,4 @@ jobs:
       - run: gem install bundler --no-document
       - run: mkdir -p ~/scratch/ci_example
       - run: cd ~/scratch/ci_example
-      - run: "rails new . -d postgresql -m ~/rails-template/template.rb << INPUT\nci.example.com\n\nINPUT"
+      - run: "rails new . -d postgresql -m $TEMPLATE_HOME/template.rb << INPUT\nci.example.com\n\nINPUT"
