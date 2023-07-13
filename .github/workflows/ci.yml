@@ -1,0 +1,41 @@
+name: CI
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+env:
+  RAILS_ENV: test
+jobs:
+  generate:
+    name: "Generate App From Template"
+    runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: postgres://postgres:postgres@localhost:5432/ci
+    services:
+      postgres:
+        image: postgres:14-alpine
+        env:
+          POSTGRES_DB: ci
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "ruby"
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "lts/*"
+      - run: "TEMPLATE_HOME=`pwd`"
+      - run: git config --global user.name 'github-actions[bot]'
+      - run: git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+      - run: git config --global init.defaultBranch main
+      - run: gem install railties --version "~> 7.0.0" --no-document
+      - run: gem install bundler --no-document
+      - run: mkdir -p ~/scratch/ci_example
+      - run: cd ~/scratch/ci_example
+      - run: "rails new . -d postgresql -m $TEMPLATE_HOME/template.rb << INPUT\nci.example.com\n\nINPUT"
