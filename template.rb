@@ -34,7 +34,7 @@ def apply_template!
   apply "Rakefile.rb"
   apply "config.ru.rb"
   apply "bin/template.rb"
-  apply "semaphore/template.rb"
+  apply "github/template.rb"
   apply "config/template.rb"
   apply "lib/template.rb"
   apply "test/template.rb"

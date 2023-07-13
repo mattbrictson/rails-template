@@ -1,0 +1,101 @@
+name: CI
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+env:
+  RAILS_ENV: test
+jobs:
+  test:
+    name: "Test"
+    runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: postgres://postgres:postgres@localhost:5432/ci
+    services:
+      postgres:
+        image: postgres:14-alpine
+        env:
+          POSTGRES_DB: ci
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: ".node-version"
+          cache: yarn
+      - run: npx --yes ci
+      - run: mkdir -p ./tmp/screenshots
+      - run: bundle exec rake db:create db:schema:load test:all
+      - uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: system-test-screenshots
+          path: ./tmp/screenshots/
+          retention-days: 7
+          if-no-files-found: ignore
+  erblint:
+    name: "Lint / erblint"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - run: bin/erblint --lint-all
+  eslint:
+    name: "Lint / eslint"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: ".node-version"
+          cache: yarn
+      - run: npx --yes ci
+      - run: yarn lint:js
+  rubocop:
+    name: "Lint / rubocop"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - run: bin/rubocop
+  stylelint:
+    name: "Lint / stylelint"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: ".node-version"
+          cache: yarn
+      - run: npx --yes ci
+      - run: yarn lint:css
+  brakeman:
+    name: "Security / brakeman"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - run: bundle exec brakeman --exit-on-warn --no-progress --color --output /dev/stdout
+  bundle-audit:
+    name: "Security / bundle-audit"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - run: bundle exec bundle-audit check --update -v
