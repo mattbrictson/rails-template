@@ -46,9 +46,10 @@ jobs:
 
           INPUT
           rm -rf .git
+          tar cfz ../generated_app.tgz .
       - uses: actions/upload-artifact@v3
         with:
           name: generated_app
-          path: ~/scratch/generated_app
+          path: ~/scratch/generated_app.tgz
           retention-days: 1
           if-no-files-found: error
