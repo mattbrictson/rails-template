@@ -37,4 +37,4 @@ jobs:
       - run: gem install bundler --no-document
       - run: mkdir -p ~/scratch/ci_example
       - run: cd ~/scratch/ci_example
-      - run: "rails new . -d postgresql -m ~/rails-template/template.rb \<< INPUT\nci.example.com\n\nINPUT"
+      - run: "rails new . -d postgresql -m ~/rails-template/template.rb << INPUT\nci.example.com\n\nINPUT"
