@@ -1,6 +1,8 @@
 # mattbrictson/rails-template
 
-[![Build Status](https://mattbrictson.semaphoreci.com/badges/rails-template/branches/main.svg?style=shields)](https://mattbrictson.semaphoreci.com/projects/rails-template)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/mattbrictson/rails-template/ci.yml)](https://github.com/mattbrictson/rails-template/actions/workflows/ci.yml)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/mattbrictson/rails-template/ci-vite.yml?label=vite+build)](https://github.com/mattbrictson/rails-template/actions/workflows/ci-vite.yml)
+
 
 ## About
 
