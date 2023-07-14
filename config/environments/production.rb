@@ -10,7 +10,7 @@ gsub_file "config/environments/production.rb", /raise_delivery_errors = false/, 
 gsub_file "config/environments/production.rb", /\bSTDOUT\b/, "$stdout"
 gsub_file "config/environments/production.rb",
           "config.force_ssl = true",
-          'config.force_ssl = ENV["RAILS_FORCE_SSL"].present?'
+          'config.force_ssl = ENV["RAILS_DISABLE_SSL"].blank?'
 
 insert_into_file "config/environments/production.rb", after: /config\.action_mailer\.raise_deliv.*\n/ do
   <<-RUBY
