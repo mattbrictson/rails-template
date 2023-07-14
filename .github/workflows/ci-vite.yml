@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+  schedule:
+    - cron: "27 10 * * SAT"
 env:
   BUNDLE_PATH: "./vendor/bundle"
 jobs:
