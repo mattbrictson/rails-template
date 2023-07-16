@@ -25,7 +25,7 @@ This template currently requires:
 * **Rails 7.0**
 * **Ruby 3.1 or newer**
 * PostgreSQL
-* Node 16+ and Yarn 1.x
+* Node >= 16.14.0 and Yarn 1.x
 
 For older versions of Rails, you can use one of [these branches](https://github.com/mattbrictson/rails-template/branches/all) going back all the way to Rails 4.2.
 
