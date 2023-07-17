@@ -1,9 +1,11 @@
 require "bundler"
 require "json"
 RAILS_REQUIREMENT = "~> 7.0.0".freeze
+NODE_REQUIREMENTS = ["~> 16.14", ">= 18.0.0"].freeze
 
 def apply_template!
   assert_minimum_rails_version
+  assert_minimum_node_version
   assert_valid_options
   assert_postgresql
   add_template_repository_to_source_path
@@ -137,6 +139,20 @@ def assert_minimum_rails_version
 
   prompt = "This template requires Rails #{RAILS_REQUIREMENT}. "\
            "You are using #{rails_version}. Continue anyway?"
+  exit 1 if no?(prompt)
+end
+
+def assert_minimum_node_version
+  requirements = NODE_REQUIREMENTS.map { Gem::Requirement.new(_1) }
+  node_version = `node --version`.chomp rescue nil
+  if node_version.nil?
+    fail Rails::Generators::Error, "This template requires Node, but Node does not appear to be installed."
+  end
+
+  return if requirements.any? { _1.satisfied_by?(Gem::Version.new(node_version[/[\d.]+/])) }
+
+  prompt = "This template requires Node #{NODE_REQUIREMENTS.join(" or ")}. "\
+           "You are using #{node_version}. Continue anyway?"
   exit 1 if no?(prompt)
 end
 
