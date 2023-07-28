@@ -54,5 +54,4 @@ group :test do
   <%= gemfile_entry "selenium-webdriver" -%>
   gem "shoulda-context"
   gem "shoulda-matchers"
-  <%= gemfile_entry "webdrivers" -%>
 end
