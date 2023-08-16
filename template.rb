@@ -266,6 +266,7 @@ def add_yarn_lint_and_run_fix
     eslint
     eslint-config-prettier
     eslint-plugin-prettier
+    npm-run-all
     postcss
     prettier
     stale-dep
@@ -274,8 +275,10 @@ def add_yarn_lint_and_run_fix
     stylelint-declaration-strict-value
     stylelint-prettier
   ]
-  add_package_json_script("fix": "npm run -- lint:js --fix && npm run -- lint:css --fix")
-  add_package_json_script("lint": "npm run lint:js && npm run lint:css")
+  add_package_json_script("fix": "npm-run-all fix:**")
+  add_package_json_script("fix:js": "npm run -- lint:js --fix")
+  add_package_json_script("fix:css": "npm run -- lint:css --fix")
+  add_package_json_script("lint": "npm-run-all lint:**")
   add_package_json_script("lint:js": "stale-dep && eslint 'app/{components,frontend,javascript}/**/*.{js,jsx}'")
   add_package_json_script("lint:css": "stale-dep && stylelint 'app/{components,frontend,assets/stylesheets}/**/*.css'")
   add_package_json_script("postinstall": "stale-dep -u")

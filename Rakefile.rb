@@ -2,21 +2,15 @@ append_to_file "Rakefile" do
   <<~RUBY
 
   Rake::Task[:default].prerequisites.clear if Rake::Task.task_defined?(:default)
-  task :default do
-    sh "bin/rails test"
-    sh "bin/rails test:system"
 
-    raise unless
-      system("bin/rubocop") &
-      system("bin/erblint --lint-all") &
-      system("yarn lint")
+  desc "Run all checks"
+  task default: %w[test:all rubocop erblint yarn:lint] do
+    Thor::Base.shell.new.say_status :OK, "All checks passed!"
   end
 
-  task :fix do
-    raise unless
-      system("bin/rubocop -a") &
-      system("bin/erblint --lint-all -a") &
-      system("yarn fix")
+  desc "Apply auto-corrections"
+  task fix: %w[rubocop:autocorrect_all erblint:autocorrect yarn:fix] do
+    Thor::Base.shell.new.say_status :OK, "All fixes applied!"
   end
   RUBY
 end
