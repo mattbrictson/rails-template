@@ -12,6 +12,7 @@ I've written several blog posts on techniques, helpers, and boilerplate that are
 
 - [How to organize CSS in a Rails project](https://mattbrictson.com/blog/organizing-css-in-rails)
 - [Tips for writing Rails tasks with Thor instead of Rake](https://mattbrictson.com/blog/rails-tasks-with-thor)
+- [Speed up your default Rake task with the multitask `-m` option](https://mattbrictson.com/blog/rake-multitask)
 - [Automatically open the browser when the Rails server starts](https://mattbrictson.com/blog/open-browser-on-rails-start)
 - [Configuring RuboCop to scan the right files in a Rails project](https://mattbrictson.com/blog/including-and-excluding-files-in-rubocop)
 - [Easier Nested Layouts in Rails](https://mattbrictson.com/blog/easier-nested-layouts-in-rails)
