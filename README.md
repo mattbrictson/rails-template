@@ -24,7 +24,7 @@ I've written several blog posts on techniques, helpers, and boilerplate that are
 
 This template currently requires:
 
-* **Rails 7.0**
+* **Rails 7.1**
 * **Ruby 3.1 or newer**
 * PostgreSQL
 * Node 16.14+ or 18+, and Yarn 1.x

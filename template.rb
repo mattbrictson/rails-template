@@ -1,6 +1,6 @@
 require "bundler"
 require "json"
-RAILS_REQUIREMENT = "~> 7.0.0".freeze
+RAILS_REQUIREMENT = "~> 7.1.0".freeze
 NODE_REQUIREMENTS = ["~> 16.14", ">= 18.0.0"].freeze
 
 def apply_template!
