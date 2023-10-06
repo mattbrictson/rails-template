@@ -29,8 +29,6 @@ This template currently requires:
 * PostgreSQL
 * Node 16.14+ or 18+, and Yarn 1.x
 
-For older versions of Rails, you can use one of [these branches](https://github.com/mattbrictson/rails-template/branches/all) going back all the way to Rails 4.2.
-
 ## Installation
 
 *Optional.*
@@ -39,7 +37,7 @@ To make this the default Rails application template on your system, create a `~/
 
 ```
 -d postgresql
--m https://raw.githubusercontent.com/mattbrictson/rails-template/main/template.rb
+-m https://raw.githubusercontent.com/mattbrictson/rails-template/rails-70/template.rb
 ```
 
 ## Usage
@@ -54,7 +52,7 @@ To generate a Rails application using this template, pass the `-m` option to `ra
 ```
 rails new blog \
   -d postgresql \
-  -m https://raw.githubusercontent.com/mattbrictson/rails-template/main/template.rb
+  -m https://raw.githubusercontent.com/mattbrictson/rails-template/rails-70/template.rb
 ```
 
 *Remember that options must go after the name of the application.* The only database supported by this template is `postgresql`.
