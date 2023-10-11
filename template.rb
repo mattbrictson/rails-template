@@ -1,6 +1,6 @@
 require "bundler"
 require "json"
-RAILS_REQUIREMENT = "~> 7.1.0".freeze
+RAILS_REQUIREMENT = "~> 7.1.1".freeze
 NODE_REQUIREMENTS = ["~> 16.14", ">= 18.0.0"].freeze
 
 def apply_template!
@@ -72,7 +72,7 @@ def apply_template!
 
     apply "app/template.rb"
 
-    add_initial_migrations
+    create_database_and_initial_migration
     run_with_clean_bundler_env "bin/setup"
 
     binstubs = %w[brakeman bundler bundler-audit erb_lint rubocop sidekiq thor]
@@ -243,17 +243,10 @@ def run_rubocop_autocorrections
   run_with_clean_bundler_env "bin/erblint --lint-all -a > /dev/null || true"
 end
 
-def add_initial_migrations
-  migration_tasks = %w[
-    action_mailbox:install:migrations
-    action_text:install:migrations
-    active_storage:install
-  ]
-  all_tasks = rails_command("-T", capture: true).scan(/^\S+\s+(\S+)/).flatten
-  tasks_to_run = migration_tasks & all_tasks
-  tasks_to_run.each { |task| rails_command(task) }
-
-  run_with_clean_bundler_env "bin/rails generate migration initial_migration" unless Dir["db/migrate/**/*.rb"].any?
+def create_database_and_initial_migration
+  return if Dir["db/migrate/**/*.rb"].any?
+  run_with_clean_bundler_env "bin/rails db:create"
+  run_with_clean_bundler_env "bin/rails generate migration initial_migration"
 end
 
 def add_yarn_start_script
