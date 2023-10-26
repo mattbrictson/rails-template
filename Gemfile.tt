@@ -3,7 +3,6 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "<%= RUBY_VERSION %>"
 
-gem "active_type"
 <%= gemfile_entry "bcrypt", force: true -%>
 <%= gemfile_entry "bootsnap" -%>
 <%= gemfile_entry "cssbundling-rails" unless install_vite? -%>

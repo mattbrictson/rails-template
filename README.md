@@ -89,7 +89,6 @@ If you don't specify `--javascript vite`, then this template will use the standa
 #### These gems are added to the standard Rails stack
 
 * Core
-    * [active_type][] – for building simple and effective form/service objects
     * [sidekiq][] – Redis-based job queue implementation for Active Job
 * Configuration
     * [dotenv][] – for local configuration
@@ -127,7 +126,6 @@ This temporary directory is then added to the `source_paths` of the Rails genera
 
 Rails generators are very lightly documented; what you’ll find is that most of the heavy lifting is done by [Thor][]. The most common methods used by this template are Thor’s `copy_file`, `template`, and `gsub_file`. You can dig into the well-organized and well-documented [Thor source code][thor] to learn more.
 
-[active_type]:https://github.com/makandra/active_type
 [sidekiq]:http://sidekiq.org
 [dotenv]:https://github.com/bkeepers/dotenv
 [annotate]:https://github.com/ctran/annotate_models
