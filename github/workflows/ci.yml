@@ -3,7 +3,10 @@ on:
   pull_request:
   push:
     branches:
+      - staging
       - main
+      - master
+      - production
 env:
   RAILS_ENV: test
 jobs:
@@ -41,6 +44,15 @@ jobs:
           path: ./tmp/screenshots/
           retention-days: 7
           if-no-files-found: ignore
+  haml-lint:
+    name: "Lint / HAML-Lint"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - run: bundle exec haml-lint
   erblint:
     name: "Lint / erblint"
     runs-on: ubuntu-latest
