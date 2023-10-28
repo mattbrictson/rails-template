@@ -110,7 +110,7 @@ This project works by hooking into the standard Rails [application templates][] 
 
 Normally, Rails only allows a single file to be specified as an application template (i.e. using the `-m <URL>` option). To work around this limitation, the first step this template performs is a `git clone` of the `brodienguyen/rails-template` repository to a local temporary directory.
 
-This temporary directory is then added to the `source_paths` of the Rails generator system, allowing all of its ERb templates and files to be referenced when the application template script is evaluated.
+This temporary directory is then added to the `source_paths` of the Rails generator system, allowing all of its HAML templates and files to be referenced when the application template script is evaluated.
 
 Rails generators are very lightly documented; what you’ll find is that most of the heavy lifting is done by [Thor][]. The most common methods used by this template are Thor’s `copy_file`, `template`, and `gsub_file`. You can dig into the well-organized and well-documented [Thor source code][thor] to learn more.
 
