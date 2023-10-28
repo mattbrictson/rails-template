@@ -238,7 +238,7 @@ end
 
 def run_rubocop_autocorrections
   run_with_clean_bundler_env "bin/rubocop -A --fail-level A > /dev/null || true"
-  run_with_clean_bundler_env "bin/erblint --lint-all -a > /dev/null || true"
+  run_with_clean_bundler_env "bin/haml-lint -a > /dev/null || true"
 end
 
 def create_database_and_initial_migration
