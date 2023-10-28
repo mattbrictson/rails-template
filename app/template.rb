@@ -8,7 +8,7 @@ insert_into_file "app/controllers/application_controller.rb", after: /^class App
   RUBY
 end
 
-File.rename "app/views/layouts/application.html.haml", "app/views/layouts/base.html.erb"
+File.rename "app/views/layouts/application.html.haml", "app/views/layouts/base.html.haml"
 
 prepend_to_file "app/views/layouts/base.html.erb", <<~ERB
 <%# The "base" layout contains boilerplate common to *all* views. %>
