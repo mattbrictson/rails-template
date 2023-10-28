@@ -44,4 +44,4 @@ end
 
 copy_file "app/views/layouts/application.html.erb"
 copy_file "app/views/shared/_flash.html.erb"
-template "app/views/home/index.html.erb.tt"
+template "app/views/home/index.html.haml.tt"

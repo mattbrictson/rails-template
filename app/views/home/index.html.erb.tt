@@ -1,5 +1,0 @@
-<%% provide(:title, "Home") %>
-<p>Find me in app/views/home/index.html.erb</p>
-<% if File.read("package.json").match?(%r{@hotwired/stimulus}) -%>
-<p>Stimulus says, <i data-controller=hello></i></p>
-<% end -%>
