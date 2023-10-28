@@ -5,6 +5,14 @@ PreCommit:
   BundleCheck:
     enabled: true
 
+  HamlLint:
+    enabled: true
+    description: 'Analyze with haml-lint'
+    required_executable: 'haml-lint'
+    install_command: 'gem install haml-lint'
+    flags: [ '--no-summary' ]
+    include: '**/*.haml'
+
   ErbLint:
     enabled: true
     required_executable: bundle

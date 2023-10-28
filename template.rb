@@ -25,6 +25,7 @@ def apply_template!
   template "example.env.tt"
   copy_file "editorconfig", ".editorconfig"
   copy_file "erb-lint.yml", ".erb-lint.yml"
+  copy_file "haml-lint.yml", ".haml-lint.yml"
   copy_file "overcommit.yml", ".overcommit.yml"
   template "node-version.tt", ".node-version", force: true
   template "ruby-version.tt", ".ruby-version", force: true
@@ -118,7 +119,7 @@ def add_template_repository_to_source_path
     at_exit { FileUtils.remove_entry(tempdir) }
     git clone: [
       "--quiet",
-      "https://github.com/mattbrictson/rails-template.git",
+      "https://github.com/brodienguyen/rails-template.git",
       tempdir
     ].map(&:shellescape).join(" ")
 
@@ -135,8 +136,8 @@ def assert_minimum_rails_version
   rails_version = Gem::Version.new(Rails::VERSION::STRING)
   return if requirement.satisfied_by?(rails_version)
 
-  prompt = "This template requires Rails #{RAILS_REQUIREMENT}. "\
-           "You are using #{rails_version}. Continue anyway?"
+  prompt = "This template requires Rails #{RAILS_REQUIREMENT}. " \
+    "You are using #{rails_version}. Continue anyway?"
   exit 1 if no?(prompt)
 end
 
@@ -149,8 +150,8 @@ def assert_minimum_node_version
 
   return if requirements.any? { _1.satisfied_by?(Gem::Version.new(node_version[/[\d.]+/])) }
 
-  prompt = "This template requires Node #{NODE_REQUIREMENTS.join(" or ")}. "\
-           "You are using #{node_version}. Continue anyway?"
+  prompt = "This template requires Node #{NODE_REQUIREMENTS.join(" or ")}. " \
+    "You are using #{node_version}. Continue anyway?"
   exit 1 if no?(prompt)
 end
 
@@ -189,7 +190,7 @@ def production_hostname
     ask_with_default("Production hostname?", :blue, "example.com")
 end
 
-def gemfile_entry(name, version=nil, require: true, force: false)
+def gemfile_entry(name, version = nil, require: true, force: false)
   @original_gemfile ||= IO.read("Gemfile")
   entry = @original_gemfile[/^\s*gem #{Regexp.quote(name.inspect)}.*$/]
   return if entry.nil? && !force
@@ -293,9 +294,9 @@ end
 def simplify_package_json_deps
   rewrite_json("package.json") do |package_json|
     package_json["dependencies"] = package_json["dependencies"]
-      .merge(package_json.delete("devDependencies") || {})
-      .sort_by { |key, _| key }
-      .to_h
+                                     .merge(package_json.delete("devDependencies") || {})
+                                     .sort_by { |key, _| key }
+                                     .to_h
   end
   run_with_clean_bundler_env "yarn install"
 end
@@ -309,4 +310,5 @@ end
 def install_vite?
   options[:javascript] == "vite"
 end
+
 apply_template!
