@@ -25,7 +25,6 @@ gem "rails", "~> <%= Rails.version[/\d+\.\d+\.\d+/] %>"
 # Templating/style gems
 #
 gem "haml"
-gem "haml_lint", require: false
 gem "haml-rails", "~> 2.0"
 
 ################################
@@ -43,6 +42,7 @@ gem "annotate"
 gem "brakeman", require: false
 gem "bundler-audit", require: false
 gem "erb_lint", require: false
+gem "haml_lint", require: false
 gem 'html2haml'
 gem "letter_opener"
 gem "rubocop", require: false
