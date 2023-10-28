@@ -3,6 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "<%= RUBY_VERSION %>"
 
+gem "active_type"
 <%= gemfile_entry "bcrypt", force: true -%>
 <%= gemfile_entry "bootsnap" -%>
 <%= gemfile_entry "cssbundling-rails" unless install_vite? -%>
@@ -19,38 +20,53 @@ gem "rails", "~> <%= Rails.version[/\d+\.\d+\.\d+/] %>"
 <%= gemfile_entry "turbo-rails" -%>
 <%= %Q{gem "vite_rails"\n} if install_vite? -%>
 
+################################
+#
+# Templating/style gems
+#
+gem "haml"
+gem "haml_lint", require: false
+gem "haml-rails", "~> 2.0"
+
+################################
+#
+# Background Jobs
+#
+gem "sidekiq"
+
 group :production do
-  gem "postmark-rails"
-  gem "sidekiq"
+gem "postmark-rails"
 end
 
 group :development do
-  gem "annotate"
-  gem "brakeman", require: false
-  gem "bundler-audit", require: false
-  gem "erb_lint", require: false
-  gem "letter_opener"
-  gem "rubocop", require: false
-  gem "rubocop-capybara", require: false
-  gem "rubocop-factory_bot", require: false
-  gem "rubocop-minitest", require: false
-  gem "rubocop-performance", require: false
-  gem "rubocop-rails", require: false
-  <%= gemfile_entry "web-console" -%>
+gem "annotate"
+gem "brakeman", require: false
+gem "bundler-audit", require: false
+gem "erb_lint", require: false
+gem 'html2haml'
+gem "letter_opener"
+gem "rubocop", require: false
+gem "rubocop-capybara", require: false
+gem "rubocop-factory_bot", require: false
+gem "rubocop-minitest", require: false
+gem "rubocop-performance", require: false
+gem "rubocop-rails", require: false
+<%= gemfile_entry "web-console" -%>
 end
 
 group :development, :test do
-  gem "byebug"
-  gem "dotenv-rails"
-  gem "factory_bot_rails"
-  gem "launchy"
+gem 'awesome_print'
+gem "byebug"
+gem "dotenv-rails"
+gem "factory_bot_rails"
+gem "launchy"
 end
 
 group :test do
-  <%= gemfile_entry "capybara" -%>
-  gem "capybara-lockstep"
-  gem "minitest-ci", require: false
-  <%= gemfile_entry "selenium-webdriver" -%>
-  gem "shoulda-context"
-  gem "shoulda-matchers"
+<%= gemfile_entry "capybara" -%>
+gem "capybara-lockstep"
+gem "minitest-ci", require: false
+<%= gemfile_entry "selenium-webdriver" -%>
+gem "shoulda-context"
+gem "shoulda-matchers"
 end
