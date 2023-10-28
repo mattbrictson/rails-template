@@ -86,7 +86,6 @@ If you don't specify `--javascript vite`, then this template will use the standa
 * Linting
   * [rubocop][] – enforces Ruby code style
   * [haml-lint][] - HAML-specific style and lint checks
-  * [erblint][] – applies rubocop rules within html.erb files
   * [stylelint][] – checks (S)CSS files
   * [eslint][] – checks JS/TS files
 * Security
@@ -121,7 +120,6 @@ Rails generators are very lightly documented; what you’ll find is that most of
 [dotenv]:https://github.com/bkeepers/dotenv
 [annotate]:https://github.com/ctran/annotate_models
 [rubocop]:https://github.com/bbatsov/rubocop
-[erblint]:https://github.com/Shopify/erb-lint
 [factory_bot_rails]:https://github.com/thoughtbot/factory_bot_rails
 [haml]:https://github.com/haml/haml
 [haml-lint]:https://github.com/sds/haml-lint
