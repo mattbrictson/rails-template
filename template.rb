@@ -24,7 +24,6 @@ def apply_template!
 
   template "example.env.tt"
   copy_file "editorconfig", ".editorconfig"
-  copy_file "erb-lint.yml", ".erb-lint.yml"
   copy_file "haml-lint.yml", ".haml-lint.yml"
   copy_file "overcommit.yml", ".overcommit.yml"
   template "node-version.tt", ".node-version", force: true
