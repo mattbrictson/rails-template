@@ -75,7 +75,7 @@ def apply_template!
     create_database_and_initial_migration
     run_with_clean_bundler_env "bin/setup"
 
-    binstubs = %w[brakeman bundler bundler-audit erb_lint rubocop sidekiq thor]
+    binstubs = %w[brakeman bundler bundler-audit haml_lint rubocop sidekiq thor]
     run_with_clean_bundler_env "bundle binstubs #{binstubs.join(' ')} --force"
 
     remove_file "Procfile.dev" unless File.exist?("bin/dev")
