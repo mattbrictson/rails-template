@@ -43,5 +43,5 @@ if install_vite?
 end
 
 copy_file "app/views/layouts/application.html.haml"
-copy_file "app/views/shared/_flash.html.erb"
+copy_file "app/views/shared/_flash.html.haml"
 template "app/views/home/index.html.haml.tt"
