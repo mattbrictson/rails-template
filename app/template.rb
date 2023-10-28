@@ -8,7 +8,7 @@ insert_into_file "app/controllers/application_controller.rb", after: /^class App
   RUBY
 end
 
-File.rename "app/views/layouts/application.html.erb", "app/views/layouts/base.html.erb"
+File.rename "app/views/layouts/application.html.haml", "app/views/layouts/base.html.erb"
 
 prepend_to_file "app/views/layouts/base.html.erb", <<~ERB
 <%# The "base" layout contains boilerplate common to *all* views. %>
@@ -42,6 +42,6 @@ if install_vite?
             'vite_javascript_tag "application", "data-turbo-track": "reload" %>'
 end
 
-copy_file "app/views/layouts/application.html.erb"
+copy_file "app/views/layouts/application.html.haml"
 copy_file "app/views/shared/_flash.html.erb"
 template "app/views/home/index.html.haml.tt"
