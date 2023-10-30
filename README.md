@@ -114,7 +114,6 @@ I like to use [Postmark][] for transactional email, and so I've included the [po
 #### Other tweaks that patch over some Rails shortcomings
 
 * A much-improved `bin/setup` script
-* Log rotation so that development and test Rails logs don’t grow out of control
 
 ## How does it work?
 
