@@ -1,3 +1,7 @@
+📣 **I am no longer maintaining this project. Please check out [mattbrictson/nextgen](https://github.com/mattbrictson/nextgen) instead.** Nextgen includes all the recommendations you see here, but in a new interactive format that lets you pick and choose the enhancements appropriate to your app. [Try it and send me your feedback!](https://github.com/mattbrictson/nextgen)
+
+---
+
 # mattbrictson/rails-template
 
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/mattbrictson/rails-template/ci.yml)](https://github.com/mattbrictson/rails-template/actions/workflows/ci.yml)
